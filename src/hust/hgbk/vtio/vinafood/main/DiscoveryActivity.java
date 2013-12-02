@@ -154,10 +154,17 @@ public class DiscoveryActivity extends Activity {
 		public View getView(final int position, View convertView,
 				ViewGroup parent) {
 			if (convertView == null) {
-				convertView = View.inflate(ctx, R.layout.single_item, null);
+				convertView = View.inflate(ctx,
+						R.layout.discovery_category_item, null);
+				// Name of food type
 				TextView name = (TextView) convertView
 						.findViewById(R.id.itemName);
 				name.setText(typeVal[keys.get(position)]);
+				// Number of item
+				TextView number = (TextView) convertView
+						.findViewById(R.id.numItem);
+				number.setText("" + hashtable.get(keys.get(position)).size());
+
 				convertView.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
