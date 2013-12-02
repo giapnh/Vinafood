@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="purpose_list">
+        <item name="md1">Tổ chức tiệc cưới</item>
+        <item name="md2">Hẹn hò</item>
+        <item name="md3">Ăn gia đình</item>
+        <item name="md4">Họp nhóm</item>
+        <item name="md5">Tiệc ngoài trời</item>
+        <item name="md6">Ăn vặt</item>
+        <item name="md7">Nhậu nhẹt</item>
+        <item name="md8">Hát hò</item>
+    </string-array>
+    <string-array name="cuisine_style_list">
+        <item name="st1">Miền Bắc</item>
+        <item name="st2">Miền Trung</item>
+        <item name="st3">Miền Nam</item>
+        <item name="st4">Tây Nguyên</item>
+        <item name="st5">Nhật Bản</item>
+        <item name="st6">Hàn Quốc</item>
+        <item name="st7">Trung Quốc</item>
+        <item name="st8">Thái Lan</item>
+        <item name="st9">Châu Âu</item>
+        <item name="st10">Châu Mỹ</item>
+        <item name="st11">Châu Á</item>
+        <item name="st12">Châu Phi</item>
+    </string-array>
+    <string-array name="jazzy_effects">
+        <item>Standard</item>
+        <item>Tablet</item>
+        <item>CubeIn</item>
+        <item>CubeOut</item>
+        <item>FlipVertical</item>
+        <item>FlipHorizontal</item>
+        <item>Stack</item>
+        <item>ZoomIn</item>
+        <item>ZoomOut</item>
+        <item>RotateUp</item>
+        <item>RotateDown</item>
+        <item>Accordion</item>
+    </string-array>
+
+    <string name="txt_menu">Menu</string>
+    <string name="txt_discovery">Khám phá</string>
+    <string name="txt_favorite">Ưa thích</string>
+    <string name="txt_recent_view">Xem gần đây</string>
+    <string name="app_name">VinaFood</string>
+
+    <color name="RED">#FF00</color>
+    <color name="WHITE">#FFFF</color>
+    <color name="GREEN">#F0F0</color>
+    <color name="BLUE">#F00F</color>
+    <color name="RG">#FFF0</color>
+    <color name="RB">#FF0F</color>
+    <color name="GB">#F0FF</color>
+    <color name="WHILE_TRANFARENT">#0FFF</color>
+    <color name="GREEN_ALPHA">#30F0</color>
+    <color name="BLACK">#F000</color>
+    <color name="TITLE_BACKGROUND">#50F0</color>
+    <color name="RED_NORMAL">#88000000</color>
+    <color name="RED_FOCUS">#44000000</color>
+
+    <string name="has_abstract_vn">có tóm tắt</string>
+    <string name="nearBy">Near by</string>
+    <string name="hasRating">Has rating</string>
+    <string name="hasCuisineStyle">Has cuisine style</string>
+    <string name="data_not_exist">Have not yet data!</string>
+    <string name="semantic_search">Semantic Search</string>
+    <string name="quick_search">Quick Search</string>
+    <string name="preference">Preference</string>
+    <string name="geo_search">Geo Search</string>
+    <string name="smart_recommendation">Recommendation</string>
+    <string name="dining_service">Dining Service</string>
+    <string name="attraction">Attraction</string>
+    <string name="bank">Bank</string>
+    <string name="favorite">Favorite</string>
+    <string name="belongto">Belong to Bank</string>
+    <string name="belongtocompany">Belong to Company</string>
+    <string name="other_company">Other Company</string>
+    <string name="tourist_resource">Tourist Resource</string>
+    <string name="health_resource">Health Resource</string>
+    <string name="vehicle_resource">Vehicle Resource</string>
+    <string name="accommodation_search">Accommodation</string>
+    <string name="entertainment_service">Entertainment Service</string>
+    <string name="semantic_search_header">Semantic Search</string>
+    <string name="topic_search_header">Topic Search</string>
+    <string name="geo_search_header">Recommendation and Favorite Search</string>
+    <string name="quick_search_des">Consults tourist resource and make a simple quick semantic search in S - V - O pattern. </string>
+    <string name="semantic_search_des">Help you create questions (from simple to complex) about tourist places (around you) and get relevant results. </string>
+    <string name="preference_des">Create your preferences</string>
+    <string name="geo_search_des">Find tourist places match your interest in a specific range around you.  </string>
+    <string name="smart_recommendation_des">Suggest you interesting places during your trip.</string>
+    <string name="accommodation_search_des">Find hotels, motels, inns and holiday rental accommodation </string>
+    <string name="dining_service_des">Help you to find eating places </string>
+    <string name="tourist_resource_des">Search tourist places simply and quickly.</string>
+    <string name="health_resource_des">Find health service</string>
+    <string name="vehicle_resource_des">Find vehicle service</string>
+    <string name="entertainment_service_des">Find entertainment service</string>
+    <string name="any_key">All result</string>
+    <string name="in_range_of">In range of (km)</string>
+    <string name="request_time">Request Time </string>
+    <string name="minutes">minutes</string>
+    <string name="clear_your_lastest_context">Clear your latest context</string>
+    <string name="apply">Apply</string>
+    <string name="cancel">Cancel</string>
+    <string name="close">Close</string>
+    <string name="stop">Stop</string>
+    <string name="run">Run</string>
+    <string name="please_wait">Loading results. Please wait!</string>
+    <string name="please_wait_data">Loading data. Please wait!</string>
+    <string name="connect_fail">Connect fail. Do you want to retry?</string>
+    <string name="no_result">No result for this case or the connection failed! You should retry with another case!</string>
+    <string name="filter_result">Filter result...</string>
+    <string name="near_by">Quanh bạn(1km)</string>
+    <string name="rating">has rating</string>
+    <string name="has_name">has name</string>
+    <string name="has_location">has location</string>
+    <string name="tourist_help">Example:\nHoan Kiem, Big Church, Lake, Park ... Or you can also type nothing and just only tap Search Button.</string>
+    <string name="dining_help">Example:\nPizza, Fish, Restaurant, Hoan Kiem ... Or you can also type nothing and just only tap Search Button.</string>
+    <string name="accomodation_help">Example:\nHotel, Bao Son, Hoan Kiem, Daewoo ... Or you can also type nothing and just only tap Search Button.</string>
+    <string name="health_help">Example:\nViet Duc, Dinh Cong, Giai Phong, Viet Phap... Or you can also type nothing and just only tap Search Button. </string>
+    <string name="entertainment_service_help">Example:\nHoan Kiem ... Or you can also type nothing and just only tap Search Button. </string>
+    <string name="you_want_find_a">You want to find a</string>
+    <string name="with_key_word">with key word</string>
+    <string name="you_want_find_a_accommodation">You want to find a accommodation:</string>
+    <string name="want_find_dining_service">Do you want find a Dining Service</string>
+    <string name="add_new_contraint_for">Add new constraint for your place</string>
+    <string name="constraint_for_your_place">constrain for</string>
+    <string name="select_property">--  Select property --</string>
+    <string name="search">Search</string>
+    <string name="option">+ Option</string>
+    <string name="advanced">+ Semantic</string>
+    <string name="help">Help</string>
+    <string name="to_common">To common</string>
+    <string name="optional">Optional</string>
+    <string name="input_data">Input data...</string>
+    <string name="false1">False</string>
+    <string name="true1">True</string>
+    <string name="constraint">Constraint</string>
+    <string name="type_instance">Type instance...</string>
+    <string name="type_key_word">Type a keyword...</string>
+    <string name="select_instance_of">-- Select Instance of -</string>
+    <string name="None">None</string>
+    <string name="is_welknown">is wellknown</string>
+    <string name="SEARCH_RESULT">SEARCH RESULT :</string>
+    <string name="view_map">View map</string>
+    <string name="category">Category</string>
+    <string name="interest">Interest</string>
+    <string name="fandr">Find \u0026 Recommend</string>
+    <string name="by_interest">by your interest</string>
+    <string name="nearByProperty">nearBy</string>
+    <string name="hasRatingProperty">has rating</string>
+    <string name="hasCuisineStyleProperty">has cuisine style</string>
+    <string name="no_image">This place has no image!</string>
+    <string name="intro_sig">Location based information and knowledge system for mobile devices\nDeveloped by: Semantic Innovation Group (SIG)\nContact: Cao Tuan-Dung, caotuandung@gmail.com\n\n(c) Copyright SIG, 2012.  All rights reserved.\nVisit <a href="http://www.icompanion.vn:8080">http://www.icompanion.vn:8080"</a> for demo, update and manual guide</string>
+    <string name="intro_icom">VietDestination (iCompanion) - Location based information and knowledge system for mobile devices developed by SIG (Semantic Innovation Group). This application help you find and access to information about tourist, entertainment and city guide service related to places in a smarter way. This companion can understand the meaning of your question to find the relevant results or give you interesting recommendation based on your interests and current location. </string>
+    <string name="slogan">Your intelligent companion</string>
+    <string name="the_crow_flies">The crow flies</string>
+    <string name="show_all">Show all</string>
+    <string name="you_are_stay_in">Data loaded for</string>
+    <string name="show_geo_search">Show Geo Search</string>
+    <string name="title_help_begin">Want more? Increase the search range or touch F \u0026 R (Find and Recommend). To filter the results, decrease the search range, specify the Category or your Interest.</string>
+    <string name="title_help_category">Want more? Increase the search range - or - select broader category, or use the smart Find and Recommending system. To filter the results, select more precise category. </string>
+    <string name="title_help_interest">To be automatically suggested, use recommending service by touch F \u0026 R.</string>
+    <string name="geo_pos">Geo position</string>
+    <string name="choose_category">Choose Category</string>
+    <string name="choose_distance">Choose Distance</string>
+    <string name="already">Enter</string>
+    <string name="subject">Subject</string>
+    <string name="verb">Verb/Adj</string>
+    <string name="object">Object</string>
+    <string name="clear">Clear</string>
+    <string name="please_choose_hint">Please choose system hint ...</string>
+    <string name="data_not_update">There is no detail data at the moment for this place! You can add your comment on the next version!</string>
+    <string name="input_subject">Input subject first, please!</string>
+    <string name="incorrect_subject">Incorrect subject! Retype, please!</string>
+    <string name="incorrect_object">Incorrect object! Retype, please!</string>
+    <string name="fact_about">Facts about</string>
+    <string name="should_input_predicate">You should input verb...</string>
+    <string name="input_object">Input object, please!</string>
+    <string name="what_concept_object_that">What are xxx that</string>
+    <string name="find">Find</string>
+    <string name="in">in</string>
+    <string name="inputing_object">Inputing object...</string>
+    <string name="type_to_object">Type \'xxx\' into object...</string>
+    <string name="type">Type</string>
+    <string name="address">Address</string>
+    <string name="in_range">in range of</string>
+    <string name="tap_on_map_icon">Tap on this icon for viewing the position of these places on map!</string>
+    <string name="result_for">Result for</string>
+    <string name="share_place_by_icom">Share place \'xxx\' by iCompanion</string>
+    <string name="do_you_want_to_exit">Do you want to exit?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="attraction_intro">The welknown places in Vietnam</string>
+    <string name="bank_intro">Finding bank agent and ATM</string>
+    <string name="favorite_intro">Display your favorite places that were saved offline.</string>
+    <string name="enable_gps">You have not enabled GPS or Wireless Location Source yet. Do you want to open location setting?</string>
+    <string name="apply_successfully">Apply successfully!</string>
+    <string name="enter_preference">You have not specified your interest. Do it now?</string>
+    <string name="not_support_call">Your device does not support phone call!</string>
+    <string name="not_catch_location_yet">Your location has not detect yet! We use the default location at Hoan Kiem Lake!</string>
+    <string name="select_on_map">Select on map</string>
+    <string name="change_city">Choose menu to change city.</string>
+    <string name="no_search_result"> No place found. Currently only Hanoi, DaNang and Hochiminh city data is available. Check your Internet connection or change the searching criteria.</string>
+    <string name="no_favorite_place"> Your list of favorite place is empty. Tap on heart icon to add a place of your favor to the list.</string>
+    <string name="show_all_on_map"> Show all places on this map.</string>
+    <string name="server_key">Db0hsr9lGsz6FaUGW7lPZcZ2VcFOMrzHZIJT2qi27p8=</string>
+    <string name="choose_place">Choose place on map</string>
+    <string name="list_grid">List/Grid</string>
+    <string name="city">City</string>
+    <string name="refresh_cache">Refresh cache</string>
+    <string name="choose_city">Choose city</string>
+    <string name="choose_city_staying">Choose city you are staying in</string>
+    <string name="language">Language</string>
+    <string name="about"></string>
+    <string name="update_location">Update location</string>
+    <string name="refresh">Refresh</string>
+    <string name="use_mapquest">Use MapQuess</string>
+    <string name="use_gmap">Use GMaps</string>
+    <string name="map_setting">Maps setting</string>
+    <string name="detail_guide">Detail Guide</string>
+    <string name="more">More</string>
+    <string name="no_network_msg">No Internet connection is ready!</string>
+    <string name="network_setting">Network setting</string>
+    <string name="view_favorite">Favorite place</string>
+    <string name="try_again">Try again</string>
+    <string name="contact">Contact</string>
+    <string name="information">Information</string>
+    <string name="version">Version</string>
+    <string name="rate_diemdenviet">Rate for Điểm đến Việt on Google Play Store</string>
+    <string name="new_in_168">- Add 10000 various places in Danang.\n- Add some Entertainment categories: Karaoke, Bar, Billiard,..\n- Fix UI bug on ICS 4.0.3. \n- Improve displaying results and UI of place detail more friendly.\n- Categories was customized for each cities.</string>
+    <string name="new_in_17">- Add 4000 interesting places in Haiphong.\n- Integrated Open Street Map, you can use it or Google Map depend on your favorite.\n- Location service was optimized to save your battery. \n- Update your location while route on map.</string>
+    <string name="new_in_175">- Add a lot of places in Khanh Hoa Province. \n- Auto connect to alternative server when old server crashes, improve stability and network quality.\n- New GUI for displaying images \n- Optimize location services.\n-Fix some bugs. </string>
+    <string name="new_in_178">- Add a large number of places in Lam Dong Province, including Dalat city.\n- Fix some bugs and errors.</string>
+    <string name="new_version_available">New version xxx already available on Google Play</string>
+    <string name="current_version">1.78</string>
+    <!-- Dinning service -->
+    <string name="txt_hotline">Hotline: (+84)1664-643-234 Vinafood v1.0</string>
+    <string name="txt_angi_odau">Ăn gì?Ở đâu?</string>
+    <string name="txt_filter">Lọc</string>
+    <string name="txt_scope">Phạm vi</string>
+    <string name="txt_agree">Đồng ý</string>
+    <string name="txt_cancel">Hủy</string>
+    <string name="txt_search">Tìm kiếm</string> <!-- Filter -->
+    <string name="txt_city">Tỉnh thành</string>
+    <string name="txt_businese_type">Hình thức</string>
+    <string name="txt_purpose">Mục đích</string>
+    <string name="txt_cuisine">Phong cách ẩm thực</string>
+    <string name="txt_landmark">Khu vực</string>
+    <string name="txt_kind">Kind</string>
+    <string name="txt_distance">Khoảng cách</string>
+
+</resources>

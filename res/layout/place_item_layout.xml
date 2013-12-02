@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/layy200"
+    android:layout_marginBottom="3dp"
+    android:background="#66000000"
+    android:orientation="vertical" >
+
+    <RelativeLayout
+        android:id="@+id/image_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="2dp"
+        android:background="#7fff" >
+
+        <WebView
+            android:id="@+id/imagePlaceWebview"
+            android:layout_width="@dimen/layx200"
+            android:layout_height="match_parent"
+            android:background="#00ff00ff"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/imagePlaceview"
+            android:layout_width="@dimen/layx200"
+            android:layout_height="match_parent"
+            android:background="@drawable/white_red_border"
+            android:focusable="false"
+            android:scaleType="centerCrop"
+            android:src="@drawable/noimage" />
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/layx4"
+        android:layout_toRightOf="@+id/image_layout"
+        android:background="#88000000"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/labelTextView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/layx2"
+            android:background="#220000ff"
+            android:ellipsize="marquee"
+            android:gravity="center_vertical"
+            android:marqueeRepeatLimit="marquee_forever"
+            android:singleLine="false"
+            android:text="Cafe morning Hoan Kiem lakeCafe morning Hoan Kiem lake"
+            android:textColor="#fff"
+            android:textSize="@dimen/text_size_22"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/addressTextView"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/labelTextView"
+            android:layout_marginLeft="@dimen/layx2"
+            android:singleLine="false"
+            android:text="Address content"
+            android:textColor="@color/WHITE"
+            android:textSize="@dimen/text_size_18"
+            android:textStyle="italic|bold" />
+
+        <TextView
+            android:id="@+id/abstractInfor"
+            android:layout_width="fill_parent"
+            android:layout_height="0dp"
+            android:layout_below="@+id/addressTextView"
+            android:layout_weight="1"
+            android:singleLine="false"
+            android:text="abstract infor content"
+            android:textColor="@color/WHITE"
+            android:textSize="@dimen/text_size_17"
+            android:textStyle="normal" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/typeTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#99ff0000"
+        android:padding="2dp"
+        android:text="Bar"
+        android:textColor="@color/WHITE"
+        android:textSize="@dimen/text_size_18"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:id="@+id/ratingLinearLayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/typeTextView"
+        android:orientation="horizontal"
+        android:padding="1dip" >
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/for_click_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+    </RelativeLayout>
+
+</RelativeLayout>

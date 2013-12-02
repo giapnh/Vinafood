@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+
+    <color name="splash_background">#FFFFFFFF</color>
+    <color name="time">#FFFF0000</color>
+    <color name="white">#FFFFFF</color>
+    <color name="cyan">#9900FFFF</color>
+    <color name="yellow">#99FFFF00</color>
+    <color name="grey">#99888888</color>
+    <color name="green2">#ffdfffff</color>
+    <color name="green">#ff00FF00</color>
+    <color name="blue">#710000ff</color>
+    <color name="light_blue">#400000ff</color>
+    <color name="header_title_color">#bbccff</color>
+    <color name="grey_standard">#D6D6D6</color>
+    <color name="holo_blue">#FF33E5B5</color>
+
+    <drawable name="red_nomal">#aa000000</drawable>
+    <drawable name="red_focus">#44000000</drawable>
+    <drawable name="blue_1">#dd000000</drawable>
+    <drawable name="blue_2">#77000000</drawable>
+
+</resources>

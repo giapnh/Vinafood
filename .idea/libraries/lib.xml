@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/mapquest-android-sdk-1.0.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/ksoap2-android-assembly-2.5.2-jar-with-dependencies.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

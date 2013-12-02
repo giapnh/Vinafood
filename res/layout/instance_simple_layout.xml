@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:padding = "2dip"
+  android:background = "@color/WHITE"
+  android:orientation = "vertical"
+  android:layout_width="fill_parent"
+  android:layout_height="wrap_content">
+    <LinearLayout 
+    android:padding = "3dip"
+    android:background = "@color/WHITE"
+    android:layout_width="fill_parent" 
+    android:orientation="horizontal"
+    android:layout_gravity="center"
+    android:layout_height="wrap_content">
+        <LinearLayout 
+        android:orientation = "vertical"
+        android:layout_width="fill_parent" 
+        android:id="@+id/linearLayout1" 
+        android:layout_weight="2"
+        android:layout_height="wrap_content">
+            <TextView 
+            android:text="Instance label" 
+            android:textStyle = "bold"
+            android:textColor = "@color/BLUE"
+            android:layout_width="fill_parent" 
+            android:layout_height="wrap_content" 
+            android:id="@+id/textViewInstanceLabel">
+            </TextView>
+            <TextView 
+            android:text="Instance type" 
+            android:textColor = "@color/RED"
+            android:layout_width="fill_parent" 
+            android:layout_height="wrap_content" 
+            android:id="@+id/textViewInstanceType">
+            </TextView>
+        </LinearLayout>
+        <LinearLayout
+        android:layout_weight="5"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        >
+        <Button 
+        android:background = "@drawable/maps_action"
+        android:layout_height="wrap_content" 
+        android:layout_width="wrap_content" 
+        android:id="@+id/buttonViewMap">
+        </Button>
+        <Button 
+        android:background = "@drawable/search_button"
+        android:layout_height="wrap_content" 
+        android:layout_width="wrap_content" 
+        android:layout_marginLeft="10dip"
+        android:id="@+id/buttonInstanceDetails">
+        </Button>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

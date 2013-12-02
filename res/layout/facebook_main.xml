@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="#fff"
+    android:padding="2dip"
+     >
+     <LinearLayout 
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:orientation="horizontal"
+         android:padding="8dip"
+         >
+         <Button 
+	    android:id="@+id/login"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:background="@drawable/login_button"
+	    />
+	<Button 
+	    android:id="@+id/wallpost"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:background="@drawable/wallpost_button"
+	    android:layout_marginLeft="10dip"
+	    />
+     </LinearLayout>
+	
+
+	<ScrollView 
+    android:layout_width="fill_parent" 
+    android:layout_marginTop="5dip" 
+    android:layout_height="wrap_content">
+        <LinearLayout 
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        >
+        	<WebView
+        	android:id="@+id/likeboxwebview"
+        	android:layout_height= "wrap_content"
+        	android:layout_width= "wrap_content"
+        	>
+        
+        	</WebView>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

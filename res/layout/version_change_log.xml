@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/BLACK"
+    android:orientation="vertical" >
+	
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:padding="7dip" >
+        <LinearLayout 
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <TextView 
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/WHITE"
+                android:textSize="20dip"
+                android:text="Semantic Innovation Group"
+                />
+            <TextView 
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/grey_standard"
+                android:textSize="14dip"
+                android:text="@string/intro_sig"
+                />
+            <TextView 
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/grey"
+                android:layout_marginBottom="7dip"
+                />
+            <TextView 
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/WHITE"
+                android:textSize="20dip"
+                android:text="1.78"
+                />
+            <TextView 
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/grey_standard"
+                android:textSize="14dip"
+                android:text="@string/new_in_178"
+                />
+            <TextView 
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/grey"
+                android:layout_marginBottom="7dip"
+                />
+            <TextView 
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/WHITE"
+                android:textSize="20dip"
+                android:text="1.75"
+                />
+            <TextView 
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/grey_standard"
+                android:textSize="14dip"
+                android:text="@string/new_in_175"
+                />
+            <TextView 
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/grey"
+                android:layout_marginBottom="7dip"
+                />
+            
+            
+            <TextView 
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/WHITE"
+                android:textSize="20dip"
+                android:text="1.7"
+                />
+            <TextView 
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/grey_standard"
+                android:textSize="14dip"
+                android:text="@string/new_in_17"
+                />
+            <TextView 
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/grey"
+                android:layout_marginBottom="7dip"
+                />
+            
+            
+            <TextView 
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/WHITE"
+                android:textSize="20dip"
+                android:text="1.68"
+                />
+            <TextView 
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/grey_standard"
+                android:textSize="14dip"
+                android:text="@string/new_in_168"
+                />
+            <TextView 
+                android:layout_width="fill_parent"
+                android:layout_height="1dip"
+                android:background="@color/grey"
+                android:layout_marginBottom="7dip"
+                />
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

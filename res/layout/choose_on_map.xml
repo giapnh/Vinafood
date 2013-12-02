@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  android:background="#ffffff">
+  
+  <TextView
+  			android:layout_width="fill_parent"
+  			android:layout_height="wrap_content"
+	  		android:textColor="#ff0000"
+	  		android:textSize="15dip"
+	  		android:typeface="serif"
+	  		android:background="@drawable/blue_white_bg"
+	  		android:text="@string/choose_place"
+	  		android:id="@+id/report_text"
+	  		android:layout_alignParentTop="true"
+	  		></TextView>
+	<LinearLayout
+		android:orientation="horizontal"
+		android:layout_width="fill_parent"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:id="@+id/bottom"
+		
+	>
+		<Button
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:text="@string/apply"
+			android:id="@+id/done_button"			
+		></Button>
+		<Button
+			android:layout_width="fill_parent"
+			android:layout_height="wrap_content"
+			android:layout_weight="1"
+			android:text="@string/cancel"
+			android:id="@+id/cancel_button"
+			
+		></Button>
+	</LinearLayout>
+	<com.google.android.maps.MapView
+  		android:layout_width="fill_parent"
+	    android:layout_height="fill_parent"
+	    android:apiKey="0MkNJnAK3xuKZqqWnwpyINkP-EksErL8Yz2yeDw"
+	    android:clickable="true"
+	    android:id="@+id/place_map_view"
+	    android:layout_above="@id/bottom"
+		android:layout_below="@id/report_text"
+	    />
+  
+</RelativeLayout>

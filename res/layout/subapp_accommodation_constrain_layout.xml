@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical" 
+    android:background="@color/WHITE">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <CheckBox
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="false"
+            android:id="@+id/checkBox"/>
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/input_data"
+            android:textColor="@color/BLACK"
+            android:id="@+id/textView"/>
+    </LinearLayout>
+    
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/linearComponent"
+        android:orientation="vertical">
+        <Spinner
+    		android:layout_height="wrap_content"
+    		android:layout_width="80dip"
+    		android:id="@+id/relOperatorSpinner"
+    		android:visibility="visible"/>
+        
+        <EditText 
+            android:id="@+id/editText"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"/>
+        
+        <LinearLayout 
+	    	android:layout_height="wrap_content" 
+	    	android:layout_width="fill_parent" 
+	    	android:id="@+id/linearLayoutBooleanValue">
+	    		<ToggleButton 
+	    		android:textOn = "@string/true1"
+	    		android:textOff = "@string/false1"
+	    		android:text="ToggleButton" 
+	    		android:layout_width="wrap_content" 
+	    		android:layout_height="wrap_content" 
+	    		android:id="@+id/toggleButton">
+	    		</ToggleButton>
+	    	</LinearLayout>
+        
+        <LinearLayout 
+	    	android:layout_height="wrap_content" 
+	    	android:layout_width="fill_parent" 
+	    	android:gravity="center_vertical" 
+	    	android:id="@+id/linearLayoutObjectValue">
+	        <Spinner
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:id="@+id/objectSpinner"
+	            android:visibility="visible"/>
+        </LinearLayout>
+        <LinearLayout 
+	    	android:layout_height="wrap_content" 
+	    	android:layout_width="fill_parent" 
+	    	android:id="@+id/linearInstanceConstrainaLoading"
+	    	android:orientation="vertical"
+	    	>
+	        <ProgressBar
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:id="@+id/progressBar"
+	            android:background="@color/BLACK"
+	            android:visibility="visible"/>
+        </LinearLayout>
+        
+        <LinearLayout 
+	    	android:layout_height="wrap_content" 
+	    	android:layout_width="fill_parent" 
+	    	android:id="@+id/linearInstanceConstrain"
+	    	android:orientation="vertical"
+	    	>
+	        <AutoCompleteTextView
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:id="@+id/instanceConstrainAuto"
+	            android:visibility="visible"/>
+	        <Spinner
+	            android:id="@+id/instanceConstrainSpinner"
+	            android:layout_width="fill_parent"
+	            android:layout_height="wrap_content"
+	            android:visibility="visible" />
+	        <RatingBar
+	            android:id="@+id/ratingBar"
+	            android:layout_width="wrap_content"
+	            android:layout_height="wrap_content"
+	            android:numStars="5"
+	            android:stepSize="1"
+	            android:visibility="visible" />
+        </LinearLayout>
+    </LinearLayout>
+          
+</LinearLayout>

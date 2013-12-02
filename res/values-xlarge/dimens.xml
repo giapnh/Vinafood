@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="notify_alert_prio_width">362.0dip</dimen>
+    <dimen name="notify_alert_prio_height">240.0dip</dimen>
+    <dimen name="notify_alert_min_width">345.0dip</dimen>
+    <dimen name="notify_alert_min_height">153.0dip</dimen>
+    <dimen name="rules_min_width">400.0dip</dimen>
+    <dimen name="rules_min_height">260.0dip</dimen>
+    <dimen name="ionline_icon_width">180.0dip</dimen>
+    <dimen name="ionline_icon_height">120.0dip</dimen>
+    <dimen name="logo_width">290.0dip</dimen>
+    <dimen name="logo_height">200.0dip</dimen>
+</resources>

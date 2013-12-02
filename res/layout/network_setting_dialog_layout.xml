@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  android:background="@color/WHITE"
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:orientation="vertical"
+  android:padding="5dip"
+  android:layout_width="fill_parent"
+  android:layout_height="wrap_content">
+    <LinearLayout 
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content" 
+    android:id="@+id/linearLayout3">
+    	<ImageView 
+    	android:src="@drawable/warning" 
+    	android:layout_width="wrap_content" 
+    	android:id="@+id/imageView1" 
+    	android:layout_height="wrap_content">
+    	</ImageView>
+	    <TextView 
+	    android:layout_marginLeft = "3dip"
+	    android:textColor="@color/BLUE"
+	    android:text="Please don't use this setting if you not sure about it!" 
+	    android:id="@+id/txt_sub_menu" 
+	    android:layout_width="fill_parent" 
+	    android:layout_height="wrap_content">
+	    </TextView>
+    </LinearLayout>
+    <LinearLayout 
+    android:id="@+id/linearLayout1" 
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content">
+        <TextView 
+        android:text="*" 
+        android:visibility="gone"
+        android:textColor="@color/RED"
+        android:id="@+id/errorsTextView" 
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content">
+        </TextView>
+        <EditText 
+        android:text="203.113.166.55"
+        android:inputType="numberDecimal"
+        android:hint="Enter host name or IP"
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content" android:id="@+id/ip_edit_text">
+        </EditText>
+    </LinearLayout>
+    <LinearLayout 
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content" 
+    android:id="@+id/linearLayout2">
+        <Button 
+        android:layout_weight="1"
+        android:text="OK" 
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:id="@+id/ok_button">
+        </Button>
+        <Button 
+        android:layout_weight="1"
+        android:text="Cancel" 
+        android:layout_width="wrap_content" 
+        android:id="@+id/cancel_button" 
+        android:layout_height="wrap_content">
+        </Button>
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/_main_layout"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/pink_bg" >
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:padding="2dip" >
+
+        <ListView
+            android:id="@+id/applicationListView"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:cacheColorHint="#0000"
+            android:visibility="gone" >
+        </ListView>
+
+        <ScrollView
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:scrollbars="none" >
+
+            <LinearLayout
+                android:id="@+id/grid_layout"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible" >
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical" >
+
+                    <Button
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="5dip"
+                        android:paddingBottom="5dip"
+                        android:background="@drawable/tags_button"
+                        android:text="@string/topic_search_header"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:typeface="serif" />
+
+                    <TableLayout
+                        android:id="@+id/simple_table"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:clipToPadding="true"
+                        android:weightSum="2" />
+
+                    <GridView
+                        android:id="@+id/simple_gridview"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:horizontalSpacing="10dp"
+                        android:numColumns="2"
+                        android:verticalSpacing="10dp"
+                        android:visibility="gone" >
+                    </GridView>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:paddingTop="5dip"
+                    android:orientation="vertical" >
+
+                    <Button
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/tags_button"
+                        android:gravity="center_vertical"
+                        android:paddingLeft="5dip"
+                        
+                        android:paddingBottom="5dip"
+                        android:text="@string/geo_search_header"
+                        android:textColor="@color/WHITE"
+                        android:textStyle="bold"
+                        android:typeface="serif" />
+
+                    <TableLayout
+                        android:id="@+id/recom_table"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:clipChildren="true" />
+
+                    <GridView
+                        android:id="@+id/recommend_gridview"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:horizontalSpacing="10dp"
+                        android:numColumns="2"
+                        android:verticalSpacing="10dp"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="vertical" 
+                    android:visibility="gone"
+                    >
+
+                    <TextView
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/blue_white_bg"
+                        android:text="@string/semantic_search_header"
+                        android:textColor="@color/white"
+                        android:textStyle="bold"
+                        android:typeface="serif" />
+
+                    <TableLayout
+                        android:id="@+id/advanced_table"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:clipChildren="true" />
+
+                    <GridView
+                        android:id="@+id/advanced_gridview"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:horizontalSpacing="10dp"
+                        android:numColumns="2"
+                        android:verticalSpacing="10dp"
+                        android:visibility="gone" />
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+    <hust.hgbk.vtio.vinafood.customview.RelativeLayoutWithCloseButton
+        android:id="@+id/citylayout"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:padding="3dip"
+        android:background="#111d45"
+        android:visibility="visible" />
+
+</RelativeLayout>
