@@ -31,7 +31,7 @@
             android:required="false" />
 
         <activity
-            android:name="hust.hgbk.vtio.vinafood.main.DiscoveryActivity"
+            android:name="hust.hgbk.vtio.vinafood.main.Splash"
             android:configChanges="orientation"
             android:label="@string/app_name" >
             <intent-filter>
@@ -88,13 +88,11 @@
         <activity
             android:name="PlaceSearchResultActivity"
             android:configChanges="orientation" >
-        </activity>
-        <!--
-        <activity
+        </activity><activity
             android:name="DiscoveryActivity"
             android:configChanges="orientation" >
         </activity>
-        -->
+       
         <activity
             android:name="hust.hgbk.vtio.vinafood.main.DiscoveryShowItemOfType"
             android:configChanges="orientation" >
