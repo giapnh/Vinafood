@@ -1,5 +1,6 @@
 package hust.hgbk.vtio.vinafood.main;
 
+import hust.hgbk.vtio.vinafood.config.log;
 import hust.hgbk.vtio.vinafood.main.DiscoveryActivity.FoodLocation;
 
 import java.util.ArrayList;
@@ -7,11 +8,14 @@ import java.util.Hashtable;
 import java.util.Iterator;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -30,8 +34,8 @@ public class DiscoveryShowItemOfType extends Activity {
 	int typeID;
 	ArrayList<String> keys = new ArrayList<String>();
 	Hashtable<String, FoodLocation> hashtable;
-
 	ListView listView;
+	ProgressDialog progressDialog;
 
 	// ===========================================================
 	// Constructors
@@ -100,6 +104,29 @@ public class DiscoveryShowItemOfType extends Activity {
 						null);
 				WebView content = (WebView) convertView
 						.findViewById(R.id.webview);
+				content.setWebViewClient(new WebViewClient() {
+					@Override
+					public void onReceivedError(WebView view, int errorCode,
+							String description, String failingUrl) {
+
+						super.onReceivedError(view, errorCode, description,
+								failingUrl);
+					}
+
+					@Override
+					public void onPageStarted(WebView view, String url,
+							Bitmap favicon) {
+						log.m("start load");
+						super.onPageStarted(view, url, favicon);
+					}
+
+					@Override
+					public void onPageFinished(WebView view, String url) {
+						log.m("loaded");
+						super.onPageFinished(view, url);
+					}
+				});
+
 				TextView title = (TextView) convertView
 						.findViewById(R.id.title);
 				TextView address = (TextView) convertView
