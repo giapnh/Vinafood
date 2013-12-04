@@ -161,7 +161,7 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
 					+ "','"
 					+ placeDataSimple.getLatitude() + "')");
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 			Toast.makeText(ctx, "Add Failed!", Toast.LENGTH_SHORT).show();
 		} finally {
 			close();

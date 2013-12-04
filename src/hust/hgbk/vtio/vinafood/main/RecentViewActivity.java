@@ -33,7 +33,6 @@ public class RecentViewActivity extends Activity {
 	TextView noFavorPlaceTextView;
 	ArrayList<FullDataInstance> listFullDataInstance = new ArrayList<FullDataInstance>();
 
-	ProgressDialog progressDialog;
 	String message;
 	NewArrayPlaceSimpleAdapter arrayPlaceSimpleAdapter;
 	LoadAllInstanceTask loadAllInstanceTask;
@@ -74,14 +73,12 @@ public class RecentViewActivity extends Activity {
 						currentPosition = arrayPlaceSimpleAdapter
 								.getCurrentPosition();
 					}
-					Log.v("POSITION", "current: " + currentPosition);
 					int begin = (currentPosition - 3) > 0 ? (currentPosition - 3)
 							: 0;
 					int finish = (currentPosition + 3) < listFullDataInstance
 							.size() ? (currentPosition + 3)
 							: (listFullDataInstance.size());
 					for (int i = begin; i < finish; i++) {
-						Log.v("POSITION", listFullDataInstance.get(i).getUri());
 						intent.putExtra("URI" + (i - begin),
 								listFullDataInstance.get(i).getUri());
 						intent.putExtra("label" + (i - begin),
@@ -93,8 +90,6 @@ public class RecentViewActivity extends Activity {
 						intent.putExtra("latitude" + (i - begin), Double
 								.toString(listFullDataInstance.get(i)
 										.getLatitude()));
-						// end added
-						//
 						intent.putExtra("type" + (i - begin),
 								listFullDataInstance.get(i).getType());
 					}

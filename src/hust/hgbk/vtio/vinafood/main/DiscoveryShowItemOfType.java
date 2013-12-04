@@ -10,6 +10,7 @@ import java.util.Iterator;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
@@ -140,6 +141,12 @@ public class DiscoveryShowItemOfType extends Activity {
 			}
 			return convertView;
 		}
+	}
+
+	public void onSearchButtonClick(View v) {
+		Intent intent = new Intent(this, DinningServiceSearch.class);
+		startActivity(intent);
+		overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 	}
 
 }

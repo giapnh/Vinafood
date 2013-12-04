@@ -31,15 +31,11 @@ public class FavoritePlaceActivity extends Activity {
 	LoadAllInstanceTask loadAllInstanceTask;
 	SQLiteAdapter sqLiteAdapter;
 
-	public FavoritePlaceActivity(Context ctx) {
-		super();
-		this.ctx = ctx;
-	}
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.result_place_layout);
+		this.ctx = FavoritePlaceActivity.this;
+		setContentView(R.layout.result_place_search_layout);
 		listResultView = (ListView) findViewById(R.id.listResultView);
 		noFavorPlaceTextView = (TextView) this
 				.findViewById(R.id.no_search_result_textview);

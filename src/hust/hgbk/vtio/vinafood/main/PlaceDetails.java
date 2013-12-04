@@ -1,16 +1,12 @@
 package hust.hgbk.vtio.vinafood.main;
 
 import hust.hgbk.vtio.vinafood.config.ServerConfig;
-import hust.hgbk.vtio.vinafood.constant.NameSpace;
+import hust.hgbk.vtio.vinafood.config.log;
 import hust.hgbk.vtio.vinafood.constant.OntologyCache;
 import hust.hgbk.vtio.vinafood.constant.SQLiteAdapter;
 import hust.hgbk.vtio.vinafood.constant.XmlAdapter;
-import hust.hgbk.vtio.vinafood.customview.StarVideoView;
 import hust.hgbk.vtio.vinafood.vtioservice.FullDataInstance;
 import hust.hgbk.vtio.vinafood.vtioservice.VtioCoreService;
-
-import java.util.ArrayList;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
@@ -19,13 +15,10 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.Window;
-import android.view.WindowManager;
-import android.view.animation.AnimationUtils;
-import android.webkit.WebChromeClient;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Button;
@@ -34,9 +27,10 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.ToggleButton;
 import android.widget.ViewFlipper;
 
-public class NewInstanceDetails extends Activity {
+public class PlaceDetails extends Activity {
 	final Activity activity = this;
 	Context context;
 	TextView waitTextView;
@@ -80,7 +74,7 @@ public class NewInstanceDetails extends Activity {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.place_details_layout);
-		this.context = NewInstanceDetails.this;
+		this.context = PlaceDetails.this;
 		Bundle extra = getIntent().getExtras();
 		// instanceURI = extra.getString("instanceURI");
 		// instanceLabel = extra.getString("instanceLabel");
@@ -114,13 +108,16 @@ public class NewInstanceDetails extends Activity {
 	}
 
 	private void loadData() {
-		LinearLayout favoristLay = (LinearLayout) findViewById(R.id.btnFavorist);
-		final TextView favoristText = (TextView) favoristLay
-				.findViewById(R.id.btnText);
+		ToggleButton favoristLay = (ToggleButton) findViewById(R.id.btn_bookmark);
+
+		// LinearLayout favoristLay = (LinearLayout)
+		// findViewById(R.id.btnFavorist);
+		// final TextView favoristText = (TextView) favoristLay
+		// .findViewById(R.id.btnText);
 		if (sqLiteAdapter.isAFavoritePlace(dataSimple.getUri())) {
-			favoristText.setText("Đã lưu");
+			favoristLay.setChecked(true);
 		} else {
-			favoristText.setText("Lưu");
+			favoristLay.setChecked(false);
 		}
 		favoristLay.setOnClickListener(new OnClickListener() {
 
@@ -128,11 +125,9 @@ public class NewInstanceDetails extends Activity {
 			public void onClick(View v) {
 				if (!sqLiteAdapter.isAFavoritePlace(dataSimple.getUri())) {
 					sqLiteAdapter.addPlaceToFavoriteTable(dataSimple);
-					favoristText.setText("Đã lưu");
 				} else {
 					sqLiteAdapter.deletePlaceFromFavoriteTable(dataSimple
 							.getUri());
-					favoristText.setText("Lưu");
 				}
 			}
 		});
@@ -147,13 +142,21 @@ public class NewInstanceDetails extends Activity {
 				+ dataSimple.getImageURL()
 				+ "\" style=' background-color:transparent;' width='" + width
 				+ "px;'height = '"
-				+ getResources().getDimension(R.dimen.layy350)
+				+ getResources().getDimension(R.dimen.layy300)
 				+ "px'    /></body></html>";
 		webView.getSettings().setJavaScriptEnabled(true);
 		webView.getSettings().setAllowFileAccess(true);
 		webView.getSettings().setPluginsEnabled(true);
 		webView.setScrollBarStyle(View.SCROLLBARS_OUTSIDE_OVERLAY);
 		webView.loadData(data, "text/html", "utf-8");
+		webView.setWebViewClient(new WebViewClient() {
+			@Override
+			public void onReceivedError(WebView view, int errorCode,
+					String description, String failingUrl) {
+				log.e("Webview error");
+				super.onReceivedError(view, errorCode, description, failingUrl);
+			}
+		});
 
 		textViewTitle = (TextView) findViewById(R.id.placeTypesTextView);
 		textViewTitle.setText(dataSimple.getLabel());
@@ -162,12 +165,12 @@ public class NewInstanceDetails extends Activity {
 		final int rate = dataSimple.getRatingNum();
 		ratingLay.removeAllViews();
 		for (int i = 0; i < rate; i++) {
-			ImageView ratingIcon = new ImageView(NewInstanceDetails.this);
+			ImageView ratingIcon = new ImageView(PlaceDetails.this);
 			ratingIcon.setImageResource(R.drawable.star_rating_full_dark);
 			ratingLay.addView(ratingIcon);
 		}
 		for (int i = 0; i < (5 - rate); i++) {
-			ImageView ratingIcon = new ImageView(NewInstanceDetails.this);
+			ImageView ratingIcon = new ImageView(PlaceDetails.this);
 			ratingIcon.setImageResource(R.drawable.star_rating_empty_dark);
 			ratingLay.addView(ratingIcon);
 		}
@@ -227,8 +230,6 @@ public class NewInstanceDetails extends Activity {
 					OntologyCache.hashMapTypeLabelToUri.get(dataSimple
 							.getType() + "@" + ServerConfig.LANGUAGE_CODE))
 					.getIconId();
-			Log.d(getClass().getSimpleName(),
-					"Dong 159" + iconUrl + String.valueOf(iconId));
 		} catch (Exception e) {
 		}
 
@@ -255,7 +256,6 @@ public class NewInstanceDetails extends Activity {
 						+ phoneNumber));
 				((Activity) context).startActivity(intent);
 			} catch (Exception e) {
-				// TODO: handle exception
 				Toast.makeText(
 						context,
 						context.getResources().getString(
@@ -269,12 +269,11 @@ public class NewInstanceDetails extends Activity {
 	}
 
 	public void onRating(View v) {
-		// TODO
 	}
 
 	public void onSearchButtonClick(View v) {
-		Intent intent = new Intent(NewInstanceDetails.this,
-				NewDinningServiceSearch.class);
+		Intent intent = new Intent(PlaceDetails.this,
+				DinningServiceSearch.class);
 		startActivity(intent);
 	}
 
@@ -282,4 +281,11 @@ public class NewInstanceDetails extends Activity {
 		finish();
 	}
 
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			finish();
+		}
+		return super.onKeyDown(keyCode, event);
+	}
 }

@@ -129,8 +129,8 @@ public class Splash extends Activity implements OnClickListener {
 	}
 
 	private void doWhenStart() {
-		if (NewDinningServiceSearch.listSubClass == null) {
-			NewDinningServiceSearch.listSubClass = new ArrayList<ClassDataSimple>();
+		if (DinningServiceSearch.listSubClass == null) {
+			DinningServiceSearch.listSubClass = new ArrayList<ClassDataSimple>();
 		}
 		detectLocation();
 		String city = XmlAdapter.getCityUri(ctx);
@@ -239,7 +239,7 @@ public class Splash extends Activity implements OnClickListener {
 						Toast.LENGTH_SHORT).show();
 			}
 			startActivity(new Intent(ctx, MainClass));
-			overridePendingTransition(R.anim.slide_in_left,
+			overridePendingTransition(R.anim.slide_in_right,
 					R.anim.slide_out_left);
 			finish();
 		}
@@ -436,7 +436,7 @@ public class Splash extends Activity implements OnClickListener {
 
 			@Override
 			public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
-				
+
 			}
 
 			@Override
@@ -450,7 +450,7 @@ public class Splash extends Activity implements OnClickListener {
 
 			@Override
 			public void onLocationChanged(Location location) {
-				
+
 				setGeoLocation(location);
 			}
 

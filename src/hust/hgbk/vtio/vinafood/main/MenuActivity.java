@@ -147,6 +147,7 @@ public class MenuActivity extends Activity {
 		intent.putExtra("radius", radius);
 		intent.putExtra("message", message);
 		startActivity(intent);
+		overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 	}
 
 	public void onNearBy(View v) {
@@ -157,22 +158,32 @@ public class MenuActivity extends Activity {
 	public void onDiscovery(View v) {
 		Intent intent = new Intent(MenuActivity.this, DiscoveryActivity.class);
 		startActivity(intent);
+		overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 	}
 
 	public void onFavorist(View v) {
 		Intent intent = new Intent(MenuActivity.this,
 				FavoritePlaceActivity.class);
 		startActivity(intent);
+		overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 	}
 
 	public void onRecentView(View v) {
 		Intent intent = new Intent(MenuActivity.this, RecentViewActivity.class);
 		startActivity(intent);
+		overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 	}
 
 	public void onSearchButtonClick(View v) {
-		Intent intent = new Intent(this, NewDinningServiceSearch.class);
+		Intent intent = new Intent(this, DinningServiceSearch.class);
 		startActivity(intent);
+		overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+	}
+
+	@Override
+	protected void onResume() {
+		overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+		super.onResume();
 	}
 
 }

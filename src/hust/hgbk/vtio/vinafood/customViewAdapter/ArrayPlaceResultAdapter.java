@@ -52,7 +52,6 @@ public abstract class ArrayPlaceResultAdapter extends
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		Log.v("TEST", "View " + position);
 		currentPosition = position;
 		PlaceItemView view;
 		if (convertView == null) {
@@ -127,7 +126,6 @@ public abstract class ArrayPlaceResultAdapter extends
 		}
 
 		protected void onCancelled() {
-			Log.v("KEN", "Load result cancel");
 		}
 
 		@Override

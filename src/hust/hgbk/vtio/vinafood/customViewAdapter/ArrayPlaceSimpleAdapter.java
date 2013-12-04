@@ -4,7 +4,7 @@ import hust.hgbk.vtio.vinafood.config.ServerConfig;
 import hust.hgbk.vtio.vinafood.constant.NameSpace;
 import hust.hgbk.vtio.vinafood.constant.SQLiteAdapter;
 import hust.hgbk.vtio.vinafood.customview.PlaceItemView;
-import hust.hgbk.vtio.vinafood.main.NewInstanceDetails;
+import hust.hgbk.vtio.vinafood.main.PlaceDetails;
 import hust.hgbk.vtio.vinafood.main.R;
 import hust.hgbk.vtio.vinafood.quickaction.ActionItem;
 import hust.hgbk.vtio.vinafood.vtioservice.FullDataInstance;
@@ -82,7 +82,7 @@ public class ArrayPlaceSimpleAdapter extends ArrayAdapter<FullDataInstance> {
 					@Override
 					public void onClick(View v) {
 						Intent intent = new Intent(context,
-								NewInstanceDetails.class);
+								PlaceDetails.class);
 						Bundle bundle = new Bundle();
 						bundle.putString("abstractInfo",
 								placeItem.getAbstractInfo());
@@ -364,14 +364,10 @@ public class ArrayPlaceSimpleAdapter extends ArrayAdapter<FullDataInstance> {
 			// "FILTER(lang(?type)='"+ServerConfig.LANGUAGE_CODE+"')"
 			queryString = queryString + "}";
 		}
-		Log.v("QUERY", "QUERY  = " + queryString);
 		long a = System.currentTimeMillis();
-		Log.v("TIME", "begin: " + a);
 
 		ArrayList<ArrayList<String>> placeInfo = services.executeQuery(
 				queryString, false);
-		Log.v("TIME", "begin: " + (System.currentTimeMillis() - a));
-		Log.v("QUERY", "INFO = " + placeInfo.size());
 		if (placeInfo.size() == 0) {
 			countLoopQuery++;
 			if (countLoopQuery == 5)

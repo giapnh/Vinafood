@@ -9,7 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import hust.hgbk.vtio.vinafood.config.ServerConfig;
 import hust.hgbk.vtio.vinafood.constant.NameSpace;
-import hust.hgbk.vtio.vinafood.main.NewInstanceDetails;
+import hust.hgbk.vtio.vinafood.main.PlaceDetails;
 import hust.hgbk.vtio.vinafood.main.R;
 import hust.hgbk.vtio.vinafood.ontology.PropertyWithValue;
 
@@ -74,7 +74,7 @@ public class propertyWithValueView extends LinearLayout {
 			@Override
 			public void onClick(View arg0) {
 				if (propertyWithValue.getProperty().isObjectProperty()) {
-					Intent intent = new Intent(context, NewInstanceDetails.class);
+					Intent intent = new Intent(context, PlaceDetails.class);
 					intent.putExtra("instanceURI", objectValueUri);
 					intent.putExtra("instanceLabel", tValueLabel);
 					context.startActivity(intent);

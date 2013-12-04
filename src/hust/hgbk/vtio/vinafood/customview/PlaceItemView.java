@@ -1,6 +1,7 @@
 package hust.hgbk.vtio.vinafood.customview;
 
 import hust.hgbk.vtio.vinafood.config.ServerConfig;
+import hust.hgbk.vtio.vinafood.config.log;
 import hust.hgbk.vtio.vinafood.constant.NameSpace;
 import hust.hgbk.vtio.vinafood.constant.OntologyCache;
 import hust.hgbk.vtio.vinafood.main.R;
@@ -19,6 +20,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebView;
+import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
@@ -170,7 +172,16 @@ public class PlaceItemView extends RelativeLayout {
 					+ "px'/></div>";
 			try {
 				imageWebView.loadData(data, "text/html", "utf-8");
-				imageWebView.reload();
+				imageWebView.setScrollContainer(false);
+				imageWebView.setWebViewClient(new WebViewClient() {
+					@Override
+					public void onReceivedError(WebView view, int errorCode,
+							String description, String failingUrl) {
+						log.e("Webview: On receive error");
+						super.onReceivedError(view, errorCode, description,
+								failingUrl);
+					}
+				});
 			} catch (Exception e) {
 				e.printStackTrace();
 			}

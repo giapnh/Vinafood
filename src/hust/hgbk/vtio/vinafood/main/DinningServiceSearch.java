@@ -9,15 +9,15 @@ import hust.hgbk.vtio.vinafood.ontology.simple.ClassDataSimple;
 import hust.hgbk.vtio.vinafood.query.Constraint;
 import hust.hgbk.vtio.vinafood.query.Query;
 import hust.hgbk.vtio.vinafood.query.Variable;
-import hust.hgbk.vtio.vinafood.vtioservice.ICoreService;
+import hust.hgbk.vtio.vinafood.vtioservice.VtioCoreService;
 
 import java.util.ArrayList;
 
-import ken.soapservicelib.proxy.SoapServiceProxy;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.View;
@@ -55,8 +55,9 @@ public class DinningServiceSearch extends Activity {
 
 	public static final String CLASS_URI = NameSpace.vtio + "Dining-Service";
 
-	// Subclass of dining servicec
-	public static ArrayList<ClassDataSimple> listSubClass;
+	VtioCoreService service = new VtioCoreService();
+	// Subclass of dining service
+	public static ArrayList<ClassDataSimple> listSubClass = new ArrayList<ClassDataSimple>();
 
 	float radius = 1f;
 
@@ -72,7 +73,6 @@ public class DinningServiceSearch extends Activity {
 	}
 
 	public void searchWithKey(String keyWord) {
-
 		String query = "SELECT DISTINCT  ?search {  ?search rdf:type <"
 				+ SubClassHorizontalView.currentClassURI
 				+ ">.  ?search"
@@ -141,18 +141,13 @@ public class DinningServiceSearch extends Activity {
 		}
 
 		Intent intent = new Intent(ctx, PlaceSearchResultActivity.class);
-
 		intent.putExtra("QueryString", query);
 		intent.putExtra("radius", 1f);
 		intent.putExtra("message", message);
-		// TODO
-		
 		startActivity(intent);
 	}
 
 	public void init() {
-		
-
 		edtSearch = (EditText) findViewById(R.id.edtSearch);
 		btnSearch = (ImageButton) findViewById(R.id.btnSearch);
 		clearButton = (ImageView) findViewById(R.id.btnClearText);
@@ -165,7 +160,7 @@ public class DinningServiceSearch extends Activity {
 						.getSystemService(Context.INPUT_METHOD_SERVICE);
 				mInputMethodManager.showSoftInput(edtSearch, 0);
 			}
-		}, 200);
+		}, 300);
 		clearButton.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -183,6 +178,7 @@ public class DinningServiceSearch extends Activity {
 				return false;
 			}
 		});
+		new GetAllSubClassTask().execute();
 		setScope();
 	}
 
@@ -288,7 +284,6 @@ public class DinningServiceSearch extends Activity {
 				String cityInfos[] = ServerConfig.infoOfCity(cityName);
 				ServerConfig.currentCityLabel = cityInfos[1];
 				ServerConfig.currentCityUri = cityInfos[2];
-				XmlAdapter.saveCityUri(ctx, ServerConfig.currentCityUri);
 				dialog.dismiss();
 			}
 
@@ -331,6 +326,14 @@ public class DinningServiceSearch extends Activity {
 				filterDialog.dismiss();
 			}
 		});
+		filterDialog.findViewById(R.id.btnCancel).setOnClickListener(
+				new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						filterDialog.dismiss();
+					}
+				});
 		filterDialog.show();
 	}
 
@@ -441,4 +444,21 @@ public class DinningServiceSearch extends Activity {
 		return super.onKeyDown(keyCode, event);
 	}
 
+	class GetAllSubClassTask extends AsyncTask<Void, Void, Void> {
+		@Override
+		protected void onPreExecute() {
+			SubClassHorizontalView.currentClassURI = CLASS_URI;
+		}
+
+		@Override
+		protected Void doInBackground(Void... arg0) {
+			while (listSubClass.size() == 0)
+				listSubClass = service.getAllAdaptedSubClassOf(CLASS_URI);
+			return null;
+		}
+
+		@Override
+		protected void onPostExecute(Void result) {
+		}
+	}
 }

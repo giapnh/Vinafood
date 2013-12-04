@@ -4,7 +4,7 @@ import hust.hgbk.vtio.vinafood.config.ServerConfig;
 import hust.hgbk.vtio.vinafood.constant.OntologyCache;
 import hust.hgbk.vtio.vinafood.constant.SQLiteAdapter;
 import hust.hgbk.vtio.vinafood.customview.PlaceItemView;
-import hust.hgbk.vtio.vinafood.main.NewInstanceDetails;
+import hust.hgbk.vtio.vinafood.main.PlaceDetails;
 import hust.hgbk.vtio.vinafood.main.R;
 import hust.hgbk.vtio.vinafood.vtioservice.FullDataInstance;
 import hust.hgbk.vtio.vinafood.vtioservice.ICoreService;
@@ -154,14 +154,13 @@ public class NewArrayPlaceSimpleAdapter extends ArrayAdapter<FullDataInstance> {
 			String data = "<div style='border: solid #bb3333  1px; position: absolute;   top: 0px; left: 0px;  overflow:hidden;  '><img src=\""
 					+ imageURL
 					+ "\" style=' background-color:transparent;'width='"
-					+ context.getResources().getDimension(R.dimen.layx200)
+					+ context.getResources().getDimension(R.dimen.layx130)
 					+ "px;'height = '"
-					+ context.getResources().getDimension(R.dimen.layy200)
+					+ context.getResources().getDimension(R.dimen.layy130)
 					+ "px'    /></div>";
 			try {
 				view.getImageWebView().loadData(data, "text/html", "utf-8");
 			} catch (Exception e) {
-				// TODO: handle exception
 			}
 		}
 
@@ -189,7 +188,7 @@ public class NewArrayPlaceSimpleAdapter extends ArrayAdapter<FullDataInstance> {
 					@Override
 					public void onClick(View v) {
 						Intent intent = new Intent(context,
-								NewInstanceDetails.class);
+								PlaceDetails.class);
 						Bundle bundle = new Bundle();
 						bundle.putString("abstractInfo",
 								placeItem.getAbstractInfo());

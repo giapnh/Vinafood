@@ -72,9 +72,7 @@ public class PlaceSearchResultActivity extends Activity {
 
 	class LoadAllInstanceTask extends AsyncTask<Void, Void, Void> {
 		Dialog progressLayout;
-
 		// TextView waitTextView;
-
 		@Override
 		protected Void doInBackground(Void... arg0) {
 			listPlaceDataSimple = new ArrayList<FullDataInstance>();
@@ -90,7 +88,6 @@ public class PlaceSearchResultActivity extends Activity {
 							queryString, true, 0, Location.getInstance()
 									.getLatitude(), Location.getInstance()
 									.getLongtitude(), radius);
-
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
@@ -104,7 +101,7 @@ public class PlaceSearchResultActivity extends Activity {
 
 		protected void onCancelled() {
 		}
-
+ 
 		@Override
 		protected void onPreExecute() {
 			// msgTextView = (TextView) findViewById(R.id.progress_bar_text);

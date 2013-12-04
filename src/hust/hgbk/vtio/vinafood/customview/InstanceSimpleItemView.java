@@ -10,7 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import hust.hgbk.vtio.vinafood.constant.NameSpace;
 import hust.hgbk.vtio.vinafood.constant.XmlAdapter;
-import hust.hgbk.vtio.vinafood.main.NewInstanceDetails;
+import hust.hgbk.vtio.vinafood.main.PlaceDetails;
 import hust.hgbk.vtio.vinafood.main.R;
 import hust.hgbk.vtio.vinafood.ontology.simple.InstanceDataSimple;
 
@@ -48,7 +48,7 @@ public class InstanceSimpleItemView extends LinearLayout {
 					//					String instanceUri = instance.getURI();
 					Log.v("KEN", "data label: " + uri);
 					Intent intent = new Intent(InstanceSimpleItemView.this.context,
-					        NewInstanceDetails.class);
+					        PlaceDetails.class);
 					intent.putExtra("instanceURI", uri);
 					InstanceSimpleItemView.this.context.startActivity(intent);
 				}

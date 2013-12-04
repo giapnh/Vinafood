@@ -60,7 +60,6 @@ public class VtioCoreService {
 				+ "> rdfs:range ?uri. {SELECT ?label WHERE {?uri rdfs:label ?label. FILTER(lang(?label)='"
 				+ ServerConfig.LANGUAGE_CODE
 				+ "')} LIMIT 1 }} ORDER BY ASC(?label)";
-		Log.d("QUERY", "QUERY GET RANGE 	: " + queryString);
 		ArrayList<ArrayList<String>> results = executeQuery(queryString, false);
 		for (int i = 0; i < results.size(); i++) {
 			/**
@@ -80,11 +79,6 @@ public class VtioCoreService {
 					.getUri());
 			returnValues.addAll(arraySubclass);
 		}
-
-		// Log.d("FOLOYU", "RANGE OF "+propertyURI);
-		// for (int i=0; i<returnValues.size(); i++){
-		// Log.d("FOLOYU", "Range ["+i+"] "+returnValues.get(i).toString());
-		// }
 		return returnValues;
 	}
 
@@ -134,7 +128,6 @@ public class VtioCoreService {
 				+ ">. ?uri rdfs:label ?label. FILTER(lang(?label)='"
 				+ ServerConfig.LANGUAGE_CODE + "')} ";
 
-		Log.d("QUERY", "QUERY GET INSTANCE 	: " + queryString);
 		ArrayList<ArrayList<String>> results = executeQuery(queryString, true);
 		for (int i = 0; i < results.size(); i++) {
 			InstanceDataSimple instanceData = new InstanceDataSimple();
@@ -163,7 +156,6 @@ public class VtioCoreService {
 				+ " vtio:hasLocation ?addresscity .   ?addresscity vtio:isPartOf <"
 				+ ServerConfig.currentCityUri + ">.}";
 
-		Log.d("QUERY", "QUERY GET INSTANCE 	: " + queryString);
 		ArrayList<ArrayList<String>> results = executeQuery(queryString, true);
 		for (int i = 0; i < results.size(); i++) {
 			InstanceDataSimple instanceData = new InstanceDataSimple();
@@ -190,7 +182,6 @@ public class VtioCoreService {
 				+ " ?location vtio:isPartOf <" + ServerConfig.currentCityUri
 				+ ">.}";
 
-		Log.d("QUERY", "QUERY GET RANGE 	: " + queryString);
 		ArrayList<ArrayList<String>> results = executeQuery(queryString, true);
 		for (int i = 0; i < results.size(); i++) {
 			InstanceDataSimple instanceData = new InstanceDataSimple();
@@ -313,7 +304,6 @@ public class VtioCoreService {
 		soapRequestObject.addProperty("arg0", instanceURI);
 		soapRequestObject.addProperty("arg1", langCode);
 		soapRequestObject.addProperty("arg2", ServerConfig.VTIO_REPOSITORY_KEY);
-		Log.v("PROPERTIES", soapRequestObject.toString());
 		SoapSerializationEnvelope envelope = new SoapSerializationEnvelope(
 				SoapEnvelope.VER11);
 		envelope.setOutputSoapObject(soapRequestObject);
@@ -322,7 +312,6 @@ public class VtioCoreService {
 
 		try {
 			SoapObject result = (SoapObject) envelope.bodyIn;
-			Log.v("PROPERTIES", result.toString());
 
 			for (int i = 0; i < result.getPropertyCount(); i++) {
 				SoapObject soapItem = (SoapObject) result.getProperty(i);
@@ -338,8 +327,6 @@ public class VtioCoreService {
 						property.setObjectProperty(true);
 					} else
 						property.setObjectProperty(false);
-					// Log.v("PROPERTIES", property.isObjectProperty() +
-					// " count " + i);
 					property.setPropertyLabel(soapItem.getProperty(
 							"propertyLabel").toString());
 					property.setPropertyURI(soapItem.getProperty("propertyUri")
@@ -393,7 +380,6 @@ public class VtioCoreService {
 
 		try {
 			SoapObject result = (SoapObject) envelope.bodyIn;
-			Log.v("PROPERTIES", result.toString());
 			SoapObject soapItem = (SoapObject) result.getProperty(0);
 
 			for (int i = 0; i < soapItem.getPropertyCount(); i++) {
@@ -465,7 +451,6 @@ public class VtioCoreService {
 						propertyWithValues
 								.setValue(propertyWithValuesSoapObject
 										.getProperty("value").toString());
-						Log.v("PROPERTIES", property.getPropertyLabel());
 						listPropertyValues.add(propertyWithValues);
 
 					} catch (Exception e) {
@@ -475,7 +460,6 @@ public class VtioCoreService {
 			}
 
 			returnValues.setListPropertyValues(listPropertyValues);
-			Log.v("PROPERTIES", listPropertyValues.size() + " pro");
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -696,7 +680,6 @@ public class VtioCoreService {
 	public ArrayList<ArrayList<String>> executeQuery(String queryString,
 			boolean reason) {
 		ArrayList<ArrayList<String>> returnValues = new ArrayList<ArrayList<String>>();
-		Log.v("QUERY", "execute: " + queryString);
 		/**
 		 * Kiem tra trong cache
 		 */
@@ -704,8 +687,6 @@ public class VtioCoreService {
 
 		if (OntologyCache.listQuery.size() > 0
 				&& OntologyCache.listQuery.containsKey(key)) {
-			Log.d("QUERYGEO", "CACHE TRUE: MATCH THIS QUERY IN CLIENT CACHE "
-					+ key);
 			if (OntologyCache.listQuery.get(key) != null
 					&& OntologyCache.listQuery.get(key).size() > 0) {
 				return OntologyCache.listQuery.get(key);
@@ -732,9 +713,6 @@ public class VtioCoreService {
 
 		try {
 			SoapObject result = (SoapObject) envelope.bodyIn;
-			Log.v("TEST", envelope.properties.toString()
-					+ " RESULT SERVICE SIZE: " + result.getPropertyCount()
-					+ " content: " + result.toString());
 			for (int i = 0; i < result.getPropertyCount(); i++) {
 				SoapObject soapItem = (SoapObject) result.getProperty(i);
 				ArrayList<String> resultItem = new ArrayList<String>();
@@ -761,7 +739,6 @@ public class VtioCoreService {
 	public ArrayList<ArrayList<String>> executeQuery(String queryString,
 			boolean reason, boolean isCache) {
 		ArrayList<ArrayList<String>> returnValues = new ArrayList<ArrayList<String>>();
-		Log.v("QUERY", "execute: " + queryString);
 		/**
 		 * Kiem tra trong cache
 		 */
@@ -769,8 +746,6 @@ public class VtioCoreService {
 
 		if (OntologyCache.listQuery.size() > 0
 				&& OntologyCache.listQuery.containsKey(key)) {
-			Log.d("QUERYGEO", "CACHE TRUE: MATCH THIS QUERY IN CLIENT CACHE "
-					+ key);
 			if (OntologyCache.listQuery.get(key) != null
 					&& OntologyCache.listQuery.get(key).size() > 0) {
 				return OntologyCache.listQuery.get(key);
@@ -810,15 +785,10 @@ public class VtioCoreService {
 			}
 		} catch (Exception e) {
 		}
-
-		/**
-		 * Ã„ï¿½Ã†Â°a vÃƒÂ o cache
-		 */
 		if (returnValues.size() > 0 && isCache) {
 
 			OntologyCache.listQuery.put(key, returnValues);
 		}
-		// Log.d("QUERY-ZERO", "ZERO SIZE: " + returnValues.size());
 		return returnValues;
 	}
 
@@ -2416,7 +2386,6 @@ public class VtioCoreService {
 				// Log.v("TEST", soapRequestObject.toString());
 			} catch (Exception e) {
 				isError = true;
-				Log.v("SERVICE_ERROR", "cannot getServiceConnect!");
 				e.printStackTrace();
 
 				try {
