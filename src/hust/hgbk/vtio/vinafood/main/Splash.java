@@ -65,13 +65,6 @@ public class Splash extends Activity implements OnClickListener {
 		txtLoading = (TextView) findViewById(R.id.txt_loading);
 		txtLoading.setText("Đang cấu hình hệ thống...");
 		XmlAdapter.synConfig(this);
-
-		// Show loading
-		// ImageView loading = (ImageView) findViewById(R.id.img_loading);
-		// loading.setBackgroundResource(R.drawable.progress_bar_states);
-		// RotateDrawable drawable = (RotateDrawable) loading.getBackground();
-		// drawable.setLevel(500);
-
 		if (ConnectionManager.isOnline(getBaseContext()) == false) {
 			String msgtext = "";
 			msgtext = getResources().getString(R.string.no_network_msg);
@@ -146,7 +139,6 @@ public class Splash extends Activity implements OnClickListener {
 				if (city.equals(ServerConfig.cityString[i][2])) {
 					ServerConfig.currentCityUri = ServerConfig.cityString[i][2];
 					ServerConfig.currentCityLabel = ServerConfig.cityString[i][1];
-					Log.v("CITY", ServerConfig.currentCityLabel);
 					break;
 				}
 			}
