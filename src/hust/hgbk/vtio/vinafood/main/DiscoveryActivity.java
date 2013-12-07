@@ -190,4 +190,9 @@ public class DiscoveryActivity extends Activity {
 		return super.onKeyDown(keyCode, event);
 	}
 
+	public void onSearchButtonClick(View v) {
+		Intent intent = new Intent(this, DinningServiceSearch.class);
+		startActivity(intent);
+		overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+	}
 }

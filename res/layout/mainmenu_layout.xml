@@ -57,7 +57,7 @@
                 android:layout_toRightOf="@+id/imageView2"
                 android:text="Menu"
                 android:textColor="#88009900"
-                android:textSize="@dimen/text_size_24"
+                android:textSize="@dimen/text_24"
                 android:textStyle="bold|italic" />
         </RelativeLayout>
     </RelativeLayout>
@@ -326,7 +326,8 @@
             android:background="@drawable/menu_button_selector"
             android:clickable="true"
             android:gravity="center"
-            android:onClick="onUpdateCity" >
+            android:onClick="onUpdateCity"
+            android:visibility="gone" >
 
             <ImageView
                 android:id="@+id/imageView3"
@@ -342,7 +343,7 @@
                 android:gravity="center_vertical"
                 android:text="Chọn thành phố"
                 android:textColor="@color/WHITE"
-                android:textSize="@dimen/text_size_24" />
+                android:textSize="@dimen/text_24" />
         </RelativeLayout>
     </RelativeLayout>
 

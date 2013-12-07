@@ -18,6 +18,7 @@
             android:layout_width="@dimen/layx200"
             android:layout_height="match_parent"
             android:background="#00ff00ff"
+            android:scrollbars="none"
             android:visibility="gone" />
 
         <ImageView
@@ -44,7 +45,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginLeft="@dimen/layx4"
         android:layout_toRightOf="@+id/image_layout"
-        android:background="#88000000"
+        android:background="#bbffffff"
         android:orientation="vertical" >
 
         <TextView
@@ -58,8 +59,8 @@
             android:marqueeRepeatLimit="marquee_forever"
             android:singleLine="false"
             android:text="Cafe morning Hoan Kiem lakeCafe morning Hoan Kiem lake"
-            android:textColor="#fff"
-            android:textSize="@dimen/text_size_22"
+            android:textColor="#ee0000ff"
+            android:textSize="@dimen/text_22"
             android:textStyle="bold" />
 
         <TextView
@@ -70,8 +71,8 @@
             android:layout_marginLeft="@dimen/layx2"
             android:singleLine="false"
             android:text="Address content"
-            android:textColor="@color/WHITE"
-            android:textSize="@dimen/text_size_18"
+            android:textColor="@color/Black"
+            android:textSize="@dimen/text_18"
             android:textStyle="italic|bold" />
 
         <TextView
@@ -82,8 +83,8 @@
             android:layout_weight="1"
             android:singleLine="false"
             android:text="abstract infor content"
-            android:textColor="@color/WHITE"
-            android:textSize="@dimen/text_size_17"
+            android:textColor="@color/Black"
+            android:textSize="@dimen/text_17"
             android:textStyle="normal" />
     </LinearLayout>
 
@@ -95,7 +96,7 @@
         android:padding="2dp"
         android:text="Bar"
         android:textColor="@color/WHITE"
-        android:textSize="@dimen/text_size_18"
+        android:textSize="@dimen/text_18"
         android:textStyle="bold" />
 
     <LinearLayout

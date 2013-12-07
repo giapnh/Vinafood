@@ -15,7 +15,7 @@
         android:gravity="center"
         android:text="@string/txt_hotline"
         android:textColor="@color/WHITE"
-        android:textSize="@dimen/text_size_20"
+        android:textSize="@dimen/text_20"
         android:textStyle="bold" />
 
     <ImageView

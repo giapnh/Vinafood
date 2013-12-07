@@ -37,7 +37,7 @@
                 android:hint="@string/txt_angi_odau"
                 android:imeOptions="actionSearch"
                 android:singleLine="true"
-                android:textSize="@dimen/text_size_22" >
+                android:textSize="@dimen/text_22" >
             </EditText>
 
             <ImageView
@@ -294,7 +294,7 @@
                 android:gravity="center_horizontal"
                 android:hint="1 (km)"
                 android:inputType="numberDecimal"
-                android:textSize="@dimen/text_size_16" />
+                android:textSize="@dimen/text_16" />
 
             <Button
                 android:id="@+id/btn_plus"

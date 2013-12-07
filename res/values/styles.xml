@@ -78,13 +78,13 @@
     </style>
 
     <style name="TitleText">
-        <item name="android:textSize">@dimen/text_size_22</item>
+        <item name="android:textSize">@dimen/text_22</item>
         <item name="android:textColor">@color/WHITE</item>
         <item name="android:textStyle">bold</item>
     </style>
 
     <style name="FilterText">
-        <item name="android:textSize">@dimen/text_size_18</item>
+        <item name="android:textSize">@dimen/text_18</item>
         <item name="android:textColor">@color/BLACK</item>
     </style>
 

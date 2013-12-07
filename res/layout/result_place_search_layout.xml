@@ -81,9 +81,10 @@
         android:layout_alignParentRight="true"
         android:background="#77000000"
         android:gravity="center"
+        android:padding="@dimen/layy5"
         android:text="Load all instance data"
         android:textColor="#ffffff"
-        android:padding="@dimen/layy5"
-        android:textSize="@dimen/text_size_20" />
+        android:textSize="@dimen/text_20"
+        android:visibility="gone" />
 
 </RelativeLayout>

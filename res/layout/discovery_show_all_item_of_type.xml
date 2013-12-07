@@ -57,7 +57,7 @@
                 android:layout_toRightOf="@+id/imageView2"
                 android:text="Menu"
                 android:textColor="#88009900"
-                android:textSize="@dimen/text_size_24"
+                android:textSize="@dimen/text_24"
                 android:textStyle="bold|italic" />
         </RelativeLayout>
     </RelativeLayout>

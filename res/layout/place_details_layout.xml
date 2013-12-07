@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/WHITE"
+    android:background="@drawable/bg"
     android:orientation="vertical" >
 
     <RelativeLayout
@@ -157,14 +157,17 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_below="@+id/view1"
-        android:layout_margin="5dp" >
+        android:layout_margin="1dp"
+        android:background="#eeffffff"
+        android:scrollbarThumbVertical="@drawable/scroll_bar"
+        android:scrollbars="vertical" >
 
         <LinearLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <WebView
+            <hust.hgbk.vtio.vinafood.customview.ExpandableWebView
                 android:id="@+id/placeImageView"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/layy350" />
@@ -181,8 +184,9 @@
                 android:orientation="horizontal" >
 
                 <LinearLayout
-                    android:layout_width="fill_parent"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:orientation="vertical" >
 
                     <LinearLayout
@@ -216,12 +220,21 @@
                             android:layout_width="fill_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="2dip"
-                            android:text="Address here..."
                             android:textColor="@color/BLACK"
                             android:textStyle="italic" >
                         </TextView>
                     </LinearLayout>
                 </LinearLayout>
+
+                <ToggleButton
+                    android:id="@+id/btn_bookmark"
+                    android:layout_width="@dimen/layx32"
+                    android:layout_height="@dimen/layy32"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/btn_bookmark_selector"
+                    android:text=""
+                    android:textOff=""
+                    android:textOn="" />
             </LinearLayout>
 
             <View
@@ -252,7 +265,7 @@
                     android:layout_toRightOf="@+id/ic_phone"
                     android:text="Call (+84) 1664643234"
                     android:textColor="@color/BLACK"
-                    android:textSize="@dimen/text_size_19"
+                    android:textSize="@dimen/text_19"
                     android:textStyle="italic" />
 
                 <ImageView
@@ -294,7 +307,7 @@
                     android:layout_toRightOf="@+id/ic_map"
                     android:text="Xem bản đồ"
                     android:textColor="@color/BLACK"
-                    android:textSize="@dimen/text_size_19" />
+                    android:textSize="@dimen/text_19" />
 
                 <ImageView
                     android:id="@+id/imageView3"
@@ -334,7 +347,7 @@
                     android:layout_toRightOf="@+id/ic_detail"
                     android:text="Thông tin chi tiết"
                     android:textColor="@color/BLACK"
-                    android:textSize="@dimen/text_size_19" />
+                    android:textSize="@dimen/text_19" />
             </RelativeLayout>
 
             <TextView
@@ -343,7 +356,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:textColor="@color/BLACK"
-                android:textSize="@dimen/text_size_18" />
+                android:textSize="@dimen/text_18" />
         </LinearLayout>
     </ScrollView>
 
