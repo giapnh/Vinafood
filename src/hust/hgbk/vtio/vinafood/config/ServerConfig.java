@@ -9,6 +9,7 @@ public class ServerConfig {
 
 	// private static String serverSpecificIp = "203.113.166.55";
 	private static String serverSpecificIp = "162.218.209.71";
+	public static String SIG_APP_URI = "https://play.google.com/store/apps/developer?id=Semantic+Innovation+Group";
 
 	public static String getWSDLURL() {
 		return "http://" + serverSpecificIp

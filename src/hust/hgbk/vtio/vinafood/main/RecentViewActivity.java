@@ -10,12 +10,10 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.Dialog;
-import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -111,11 +109,10 @@ public class RecentViewActivity extends Activity {
 		@Override
 		protected Void doInBackground(Void... arg0) {
 			FullDataInstance[] dataInstances = SQLiteAdapter.getInstance(
-					RecentViewActivity.this).getAllRecentViewPlace(8, 0);
-			for (int i = 0; i < dataInstances.length; i++) {
+					RecentViewActivity.this).getAllRecentViewPlace(20, 0);
+			for (int i = dataInstances.length - 1; i >= 0; i--) {
 				listFullDataInstance.add(dataInstances[i]);
 			}
-			// dungct: truy van tim wellKnown - Place - bat suy dien
 			arrayPlaceSimpleAdapter = new NewArrayPlaceSimpleAdapter(
 					RecentViewActivity.this, R.layout.place_item_layout,
 					listFullDataInstance, sqLiteAdapter);

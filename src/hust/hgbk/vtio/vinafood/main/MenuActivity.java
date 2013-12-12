@@ -7,26 +7,31 @@ import hust.hgbk.vtio.vinafood.vtioservice.VtioCoreService;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.ViewFlipper;
 
 public class MenuActivity extends Activity {
 	Context ctx;
 	ImageButton btnSearch;
 	Button advancedButton;
-
 	String currentLanguage = "";
-
 	public final String CLASS_URI = NameSpace.vtio + "Dining-Service";
 
 	VtioCoreService service = new VtioCoreService();
 	// background switcher
 	ViewFlipper flipper;
 	Thread flipperThread;
+	RelativeLayout about;
 
 	String queryString;
 	Float radius = 0f;
@@ -72,6 +77,7 @@ public class MenuActivity extends Activity {
 	private void findViewById() {
 		flipper = (ViewFlipper) this.findViewById(R.id.sampleFlipper);
 		btnSearch = (ImageButton) this.findViewById(R.id.btnSearch);
+		about = (RelativeLayout) this.findViewById(R.id.about);
 	}
 
 	public void searchWithKey(String keyWord) {
@@ -174,10 +180,44 @@ public class MenuActivity extends Activity {
 		overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 	}
 
+	boolean isShowAbout = false;
+
+	public void onAboutUs(View v) {
+		about.setVisibility(View.VISIBLE);
+		about.startAnimation(AnimationUtils.loadAnimation(ctx,
+				R.anim.slide_in_left));
+		isShowAbout = true;
+		TextView view = (TextView) about.findViewById(R.id.txt_other_app);
+		view.setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Uri uri = Uri.parse(ServerConfig.SIG_APP_URI);
+				Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+				startActivity(intent);
+			}
+		});
+	}
+
 	public void onSearchButtonClick(View v) {
 		Intent intent = new Intent(this, DinningServiceSearch.class);
 		startActivity(intent);
 		overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
+	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			if (isShowAbout) {
+				about.setVisibility(View.GONE);
+				about.startAnimation(AnimationUtils.loadAnimation(ctx,
+						R.anim.slide_out_right));
+			} else {
+				finish();
+			}
+			isShowAbout = false;
+		}
+		return super.onKeyDown(keyCode, event);
+
 	}
 
 	@Override

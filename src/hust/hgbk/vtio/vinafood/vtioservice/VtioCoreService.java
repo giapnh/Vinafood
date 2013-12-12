@@ -28,26 +28,12 @@ import org.ksoap2.serialization.SoapSerializationEnvelope;
 import android.content.Context;
 import android.util.Log;
 
-/**
- * 
- * Class goi ve tat ca cac ham service cung cap
- * 
- * @author mrhien
- * 
- */
 public class VtioCoreService {
 	public int countCategoryCall = 0;
 
 	public VtioCoreService() {
 
 	}
-
-	/**
-	 * Lay rat tat ca cac lop la range cua mot property
-	 * 
-	 * @param propertyURI
-	 * @return
-	 */
 
 	public ArrayList<ClassDataSimple> getRangeSimpleOfObjectProperty(
 			String propertyURI) {
@@ -2383,7 +2369,6 @@ public class VtioCoreService {
 					ServerConfig.getWSDLURL());
 			try {
 				androidHttpTransport.call("\"" + soapAction + "\"", envelope);
-				// Log.v("TEST", soapRequestObject.toString());
 			} catch (Exception e) {
 				isError = true;
 				e.printStackTrace();
