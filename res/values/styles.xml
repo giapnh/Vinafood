@@ -89,9 +89,10 @@
     </style>
 
     <style name="MenuButtonText">
-        <item name="android:textSize">@dimen/layx30</item>
-        <item name="android:textColor">@color/WHITE</item>
+        <item name="android:textSize">@dimen/layx35</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:typeface">sans</item>
+        <item name="android:textColor">@color/WHITE</item>
     </style>
 
 </resources>

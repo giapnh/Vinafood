@@ -63,7 +63,6 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/view_pager_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/top_bar_layout"
@@ -79,18 +78,18 @@
                 android:layout_height="match_parent" >
 
                 <ImageView
-                    android:id="@+id/imageView1"
+                    android:id="@+id/ImageView06"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/sample1" />
+                    android:src="@drawable/img_chaca" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentLeft="true"
-                    android:background="#55000000"
+                    android:background="#99000000"
                     android:orientation="vertical" >
 
                     <TextView
@@ -98,17 +97,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="3dp"
-                        android:text="Vịt quay"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/WHITE" />
-
-                    <TextView
-                        android:id="@+id/textView3"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="3dp"
-                        android:text="120 Trường Chinh - Hà Nội"
-                        android:textColor="@color/WHITE"
+                        android:text="ĐA DẠNG"
+                        android:textColor="#aa00ff00"
+                        android:textSize="@dimen/text_35"
                         android:textStyle="bold" />
                 </LinearLayout>
             </RelativeLayout>
@@ -122,14 +113,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/sample2" />
+                    android:src="@drawable/sample3" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentLeft="true"
-                    android:background="#55000000"
+                    android:background="#99000000"
                     android:orientation="vertical" >
 
                     <TextView
@@ -137,17 +128,9 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="3dp"
-                        android:text="Vịt quay"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/WHITE" />
-
-                    <TextView
-                        android:id="@+id/TextView09"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="3dp"
-                        android:text="02 Trần Đại Nghĩa- Hai Bà Trưng- Hà Nội"
-                        android:textColor="@color/WHITE"
+                        android:text="TIỆN LỢI"
+                        android:textColor="#ff00ffff"
+                        android:textSize="@dimen/text_35"
                         android:textStyle="bold" />
                 </LinearLayout>
             </RelativeLayout>
@@ -161,14 +144,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/sample3" />
+                    android:src="@drawable/img_map_demo" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentLeft="true"
-                    android:background="#55000000"
+                    android:background="#99000000"
                     android:orientation="vertical" >
 
                     <TextView
@@ -176,147 +159,44 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="3dp"
-                        android:text="Vịt quay"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/WHITE" />
+                        android:text="CHÍNH XÁC"
+                        android:textColor="#dd0088ff"
+                        android:textSize="@dimen/text_35"
+                        android:textStyle="bold" />
+                </LinearLayout>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent" >
+
+                <ImageView
+                    android:id="@+id/ImageView07"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/img_free_app" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentLeft="true"
+                    android:background="#99000000"
+                    android:orientation="vertical" >
 
                     <TextView
-                        android:id="@+id/TextView02"
+                        android:id="@+id/TextView01"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="3dp"
-                        android:text="12 Chùa Bộc- Hà Nội"
+                        android:text="MIỄN PHÍ"
                         android:textColor="@color/WHITE"
+                        android:textSize="@dimen/text_35"
                         android:textStyle="bold" />
                 </LinearLayout>
             </RelativeLayout>
         </ViewFlipper>
-
-        <RelativeLayout
-            android:id="@+id/menuNearby"
-            style="@style/MenuButton"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/layx85"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/sampleFlipper"
-            android:layout_margin="1dp"
-            android:focusable="true"
-            android:gravity="center_vertical"
-            android:onClick="onNearBy" >
-
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="@dimen/layx80"
-                android:layout_height="@dimen/layx80"
-                android:layout_alignParentLeft="true"
-                android:layout_marginLeft="16dp"
-                android:src="@drawable/ic_nearby" />
-
-            <TextView
-                android:id="@+id/textView4"
-                style="@style/MenuButtonText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="14dp"
-                android:layout_toRightOf="@+id/imageView2"
-                android:text="@string/near_by" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/menuDiscovery"
-            style="@style/MenuButton"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/layx85"
-            android:layout_below="@+id/menuNearby"
-            android:layout_margin="1dp"
-            android:focusable="true"
-            android:gravity="center_vertical"
-            android:onClick="onDiscovery" >
-
-            <ImageView
-                android:id="@+id/ImageView04"
-                android:layout_width="@dimen/layx80"
-                android:layout_height="@dimen/layx80"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="16dp"
-                android:src="@drawable/ic_discovery" />
-
-            <TextView
-                android:id="@+id/TextView06"
-                style="@style/MenuButtonText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="14dp"
-                android:layout_toRightOf="@+id/ImageView04"
-                android:text="Khám phá" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/menuFavorite"
-            style="@style/MenuButton"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/layx85"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/menuDiscovery"
-            android:layout_margin="1dp"
-            android:focusable="true"
-            android:gravity="center_vertical"
-            android:onClick="onFavorist" >
-
-            <ImageView
-                android:id="@+id/ImageView03"
-                android:layout_width="@dimen/layx80"
-                android:layout_height="@dimen/layx80"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="16dp"
-                android:src="@drawable/ic_favorite" />
-
-            <TextView
-                android:id="@+id/TextView05"
-                style="@style/MenuButtonText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="14dp"
-                android:layout_toRightOf="@+id/ImageView03"
-                android:text="Ưa thích" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:id="@+id/menuRecentView"
-            style="@style/MenuButton"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/layx85"
-            android:layout_alignParentLeft="true"
-            android:layout_below="@+id/menuFavorite"
-            android:layout_margin="1dp"
-            android:focusable="true"
-            android:gravity="center_vertical"
-            android:onClick="onRecentView" >
-
-            <ImageView
-                android:id="@+id/ImageView05"
-                android:layout_width="@dimen/layx80"
-                android:layout_height="@dimen/layx80"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="16dp"
-                android:src="@drawable/ic_recent" />
-
-            <TextView
-                android:id="@+id/TextView07"
-                style="@style/MenuButtonText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="14dp"
-                android:layout_toRightOf="@+id/ImageView05"
-                android:text="Xem gần đây" />
-        </RelativeLayout>
 
         <RelativeLayout
             android:id="@+id/update_city"
@@ -345,6 +225,192 @@
                 android:textColor="@color/WHITE"
                 android:textSize="@dimen/text_24" />
         </RelativeLayout>
+
+        <ScrollView
+            android:id="@+id/scrollView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/sampleFlipper"
+            android:scrollbars="vertical" >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical" >
+
+                <RelativeLayout
+                    android:id="@+id/menuNearby"
+                    style="@style/MenuButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/layx85"
+                    android:layout_margin="1dp"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:onClick="onNearBy" >
+
+                    <ImageView
+                        android:id="@+id/imageView2"
+                        android:layout_width="@dimen/layx80"
+                        android:layout_height="@dimen/layx80"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="16dp"
+                        android:src="@drawable/ic_nearby" />
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        style="@style/MenuButtonText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="14dp"
+                        android:layout_toRightOf="@+id/imageView2"
+                        android:text="@string/near_by" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/menuDiscovery"
+                    style="@style/MenuButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/layx85"
+                    android:layout_margin="1dp"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:onClick="onDiscovery" >
+
+                    <ImageView
+                        android:id="@+id/ImageView04"
+                        android:layout_width="@dimen/layx80"
+                        android:layout_height="@dimen/layx80"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="16dp"
+                        android:src="@drawable/ic_discovery" />
+
+                    <TextView
+                        android:id="@+id/TextView06"
+                        style="@style/MenuButtonText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="14dp"
+                        android:layout_toRightOf="@+id/ImageView04"
+                        android:text="Khám phá" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/menuFavorite"
+                    style="@style/MenuButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/layx85"
+                    android:layout_margin="1dp"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:onClick="onFavorist" >
+
+                    <ImageView
+                        android:id="@+id/ImageView03"
+                        android:layout_width="@dimen/layx80"
+                        android:layout_height="@dimen/layx80"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="16dp"
+                        android:src="@drawable/ic_favorite" />
+
+                    <TextView
+                        android:id="@+id/TextView05"
+                        style="@style/MenuButtonText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="14dp"
+                        android:layout_toRightOf="@+id/ImageView03"
+                        android:text="Ưa thích" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/menuRecentView"
+                    style="@style/MenuButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/layx85"
+                    android:layout_margin="1dp"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:onClick="onRecentView" >
+
+                    <ImageView
+                        android:id="@+id/ImageView05"
+                        android:layout_width="@dimen/layx80"
+                        android:layout_height="@dimen/layx80"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="16dp"
+                        android:src="@drawable/ic_recent" />
+
+                    <TextView
+                        android:id="@+id/TextView07"
+                        style="@style/MenuButtonText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="14dp"
+                        android:layout_toRightOf="@+id/ImageView05"
+                        android:text="Xem gần đây" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/menuAboutUs"
+                    style="@style/MenuButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/layx85"
+                    android:layout_margin="1dp"
+                    android:focusable="true"
+                    android:gravity="center_vertical"
+                    android:onClick="onAboutUs" >
+
+                    <ImageView
+                        android:id="@+id/ic_about"
+                        android:layout_width="@dimen/layx80"
+                        android:layout_height="@dimen/layx80"
+                        android:layout_alignParentLeft="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="16dp"
+                        android:src="@drawable/ic_about_us" />
+
+                    <TextView
+                        style="@style/MenuButtonText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="14dp"
+                        android:layout_toRightOf="@+id/ic_about"
+                        android:text="@string/txt_about_us" />
+                </RelativeLayout>
+            </LinearLayout>
+        </ScrollView>
+
+        <TextView
+            android:id="@+id/message"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/layy40"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:background="#44ff0000"
+            android:gravity="center"
+            android:textColor="@color/WHITE" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/about"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/top_bar_layout"
+        android:visibility="gone" >
+
+        <include
+            android:id="@+id/version_change_log"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            layout="@layout/version_change_log" />
     </RelativeLayout>
 
 </RelativeLayout>

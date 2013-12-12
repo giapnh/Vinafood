@@ -35,7 +35,7 @@
             android:layout_height="@dimen/layy64"
             android:layout_alignParentRight="true"
             android:layout_marginLeft="@dimen/layx5"
-            android:background="@drawable/filter_map"
+            android:background="@drawable/ic_map"
             android:onClick="onClick" />
     </RelativeLayout>
 
