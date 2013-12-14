@@ -220,8 +220,6 @@ public class PlaceDetails extends Activity {
 		String iconUrl = "";
 		int iconId = 0;
 		try {
-			// lva: chinh lai cach thuc lay url
-
 			iconUrl = OntologyCache.uriOfIcon.get(
 					OntologyCache.hashMapTypeLabelToUri.get(dataSimple
 							.getType() + "@" + ServerConfig.LANGUAGE_CODE))

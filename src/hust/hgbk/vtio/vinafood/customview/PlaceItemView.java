@@ -2,22 +2,12 @@ package hust.hgbk.vtio.vinafood.customview;
 
 import hust.hgbk.vtio.vinafood.config.ServerConfig;
 import hust.hgbk.vtio.vinafood.config.log;
-import hust.hgbk.vtio.vinafood.constant.NameSpace;
 import hust.hgbk.vtio.vinafood.constant.OntologyCache;
 import hust.hgbk.vtio.vinafood.main.R;
 import hust.hgbk.vtio.vinafood.vtioservice.FullDataInstance;
-import hust.hgbk.vtio.vinafood.vtioservice.VtioCoreService;
-
-import java.util.ArrayList;
-
-import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
-import android.os.AsyncTask;
-import android.view.Display;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
@@ -26,7 +16,6 @@ import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class PlaceItemView extends RelativeLayout {
 	WebView imageWebView;
@@ -57,7 +46,7 @@ public class PlaceItemView extends RelativeLayout {
 		abstractTextView = (TextView) findViewById(R.id.abstractInfor);
 		ratingView = (LinearLayout) findViewById(R.id.ratingLinearLayout);
 		typeTextView = (TextView) findViewById(R.id.typeTextView);
-		progressBar = (ProgressBar) findViewById(R.id.progressBar);
+		progressBar = (ProgressBar) findViewById(R.id.loadingProgress);
 	}
 
 	public WebView getImageWebView() {
@@ -134,7 +123,6 @@ public class PlaceItemView extends RelativeLayout {
 		}
 		String iconUrl1 = "";
 		int iconId1 = 0;
-
 		try {
 			iconUrl1 = OntologyCache.uriOfIcon.get(
 					OntologyCache.hashMapTypeLabelToUri.get(fullDataInstance
@@ -154,7 +142,6 @@ public class PlaceItemView extends RelativeLayout {
 				imageView.setImageResource(iconId1);
 			} catch (Exception e) {
 			}
-
 		} else {
 			imageView.setVisibility(View.GONE);
 			imageWebView.setVisibility(View.VISIBLE);
@@ -187,67 +174,67 @@ public class PlaceItemView extends RelativeLayout {
 			}
 		}
 		imageWebView.setBackgroundColor(Color.TRANSPARENT);
-		imageWebView.setOnTouchListener(new OnTouchListener() {
-
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				if (event.getAction() == MotionEvent.ACTION_UP) {
-					imageWebView.setClickable(false);
-					new AsyncTask<Void, Void, ArrayList<String>>() {
-
-						@Override
-						protected ArrayList<String> doInBackground(
-								Void... params) {
-							String query = "select ?url where {"
-									+ "<"
-									+ fullDataInstance.getUri()
-									+ "> vtio:hasMedia ?imageUri. ?imageUri rdf:type vtio:Image."
-									+ "?imageUri vtio:hasURL ?url." + "}";
-							ArrayList<ArrayList<String>> results = new VtioCoreService()
-									.executeQuery(query, true);
-							ArrayList<String> listUrl = new ArrayList<String>();
-							for (int i = 0; i < results.size(); i++) {
-								String url = results
-										.get(i)
-										.get(0)
-										.replace(
-												"^^" + NameSpace.xsd + "string",
-												"");
-								url = url.trim();
-								url = url.replace(" ", "%20");
-								listUrl.add(url);
-							}
-							return listUrl;
-						}
-
-						@Override
-						protected void onPostExecute(ArrayList<String> result) {
-							if (result.size() > 0) {
-								Display display = ((Activity) context)
-										.getWindowManager().getDefaultDisplay();
-								Dialog dialog = new Dialog(getContext(),
-										R.style.MyDialogTheme);
-								dialog.setContentView(new ShowImageOfPlaceView(
-										getContext(), result, dialog));
-								dialog.getWindow().setLayout(
-										display.getWidth() - 20,
-										LayoutParams.WRAP_CONTENT);
-								dialog.show();
-							} else {
-								Toast.makeText(getContext(),
-										"This place has no image!",
-										Toast.LENGTH_SHORT).show();
-							}
-
-							imageWebView.setClickable(true);
-						}
-
-					}.execute();
-
-				}
-				return false;
-			}
-		});
+		// imageWebView.setOnTouchListener(new OnTouchListener() {
+		//
+		// @Override
+		// public boolean onTouch(View v, MotionEvent event) {
+		// if (event.getAction() == MotionEvent.ACTION_UP) {
+		// imageWebView.setClickable(false);
+		// new AsyncTask<Void, Void, ArrayList<String>>() {
+		//
+		// @Override
+		// protected ArrayList<String> doInBackground(
+		// Void... params) {
+		// String query = "select ?url where {"
+		// + "<"
+		// + fullDataInstance.getUri()
+		// + "> vtio:hasMedia ?imageUri. ?imageUri rdf:type vtio:Image."
+		// + "?imageUri vtio:hasURL ?url." + "}";
+		// ArrayList<ArrayList<String>> results = new VtioCoreService()
+		// .executeQuery(query, true);
+		// ArrayList<String> listUrl = new ArrayList<String>();
+		// for (int i = 0; i < results.size(); i++) {
+		// String url = results
+		// .get(i)
+		// .get(0)
+		// .replace(
+		// "^^" + NameSpace.xsd + "string",
+		// "");
+		// url = url.trim();
+		// url = url.replace(" ", "%20");
+		// listUrl.add(url);
+		// }
+		// return listUrl;
+		// }
+		//
+		// @Override
+		// protected void onPostExecute(ArrayList<String> result) {
+		// if (result.size() > 0) {
+		// Display display = ((Activity) context)
+		// .getWindowManager().getDefaultDisplay();
+		// Dialog dialog = new Dialog(getContext(),
+		// R.style.MyDialogTheme);
+		// dialog.setContentView(new ShowImageOfPlaceView(
+		// getContext(), result, dialog));
+		// dialog.getWindow().setLayout(
+		// display.getWidth() - 20,
+		// LayoutParams.WRAP_CONTENT);
+		// dialog.show();
+		// } else {
+		// Toast.makeText(getContext(),
+		// "This place has no image!",
+		// Toast.LENGTH_SHORT).show();
+		// }
+		//
+		// imageWebView.setClickable(true);
+		// }
+		//
+		// }.execute();
+		//
+		// }
+		// return false;
+		// }
+		// });
 		final int iconId = iconId1;
 
 		final int rate = fullDataInstance.getRatingNum();

@@ -104,4 +104,8 @@ public class FavoritePlaceActivity extends Activity {
 							}
 						}).show();
 	}
+
+	public void onBack(View v) {
+		finish();
+	}
 }

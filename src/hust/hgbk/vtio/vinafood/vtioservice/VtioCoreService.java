@@ -2361,20 +2361,18 @@ public class VtioCoreService {
 		System.setProperty("http.keepAlive", "false");
 		int counter = 10;
 		boolean isError = true;
+		MyHttpTransportSE androidHttpTransport = new MyHttpTransportSE(
+				ServerConfig.getWSDLURL());
 		while (counter > 0 && isError) {
 			isError = false;
 			counter -= 1;
-
-			MyHttpTransportSE androidHttpTransport = new MyHttpTransportSE(
-					ServerConfig.getWSDLURL());
 			try {
 				androidHttpTransport.call("\"" + soapAction + "\"", envelope);
 			} catch (Exception e) {
 				isError = true;
 				e.printStackTrace();
-
 				try {
-					Thread.sleep(100);
+					Thread.sleep(50);
 				} catch (InterruptedException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

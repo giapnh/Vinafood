@@ -7,7 +7,6 @@ import hust.hgbk.vtio.vinafood.customview.ConstraintHelper;
 import hust.hgbk.vtio.vinafood.customview.SubClassHorizontalView;
 import hust.hgbk.vtio.vinafood.ontology.simple.ClassDataSimple;
 import hust.hgbk.vtio.vinafood.query.Constraint;
-import hust.hgbk.vtio.vinafood.query.Query;
 import hust.hgbk.vtio.vinafood.query.Variable;
 import hust.hgbk.vtio.vinafood.vtioservice.VtioCoreService;
 
@@ -183,9 +182,9 @@ public class DinningServiceSearch extends Activity {
 	}
 
 	// Search
-	String purpose = null;
+	String purpose = "";
 	ClassDataSimple businessType = null;
-	String cuisineStyle = null;
+	String cuisineStyle = "";
 
 	public void onSearch(View v) {
 		arrayVariable.clear();
@@ -199,9 +198,6 @@ public class DinningServiceSearch extends Activity {
 			arrayVariable.add(variable);
 		}
 
-		/**
-		 * Lay ra tat ca cac rang buoc
-		 */
 		if (arrayConstraint == null) {
 			arrayConstraint = new ArrayList<Constraint>();
 		} else {
@@ -216,48 +212,21 @@ public class DinningServiceSearch extends Activity {
 			arrayConstraint.add(hasNameConstraint);
 		}
 
-		if (cuisineStyle != null) {
+		if (cuisineStyle != null
+				&& !cuisineStyle.equals(getString(R.string.txt_all))) {
 			Constraint cuisineStyleConstraint = ConstraintHelper.getConstraint(
 					ConstraintHelper.HAS_CUISINE_STYLE, cuisineStyle);
 			arrayConstraint.add(cuisineStyleConstraint);
 		}
 
-		String message;
-		try {
-			String classLabel = getResources().getString(
-					R.string.dining_service);
-			for (int i = 0; i < listSubClass.size(); i++) {
-				if (listSubClass.get(i).getUri()
-						.equals(SubClassHorizontalView.currentClassURI)) {
-					classLabel = listSubClass.get(i).getLabel();
-					break;
-				}
-			}
-			message = getResources().getString(R.string.you_want_find_a) + " "
-					+ classLabel + "\n";
-
-		} catch (Exception e) {
-			message = getResources().getString(R.string.dining_service) + "\n";
-		}
-
-		float radius = this.radius;
-		if (radius > 0)
-			message = message + getResources().getString(R.string.in_range)
-					+ " " + radius + " km.";
-		// Hien thi activity ket qua
-
 		Intent intent = new Intent(ctx, PlaceSearchResultActivity.class);
-		Query query = new Query();
-		query.setArrayVariable(arrayVariable);
-		query.setArrayConstraint(arrayConstraint);
-		if (radius == 0f) {
-			intent.putExtra("QueryString", query.getQueryStringWithCity());
-		} else {
-			intent.putExtra("QueryString", query.getQueryString());
-		}
-		System.out.println(query.getQueryString());
-		intent.putExtra("radius", this.radius);
-		intent.putExtra("message", message);
+		Bundle bundle = new Bundle();
+		bundle.putString("keyword", keyWord);
+		bundle.putString("purpose", purpose);
+		bundle.putString("cuisineStype", cuisineStyle);
+		bundle.putString("busineseType", businessType.getLabel());
+		bundle.putFloat("radius", this.radius);
+		bundle.putBoolean("hasConstraint", true);
 		startActivity(intent);
 	}
 
@@ -288,6 +257,7 @@ public class DinningServiceSearch extends Activity {
 			}
 
 		});
+
 		Button btnCancel = (Button) dialog.findViewById(R.id.btnCancel);
 		btnCancel.setOnClickListener(new OnClickListener() {
 			@Override
@@ -307,9 +277,10 @@ public class DinningServiceSearch extends Activity {
 		TextView layName = (TextView) filterDialog
 				.findViewById(R.id.layoutName);
 		layName.setText(getResources().getString(R.string.txt_businese_type));
-		String[] str = new String[listSubClass.size()];
+		String[] str = new String[listSubClass.size() + 1];
+		str[0] = getResources().getString(R.string.txt_all);
 		for (int i = 0; i < listSubClass.size(); i++) {
-			str[i] = listSubClass.get(i).getLabel();
+			str[i + 1] = listSubClass.get(i).getLabel();
 		}
 		// Bind data
 		filterListAdapter = new ArrayAdapter<String>(this,
@@ -319,10 +290,17 @@ public class DinningServiceSearch extends Activity {
 			@Override
 			public void onItemClick(AdapterView<?> arg0, View arg1,
 					int position, long arg3) {
-				businessType = listSubClass.get(position);
-				((TextView) DinningServiceSearch.this
-						.findViewById(R.id.typeValue)).setText(listSubClass
-						.get(position).getLabel());
+				if (position == 0) {
+					businessType = null;
+					((TextView) DinningServiceSearch.this
+							.findViewById(R.id.typeValue))
+							.setText(getString(R.string.txt_all));
+				} else {
+					businessType = listSubClass.get(position - 1);
+					((TextView) DinningServiceSearch.this
+							.findViewById(R.id.typeValue)).setText(listSubClass
+							.get(position - 1).getLabel());
+				}
 				filterDialog.dismiss();
 			}
 		});
@@ -337,7 +315,6 @@ public class DinningServiceSearch extends Activity {
 		filterDialog.show();
 	}
 
-	// TODO
 	public void onPurposeFilter(View v) {
 		filterDialog = new Dialog(DinningServiceSearch.this,
 				android.R.style.Theme_NoTitleBar);
@@ -347,6 +324,7 @@ public class DinningServiceSearch extends Activity {
 		layName.setText(getResources().getString(R.string.txt_purpose));
 		ListView filterList = (ListView) filterDialog
 				.findViewById(R.id.listView);
+
 		// Bind data
 		final String[] data = getResources().getStringArray(
 				R.array.purpose_list);
@@ -363,6 +341,14 @@ public class DinningServiceSearch extends Activity {
 				filterDialog.dismiss();
 			}
 		});
+
+		filterDialog.findViewById(R.id.btnCancel).setOnClickListener(
+				new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						filterDialog.dismiss();
+					}
+				});
 		filterDialog.show();
 	}
 
@@ -375,6 +361,7 @@ public class DinningServiceSearch extends Activity {
 		layName.setText(getResources().getString(R.string.txt_cuisine));
 		ListView filterList = (ListView) filterDialog
 				.findViewById(R.id.listView);
+
 		// Bind data
 		final String[] data = getResources().getStringArray(
 				R.array.cuisine_style_list);
@@ -392,6 +379,15 @@ public class DinningServiceSearch extends Activity {
 			}
 		});
 		filterDialog.show();
+
+		// Button cancel click listener
+		filterDialog.findViewById(R.id.btnCancel).setOnClickListener(
+				new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						filterDialog.dismiss();
+					}
+				});
 	}
 
 	float temp = 0;
@@ -401,11 +397,10 @@ public class DinningServiceSearch extends Activity {
 		Button plus = (Button) findViewById(R.id.btn_plus);
 		Button minus = (Button) findViewById(R.id.btn_minus);
 		plus.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
 				temp += 1;
-				value.setText("" + temp);
+				value.setText("" + temp + "(km)");
 				try {
 					radius = Integer.parseInt(value.getText().toString());
 				} catch (NumberFormatException exception) {
@@ -414,13 +409,12 @@ public class DinningServiceSearch extends Activity {
 			}
 		});
 		minus.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
 				if (temp > 1) {
 					temp -= 1;
 				}
-				value.setText("" + temp);
+				value.setText("" + temp + "(km)");
 				try {
 					radius = Integer.parseInt(value.getText().toString());
 				} catch (NumberFormatException exception) {
@@ -433,12 +427,15 @@ public class DinningServiceSearch extends Activity {
 	// On icon back inside clicked listener
 	public void onBack(View v) {
 		finish();
+		overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 	}
 
 	@Override
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
 			finish();
+			overridePendingTransition(R.anim.slide_in_right,
+					R.anim.slide_out_left);
 		}
 
 		return super.onKeyDown(keyCode, event);

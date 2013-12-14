@@ -2,7 +2,7 @@ package hust.hgbk.vtio.vinafood.main;
 
 import hust.hgbk.vtio.vinafood.config.ServerConfig;
 import hust.hgbk.vtio.vinafood.constant.Location;
-import hust.hgbk.vtio.vinafood.constant.OntologyCache;
+import hust.hgbk.vtio.vinafood.constant.NameSpace;
 import hust.hgbk.vtio.vinafood.constant.XmlAdapter;
 import hust.hgbk.vtio.vinafood.customViewAdapter.ArrayPlaceSimpleAdapter;
 import hust.hgbk.vtio.vinafood.customViewAdapter.NewArrayPlaceSimpleAdapter;
@@ -20,17 +20,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
-import android.widget.ListView;
 import android.widget.ImageView;
+import android.widget.ListView;
 
 public class PlaceSearchResultActivity extends Activity {
-	String titleSearch;
-	String queryString;
-	Float radius = 0f;
+
 	ArrayList<String> listInstanceURI;
 	ArrayList<ArrayList<String>> queryResult;
 	VtioCoreService service = new VtioCoreService();
@@ -40,13 +37,20 @@ public class PlaceSearchResultActivity extends Activity {
 	ArrayList<FullDataInstance> listPlaceDataSimple;
 	boolean isReasoning = true;
 
-	String message;
 	NewArrayPlaceSimpleAdapter newArrayPlaceSimpleAdapter;
 	ArrayPlaceSimpleAdapter arrayPlaceSimpleAdapter;
 	LoadAllInstanceTask loadAllInstanceTask;
 
 	ImageView switchGridList;
 	boolean isGrid = false;
+	public final String CLASS_URI = NameSpace.vtio + "Dining-Service";
+	// Data for load
+	String keyword;
+	Float radius = 0f;
+	String cuisineStype = "";
+	String busineseType = "";
+	String purpose = "";
+	boolean hasConstraint = false;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -55,63 +59,64 @@ public class PlaceSearchResultActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		XmlAdapter.synConfig(this);
 		setContentView(R.layout.result_place_search_layout);
+		// Get extras data
 		Bundle extra = this.getIntent().getExtras();
-		queryString = extra.getString("QueryString");
+		keyword = extra.getString("keyword");
 		radius = extra.getFloat("radius", 0f);
-		message = extra.getString("message");
+		cuisineStype = extra.getString("cuisineStyle");
+		busineseType = extra.getString("busineseType");
+		purpose = extra.getString("purpose");
+		hasConstraint = extra.getBoolean("hasConstraint");
+
 		soapServiceProxy = new SoapServiceProxy<ICoreService>(
 				ICoreService.class, ServerConfig.SERVICE_NAMESPACE,
 				ServerConfig.getWSDLURL());
-
 		listResultView = (ListView) findViewById(R.id.listResultView);
-		// switchGridList = (ImageView) findViewById(R.id.list_grid);
-
 		loadAllInstanceTask = new LoadAllInstanceTask();
 		loadAllInstanceTask.execute();
 	}
 
 	class LoadAllInstanceTask extends AsyncTask<Void, Void, Void> {
 		Dialog progressLayout;
+
 		// TextView waitTextView;
 		@Override
 		protected Void doInBackground(Void... arg0) {
 			listPlaceDataSimple = new ArrayList<FullDataInstance>();
 			if (radius == 0f) {
-				// tham so cuoi cung la Cache On hay Off.
-				newArrayPlaceSimpleAdapter = new NewArrayPlaceSimpleAdapter(
-						PlaceSearchResultActivity.this,
-						R.layout.place_item_layout, listPlaceDataSimple,
-						queryString, false, isReasoning);
 			} else {
+				arrayPlaceSimpleAdapter = new ArrayPlaceSimpleAdapter(
+						PlaceSearchResultActivity.this,
+						R.layout.place_item_layout, listPlaceDataSimple);
 				try {
-					queryResult = service.executeQueryWithGeoConstrains(
-							queryString, true, 0, Location.getInstance()
-									.getLatitude(), Location.getInstance()
-									.getLongtitude(), radius);
+					if (!hasConstraint) {
+						arrayPlaceSimpleAdapter.loadPlaceDataInFirst(CLASS_URI,
+								Location.getInstance().getLatitude(), Location
+										.getInstance().getLongtitude(), radius,
+								false, keyword);
+					} else {
+						arrayPlaceSimpleAdapter.loadPlaceDataInFirst(CLASS_URI,
+								Location.getInstance().getLatitude(),//
+								Location.getInstance().getLongtitude(),//
+								radius, false, keyword, //
+								null, null, busineseType, cuisineStype, 0, 0);// FIXME
+					}
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
-				arrayPlaceSimpleAdapter = new ArrayPlaceSimpleAdapter(
-						PlaceSearchResultActivity.this,
-						R.layout.place_item_layout, listPlaceDataSimple,
-						queryResult);
 			}
 			return null;
 		}
 
 		protected void onCancelled() {
 		}
- 
+
 		@Override
 		protected void onPreExecute() {
-			// msgTextView = (TextView) findViewById(R.id.progress_bar_text);
-			// waitTextView = (TextView) findViewById(R.id.ads_textview);
 			progressLayout = new Dialog(PlaceSearchResultActivity.this,
 					android.R.style.Theme_Translucent_NoTitleBar);
 			progressLayout.setContentView(R.layout.loading_layout);
 			progressLayout.show();
-			// waitTextView.setText(AdsInfoSentences.getRandomAdsSentence());
-			// msgTextView.setText(message);
 		}
 
 		@Override
@@ -137,36 +142,6 @@ public class PlaceSearchResultActivity extends Activity {
 		}
 
 		return super.onKeyDown(keyCode, event);
-	}
-
-	public String getQueryInstanceWithGeoConstrains(String classUri,
-			double geoLat, double geoLon, float radius, boolean hasPreference) {
-
-		String queryString = "select distinct ?place where{"
-				+ " GEO OBJECT "
-				+ " SUBTYPE 'http://franz.com/ns/allegrograph/3.0/geospatial/spherical/degrees/-180.0/180.0/-90.0/90.0/5.0'"
-				+ " HAVERSINE (POINT(" + geoLon + ", " + geoLat + "), "
-				+ radius + " KM) {" + " ?place vtio:hasGeoPoint ?loc."
-				+ " ?place rdf:type <" + classUri + ">."
-				+ " }  where{       	       ";
-		if (OntologyCache.preferUser.size() > 0 && hasPreference) {
-			queryString = queryString + " ?place  vtio:relatedToTopic ?t. {";
-			queryString = queryString + " { ?t rdf:type <"
-					+ OntologyCache.preferUser.get(0).getUri() + "> } ";
-			try {
-				for (int i = 1; i < OntologyCache.preferUser.size(); i++) {
-					queryString = queryString + "UNION { ?t rdf:type <"
-							+ OntologyCache.preferUser.get(i).getUri() + ">. }";
-				}
-			} catch (Exception e) {
-			}
-			queryString = queryString + " } ";
-		}
-		queryString = queryString
-				+ " }} ORDER BY geo:haversine-km(?loc,(POINT(" + geoLon + ", "
-				+ geoLat + ")) )";
-		Log.v("QUERY", queryString);
-		return queryString;
 	}
 
 	protected void showhelpDialog(String message) {

@@ -81,83 +81,15 @@ public class MenuActivity extends Activity {
 	}
 
 	public void searchWithKey(String keyWord) {
-		String query = "SELECT DISTINCT  ?search {  ?search rdf:type <"
-				+ SubClassHorizontalView.currentClassURI
-				+ ">.  ?search"
-				+ " vtio:hasLocation ?addresscity .   ?addresscity vtio:isPartOf <"
-				+ ServerConfig.currentCityUri + ">.}";
-		keyWord = keyWord.trim();
-		if (keyWord.length() > 0) {
-			if (keyWord.toLowerCase().equals("atm")) {
-				query = "SELECT DISTINCT  ?search {" + "   {?search rdf:type <"
-						+ SubClassHorizontalView.currentClassURI + ">."
-						+ "    ?search vtio:hasLocation ?add_0."
-						+ "    ?add_0 vtio:isPartOf <"
-						+ ServerConfig.currentCityUri + ">."
-						+ "	 ?search vtio:nearBy ?n. ?n rdf:type vtio:ATM.}} ";
-			} else
-				query = "SELECT DISTINCT  ?search {" + "   {?search rdf:type <"
-						+ SubClassHorizontalView.currentClassURI + ">."
-						+ "    ?search vtio:hasLocation ?add_0."
-						+ "    ?add_0 vtio:isPartOf <"
-						+ ServerConfig.currentCityUri + ">."
-						+ "	 ?search fti:match '" + keyWord + "*'.} "
-						+ "   UNION {" + "	 ?search rdf:type <"
-						+ SubClassHorizontalView.currentClassURI + ">."
-						+ "	 ?search vtio:hasLocation ?add_0."
-						+ "    ?add_0 vtio:isPartOf <"
-						+ ServerConfig.currentCityUri + ">."
-						+ "	 ?add_0 vtio:isPartOf ?add_1."
-						+ "	 ?add_1 fti:match '" + keyWord + "*'.} "
-						+ "   UNION {" + "	 ?search rdf:type <"
-						+ SubClassHorizontalView.currentClassURI + ">."
-						+ "    ?class rdfs:subClassOf vtio:Cuisine-Style. "
-						+ "	 ?class fti:match '" + keyWord + "*'. "
-						+ "	 ?search vtio:hasLocation ?add_0. "
-						+ "    ?add_0 vtio:isPartOf <"
-						+ ServerConfig.currentCityUri + ">."
-						+ "	 ?search vtio:hasCuisineStyle ?cuisine. "
-						+ "	 ?cuisine rdf:type ?class. } }";
-		}
-
-		String message;
-		try {
-			String classLabel = getResources().getString(
-					R.string.dining_service);
-			message = getResources().getString(R.string.you_want_find_a) + " "
-					+ classLabel + "\n";
-			if (keyWord.length() == 0) {
-				message = getResources().getString(R.string.show_all) + " "
-						+ classLabel;
-			} else {
-				message = message
-						+ getResources().getString(R.string.with_key_word)
-						+ "'..." + keyWord + "...'";
-			}
-
-		} catch (Exception e) {
-			message = getResources().getString(R.string.dining_service) + "\n";
-			if (keyWord.length() == 0) {
-				message = getResources().getString(R.string.show_all) + " "
-						+ message;
-			} else {
-				message = message
-						+ getResources().getString(R.string.with_key_word)
-						+ "'..." + keyWord + "...'";
-			}
-		}
-
-		queryString = query;
 		Intent intent = new Intent(ctx, PlaceSearchResultActivity.class);
-		intent.putExtra("QueryString", queryString);
+		intent.putExtra("keyword", keyWord);
 		intent.putExtra("radius", radius);
-		intent.putExtra("message", message);
 		startActivity(intent);
 		overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 	}
 
 	public void onNearBy(View v) {
-		radius = 10f;
+		radius = 1f;
 		searchWithKey("");
 	}
 
@@ -216,7 +148,7 @@ public class MenuActivity extends Activity {
 			}
 			isShowAbout = false;
 		}
-		return super.onKeyDown(keyCode, event);
+		return false;
 
 	}
 
