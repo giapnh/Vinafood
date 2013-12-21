@@ -1,5 +1,6 @@
 package hust.hgbk.vtio.vinafood.maps;
 
+
 import hust.hgbk.vtio.vinafood.main.R;
 import android.content.Context;
 import android.view.Gravity;
@@ -34,7 +35,7 @@ public class BalloonOverlayView<Item extends OverlayItem> extends FrameLayout {
 		layout.setVisibility(VISIBLE);
 
 		LayoutInflater inflater = (LayoutInflater) context
-		        .getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		View v = inflater.inflate(R.layout.balloon_overlay, layout);
 		title = (TextView) v.findViewById(R.id.balloon_item_title);
 		snippet = (TextView) v.findViewById(R.id.balloon_item_snippet);
@@ -46,8 +47,8 @@ public class BalloonOverlayView<Item extends OverlayItem> extends FrameLayout {
 			}
 		});
 
-		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(LayoutParams.WRAP_CONTENT,
-		        LayoutParams.WRAP_CONTENT);
+		FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+				LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 		params.gravity = Gravity.NO_GRAVITY;
 
 		addView(layout, params);

@@ -1,10 +1,12 @@
 package hust.hgbk.vtio.vinafood.main;
 
 import hust.hgbk.vtio.vinafood.config.ServerConfig;
+import hust.hgbk.vtio.vinafood.config.log;
 import hust.hgbk.vtio.vinafood.constant.NameSpace;
 import hust.hgbk.vtio.vinafood.constant.XmlAdapter;
-import hust.hgbk.vtio.vinafood.customview.ConstraintHelper;
 import hust.hgbk.vtio.vinafood.customview.SubClassHorizontalView;
+import hust.hgbk.vtio.vinafood.maps.CustomLocationListener;
+import hust.hgbk.vtio.vinafood.maps.LocationService;
 import hust.hgbk.vtio.vinafood.ontology.simple.ClassDataSimple;
 import hust.hgbk.vtio.vinafood.query.Constraint;
 import hust.hgbk.vtio.vinafood.query.Variable;
@@ -16,6 +18,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -34,8 +37,13 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.TextView.OnEditorActionListener;
 
-public class DinningServiceSearch extends Activity {
+import com.google.android.gms.common.ConnectionResult;
 
+public class DinningServiceSearch extends Activity {
+	String keyword = "";
+	String purpose = "";
+	ClassDataSimple businessType = null;
+	String cuisineStyle = "";
 	Context ctx;
 	ImageButton btnSearch;
 	EditText edtSearch;
@@ -69,80 +77,13 @@ public class DinningServiceSearch extends Activity {
 		XmlAdapter.synConfig(this);
 		ctx = this;
 		init();
+		detectLocation();
 	}
 
 	public void searchWithKey(String keyWord) {
-		String query = "SELECT DISTINCT  ?search {  ?search rdf:type <"
-				+ SubClassHorizontalView.currentClassURI
-				+ ">.  ?search"
-				+ " vtio:hasLocation ?addresscity .   ?addresscity vtio:isPartOf <"
-				+ ServerConfig.currentCityUri + ">.}";
-		keyWord = keyWord.trim();
-		if (keyWord.length() > 0) {
-			if (keyWord.toLowerCase().equals("atm")) {
-				query = "SELECT DISTINCT  ?search {" + "   {?search rdf:type <"
-						+ SubClassHorizontalView.currentClassURI + ">."
-						+ "    ?search vtio:hasLocation ?add_0."
-						+ "    ?add_0 vtio:isPartOf <"
-						+ ServerConfig.currentCityUri + ">."
-						+ "	 ?search vtio:nearBy ?n. ?n rdf:type vtio:ATM.}} ";
-			} else
-				query = "SELECT DISTINCT  ?search {" + "   {?search rdf:type <"
-						+ SubClassHorizontalView.currentClassURI + ">."
-						+ "    ?search vtio:hasLocation ?add_0."
-						+ "    ?add_0 vtio:isPartOf <"
-						+ ServerConfig.currentCityUri + ">."
-						+ "	 ?search fti:match '" + keyWord + "*'.} "
-						+ "   UNION {" + "	 ?search rdf:type <"
-						+ SubClassHorizontalView.currentClassURI + ">."
-						+ "	 ?search vtio:hasLocation ?add_0."
-						+ "    ?add_0 vtio:isPartOf <"
-						+ ServerConfig.currentCityUri + ">."
-						+ "	 ?add_0 vtio:isPartOf ?add_1."
-						+ "	 ?add_1 fti:match '" + keyWord + "*'.} "
-						+ "   UNION {" + "	 ?search rdf:type <"
-						+ SubClassHorizontalView.currentClassURI + ">."
-						+ "    ?class rdfs:subClassOf vtio:Cuisine-Style. "
-						+ "	 ?class fti:match '" + keyWord + "*'. "
-						+ "	 ?search vtio:hasLocation ?add_0. "
-						+ "    ?add_0 vtio:isPartOf <"
-						+ ServerConfig.currentCityUri + ">."
-						+ "	 ?search vtio:hasCuisineStyle ?cuisine. "
-						+ "	 ?cuisine rdf:type ?class. } }";
-			// dungct: Ket thuc truy van moi - toc do nhanh hon gap 2
-		}
-
-		String message;
-		try {
-			String classLabel = getResources().getString(
-					R.string.dining_service);
-			message = getResources().getString(R.string.you_want_find_a) + " "
-					+ classLabel + "\n";
-			if (keyWord.length() == 0) {
-				message = getResources().getString(R.string.show_all) + " "
-						+ classLabel;
-			} else {
-				message = message
-						+ getResources().getString(R.string.with_key_word)
-						+ "'..." + keyWord + "...'";
-			}
-
-		} catch (Exception e) {
-			message = getResources().getString(R.string.dining_service) + "\n";
-			if (keyWord.length() == 0) {
-				message = getResources().getString(R.string.show_all) + " "
-						+ message;
-			} else {
-				message = message
-						+ getResources().getString(R.string.with_key_word)
-						+ "'..." + keyWord + "...'";
-			}
-		}
-
 		Intent intent = new Intent(ctx, PlaceSearchResultActivity.class);
-		intent.putExtra("QueryString", query);
+		intent.putExtra("keyword", keyWord);
 		intent.putExtra("radius", 1f);
-		intent.putExtra("message", message);
 		startActivity(intent);
 	}
 
@@ -181,52 +122,23 @@ public class DinningServiceSearch extends Activity {
 		setScope();
 	}
 
-	// Search
-	String purpose = "";
-	ClassDataSimple businessType = null;
-	String cuisineStyle = "";
-
 	public void onSearch(View v) {
-		arrayVariable.clear();
-		Variable variable = new Variable("Dining Service that you want",
-				"search", SubClassHorizontalView.currentClassURI, true);
-		arrayVariable.add(variable);
-		if (businessType != null) {
-			arrayVariable.clear();
-			variable = new Variable("Dining Service that you want", "search",
-					businessType.getUri(), true);
-			arrayVariable.add(variable);
-		}
-
-		if (arrayConstraint == null) {
-			arrayConstraint = new ArrayList<Constraint>();
-		} else {
-			arrayConstraint.clear();
-		}
-
-		String keyWord = edtSearch.getText().toString().trim();
-		// Has name
-		if (!keyWord.trim().equals("")) {
-			Constraint hasNameConstraint = ConstraintHelper.getConstraint(
-					ConstraintHelper.HAS_NAME, keyWord);
-			arrayConstraint.add(hasNameConstraint);
-		}
-
-		if (cuisineStyle != null
-				&& !cuisineStyle.equals(getString(R.string.txt_all))) {
-			Constraint cuisineStyleConstraint = ConstraintHelper.getConstraint(
-					ConstraintHelper.HAS_CUISINE_STYLE, cuisineStyle);
-			arrayConstraint.add(cuisineStyleConstraint);
-		}
-
+		this.radius = Float
+				.parseFloat(((TextView) findViewById(R.id.range_text))
+						.getText().toString());
 		Intent intent = new Intent(ctx, PlaceSearchResultActivity.class);
 		Bundle bundle = new Bundle();
-		bundle.putString("keyword", keyWord);
+		bundle.putString("keyword", edtSearch.getText().toString().trim());
 		bundle.putString("purpose", purpose);
 		bundle.putString("cuisineStype", cuisineStyle);
-		bundle.putString("busineseType", businessType.getLabel());
+		if (businessType != null) {
+			bundle.putString("classUri", businessType.getUri());
+		} else {
+			bundle.putString("classUri", CLASS_URI);
+		}
 		bundle.putFloat("radius", this.radius);
 		bundle.putBoolean("hasConstraint", true);
+		intent.putExtras(bundle);
 		startActivity(intent);
 	}
 
@@ -400,9 +312,10 @@ public class DinningServiceSearch extends Activity {
 			@Override
 			public void onClick(View v) {
 				temp += 1;
-				value.setText("" + temp + "(km)");
+				value.setText("" + temp);
 				try {
 					radius = Integer.parseInt(value.getText().toString());
+					log.m("Radius = " + radius);
 				} catch (NumberFormatException exception) {
 					radius = 1;
 				}
@@ -414,9 +327,10 @@ public class DinningServiceSearch extends Activity {
 				if (temp > 1) {
 					temp -= 1;
 				}
-				value.setText("" + temp + "(km)");
+				value.setText("" + temp);
 				try {
 					radius = Integer.parseInt(value.getText().toString());
+					log.m("Radius = " + radius);
 				} catch (NumberFormatException exception) {
 					radius = 1;
 				}
@@ -458,4 +372,63 @@ public class DinningServiceSearch extends Activity {
 		protected void onPostExecute(Void result) {
 		}
 	}
+
+	private void detectLocation() {
+		LocationService locationService = new LocationService(ctx);
+		locationService.updateLocation(ctx, LocationService.EXPIRATION_TIME,
+				new CustomLocationListener() {
+
+					@Override
+					public void onProviderDisabled() {
+					}
+
+					@Override
+					public void onLocationUpdateFailed(ConnectionResult result) {
+					}
+
+					@Override
+					public void onLocationStopUpdate() {
+					}
+
+					@Override
+					public void onLocationServiceDisconnect() {
+					}
+
+					@Override
+					public void onLocationServiceConnect() {
+					}
+
+					@Override
+					public void onLocationChanged(Location location) {
+						setGeoLocation(location);
+					}
+
+					@Override
+					public void onGetLastLocation(Location location) {
+					}
+				});
+	}
+
+	private void setGeoLocation(Location location) {
+		String lat = String.valueOf(location.getLatitude());
+		String lon = String.valueOf(location.getLongitude());
+		log.m("Update location: lat = " + lat + ";long = " + lon);
+		try {
+			lat = lat.substring(0, 10);
+		} catch (Exception e) {
+		}
+		try {
+			lon = lon.substring(0, 10);
+		} catch (Exception e) {
+		}
+		try {
+			hust.hgbk.vtio.vinafood.constant.Location.getInstance().setGeo(
+					Float.valueOf(lat), Float.valueOf(lon));
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
 }

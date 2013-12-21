@@ -4,6 +4,8 @@ import hust.hgbk.vtio.vinafood.config.ServerConfig;
 import hust.hgbk.vtio.vinafood.constant.OntologyCache;
 import hust.hgbk.vtio.vinafood.constant.XmlAdapter;
 import hust.hgbk.vtio.vinafood.customDialog.MapsSettingDialog;
+import hust.hgbk.vtio.vinafood.maps.CustomLocationListener;
+import hust.hgbk.vtio.vinafood.maps.LocationService;
 import hust.hgbk.vtio.vinafood.maps.PlacesItemizedOverlay;
 
 import java.util.List;
@@ -21,6 +23,7 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.widget.TextView;
 
+import com.google.android.gms.common.ConnectionResult;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;
@@ -30,14 +33,17 @@ import com.google.android.maps.OverlayItem;
 
 public class ShowAllPlaceOnMap extends MapActivity {
 	public static MapView mapView;
-	//	VtioService services = new VtioService();
+	// VtioService services = new VtioService();
 	GeoPoint hustPositionPoint;
 	GeoPoint placePoint;
+	Context ctx;
+	private boolean isStartFromCommentActivity = false;
 
 	@Override
 	protected void onCreate(Bundle icicle) {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		super.onCreate(icicle);
+		this.ctx = ShowAllPlaceOnMap.this;
 		XmlAdapter.synConfig(this);
 		setContentView(R.layout.geo_search_on_map);
 
@@ -59,16 +65,16 @@ public class ShowAllPlaceOnMap extends MapActivity {
 		int currentGeoLat = (int) (1E6 * hust.hgbk.vtio.vinafood.constant.Location.GEO_LON_DEFAULT);
 		;
 		try {
-			currentGeoLat = (int) (1E6 * hust.hgbk.vtio.vinafood.constant.Location.getInstance()
-			        .getLatitude());
+			currentGeoLat = (int) (1E6 * hust.hgbk.vtio.vinafood.constant.Location
+					.getInstance().getLatitude());
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		int currentGeoLong = (int) (1E6 * hust.hgbk.vtio.vinafood.constant.Location.GEO_LON_DEFAULT);
 		try {
-			currentGeoLong = (int) (1E6 * hust.hgbk.vtio.vinafood.constant.Location.getInstance()
-			        .getLongtitude());
+			currentGeoLong = (int) (1E6 * hust.hgbk.vtio.vinafood.constant.Location
+					.getInstance().getLongtitude());
 		} catch (InterruptedException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -89,46 +95,54 @@ public class ShowAllPlaceOnMap extends MapActivity {
 			String placeLong = extra.getString("longtitude" + i);
 			String placeLat = extra.getString("latitude" + i);
 			String type = extra.getString("type" + i);
-			//			Log.v("LongLat-Show", placeLat + "--" + placeLong);
+			// Log.v("LongLat-Show", placeLat + "--" + placeLong);
 			try {
 				geoLat = Double.parseDouble(placeLat);
 				geoLong = Double.parseDouble(placeLong);
 			} catch (Exception e) {
-				System.out.println("Loi chuyen kieu:" + placeURI + ":" + placeLat + "---"
-				        + placeLong);
+				System.out.println("Loi chuyen kieu:" + placeURI + ":"
+						+ placeLat + "---" + placeLong);
 
 			}
-			//			Log.v("Dungct", geoLat + "--" + geoLong);
+			// Log.v("Dungct", geoLat + "--" + geoLong);
 			// Set noi dung cho label
-			//			placeLabelTextView.setText("Show all place on this map");
-			placeLabelTextView.setText(getResources().getString(R.string.show_all_on_map));
+			// placeLabelTextView.setText("Show all place on this map");
+			placeLabelTextView.setText(getResources().getString(
+					R.string.show_all_on_map));
 			// Lay toa do hien tai cua SmartPhone thong qua GPS
 			if (geoLat == 0.0 || geoLong == 0.0) {
-				placeLabelTextView.setText("Can't found GeoPoint. Show your current place");
+				placeLabelTextView
+						.setText("Can't found GeoPoint. Show your current place");
 				LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 				Location location = locationManager
-				        .getLastKnownLocation(LocationManager.GPS_PROVIDER);
+						.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+
 				if (location != null) {
 					geoLat = location.getLatitude();
 					geoLong = location.getLongitude();
 				} else {
 					placeLabelTextView.setText("Can't found GeoPoint.");
-					//					Log.d("GET LOCATION ERRORS", "GPS not available!!!");
+					// Log.d("GET LOCATION ERRORS", "GPS not available!!!");
 				}
 			}
 
-			placePoint = new GeoPoint((int) (1E6 * geoLat), (int) (1E6 * geoLong));
-			maxLat = maxLat > (int) (1E6 * geoLat) ? maxLat : (int) (1E6 * geoLat);
-			minLat = minLat < (int) (1E6 * geoLat) ? minLat : (int) (1E6 * geoLat);
-			maxLon = maxLon > (int) (1E6 * geoLong) ? maxLon : (int) (1E6 * geoLong);
-			minLon = minLon < (int) (1E6 * geoLong) ? minLon : (int) (1E6 * geoLong);
+			placePoint = new GeoPoint((int) (1E6 * geoLat),
+					(int) (1E6 * geoLong));
+			maxLat = maxLat > (int) (1E6 * geoLat) ? maxLat
+					: (int) (1E6 * geoLat);
+			minLat = minLat < (int) (1E6 * geoLat) ? minLat
+					: (int) (1E6 * geoLat);
+			maxLon = maxLon > (int) (1E6 * geoLong) ? maxLon
+					: (int) (1E6 * geoLong);
+			minLon = minLon < (int) (1E6 * geoLong) ? minLon
+					: (int) (1E6 * geoLong);
 			// Map overlays
 			List<Overlay> mapOverlays = mapView.getOverlays();
 			String iconUri = "";
 			try {
 
 				iconUri = OntologyCache.hashMapTypeLabelToUri.get(type + "@"
-				        + ServerConfig.LANGUAGE_CODE);
+						+ ServerConfig.LANGUAGE_CODE);
 			} catch (Exception e) {
 			}
 			Drawable drawable = null;
@@ -136,15 +150,17 @@ public class ShowAllPlaceOnMap extends MapActivity {
 			if (iconUri != null && iconUri.length() > 0) {
 				Log.v("CLASSURI", iconUri);
 				drawable = getResources().getDrawable(
-				        OntologyCache.uriOfIcon.get(iconUri).getIconId());
+						OntologyCache.uriOfIcon.get(iconUri).getIconId());
 
 			}
 			if (drawable == null) {
 				drawable = getResources().getDrawable(R.drawable.maps_point);
 			}
 
-			PlacesItemizedOverlay itemOverlay = new PlacesItemizedOverlay(drawable, this);
-			OverlayItem overlay = new OverlayItem(placePoint, placeLabel, placeURI);
+			PlacesItemizedOverlay itemOverlay = new PlacesItemizedOverlay(
+					drawable, this);
+			OverlayItem overlay = new OverlayItem(placePoint, placeLabel,
+					placeURI);
 			itemOverlay.addOverlay(overlay);
 
 			mapOverlays.add(itemOverlay);
@@ -154,9 +170,12 @@ public class ShowAllPlaceOnMap extends MapActivity {
 
 		try {
 			Drawable drawable = getResources().getDrawable(R.drawable.profile);
-			Log.v("POSITION", "hustPositionPoint: " + (hustPositionPoint == null));
-			PlacesItemizedOverlay itemOverlay = new PlacesItemizedOverlay(drawable, this);
-			OverlayItem overlay = new OverlayItem(hustPositionPoint, "Your current position", "");
+			Log.v("POSITION", "hustPositionPoint: "
+					+ (hustPositionPoint == null));
+			PlacesItemizedOverlay itemOverlay = new PlacesItemizedOverlay(
+					drawable, this);
+			OverlayItem overlay = new OverlayItem(hustPositionPoint,
+					"Your current position", "");
 			itemOverlay.addOverlay(overlay);
 
 			mapOverlays.add(itemOverlay);
@@ -168,7 +187,8 @@ public class ShowAllPlaceOnMap extends MapActivity {
 				// TODO: handle exception
 				mapController.setZoom(16);
 			}
-			mapController.animateTo(new GeoPoint((maxLat + minLat) / 2, (maxLon + minLon) / 2));
+			mapController.animateTo(new GeoPoint((maxLat + minLat) / 2,
+					(maxLon + minLon) / 2));
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
@@ -178,7 +198,7 @@ public class ShowAllPlaceOnMap extends MapActivity {
 	public static byte zoomLevel(double distance) {
 		byte zoom = 1;
 		double E = 40075;
-		//	    Log.i("Astrology", "result: "+ (Math.log(E/distance)/Math.log(2)+1));
+		// Log.i("Astrology", "result: "+ (Math.log(E/distance)/Math.log(2)+1));
 		zoom = (byte) Math.round(Math.log(E / distance) / Math.log(2) + 1);
 		// to avoid exeptions
 		if (zoom > 17)
@@ -205,10 +225,9 @@ public class ShowAllPlaceOnMap extends MapActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Chon setting 
 		if (item.getItemId() == R.id.map_setting) {
-			MapsSettingDialog settingDialog = new MapsSettingDialog(ShowAllPlaceOnMap.this,
-			        this.mapView);
+			MapsSettingDialog settingDialog = new MapsSettingDialog(
+					ShowAllPlaceOnMap.this, this.mapView);
 			settingDialog.show();
 		} else if (item.getItemId() == R.id.mapquess) {
 			XmlAdapter.useMapQuess(getBaseContext(), true);
@@ -218,6 +237,12 @@ public class ShowAllPlaceOnMap extends MapActivity {
 			finish();
 		}
 		return super.onOptionsItemSelected(item);
+	}
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		// TODO Auto-generated method stub
+		super.onSaveInstanceState(outState);
 	}
 
 }

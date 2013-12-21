@@ -2,9 +2,11 @@ package hust.hgbk.vtio.vinafood.vtioservice;
 
 import hust.hgbk.vtio.vinafood.constant.Location;
 
+import java.io.Serializable;
 import java.text.DecimalFormat;
 
-public class FullDataInstance {
+public class FullDataInstance implements Serializable {
+	private static final long serialVersionUID = 1L;
 	private String abstractInfo;
 	private String address;
 	private String imageURL;

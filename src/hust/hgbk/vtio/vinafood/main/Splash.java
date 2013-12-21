@@ -4,6 +4,8 @@ import hust.hgbk.vtio.vinafood.config.ServerConfig;
 import hust.hgbk.vtio.vinafood.constant.OntologyCache;
 import hust.hgbk.vtio.vinafood.constant.SQLiteAdapter;
 import hust.hgbk.vtio.vinafood.constant.XmlAdapter;
+import hust.hgbk.vtio.vinafood.maps.CustomLocationListener;
+import hust.hgbk.vtio.vinafood.maps.LocationService;
 import hust.hgbk.vtio.vinafood.media.OnlineContentReader;
 import hust.hgbk.vtio.vinafood.network.ConnectionManager;
 import hust.hgbk.vtio.vinafood.ontology.simple.ClassDataSimple;
@@ -36,6 +38,8 @@ import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.android.gms.common.ConnectionResult;
 
 public class Splash extends Activity implements OnClickListener {
 	public AsyncTask<Void, Void, Void> loadIconThread;
@@ -429,69 +433,105 @@ public class Splash extends Activity implements OnClickListener {
 
 	private void detectLocation() {
 		txtLoading.setText("Đang cập nhật vị trí...");
-		locationManager = (LocationManager) ctx
-				.getSystemService(Context.LOCATION_SERVICE);
-		locationListener = new LocationListener() {
-			int count = 0;
 
-			@Override
-			public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
+		LocationService locationService = new LocationService(ctx);
+		locationService.updateLocation(ctx, LocationService.EXPIRATION_TIME,
+				new CustomLocationListener() {
 
-			}
+					@Override
+					public void onProviderDisabled() {
+					}
 
-			@Override
-			public void onProviderEnabled(String arg0) {
-			}
+					@Override
+					public void onLocationUpdateFailed(ConnectionResult result) {
+					}
 
-			@Override
-			public void onProviderDisabled(String arg0) {
+					@Override
+					public void onLocationStopUpdate() {
+					}
 
-			}
+					@Override
+					public void onLocationServiceDisconnect() {
+					}
 
-			@Override
-			public void onLocationChanged(Location location) {
+					@Override
+					public void onLocationServiceConnect() {
+					}
 
-				setGeoLocation(location);
-			}
+					@Override
+					public void onLocationChanged(Location location) {
+						setGeoLocation(location);
+					}
 
-		};
+					@Override
+					public void onGetLastLocation(Location location) {
+					}
+				});
 
-		if (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER)) {
-			try {
-				locationManager.requestLocationUpdates(
-						LocationManager.NETWORK_PROVIDER, 0, 0,
-						locationListener);
-				Location lastKnowLocation = locationManager
-						.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-				if (lastKnowLocation != null) {
-					setGeoLocation(lastKnowLocation);
-				}
-			} catch (IllegalArgumentException e) {
-				e.printStackTrace();
-			}
-		} else if (locationManager
-				.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-			try {
-				locationManager.requestLocationUpdates(
-						LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+		// locationManager = (LocationManager) ctx
+		// .getSystemService(Context.LOCATION_SERVICE);
+		// locationListener = new LocationListener() {
+		// int count = 0;
+		//
+		// @Override
+		// public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
+		//
+		// }
+		//
+		// @Override
+		// public void onProviderEnabled(String arg0) {
+		// }
+		//
+		// @Override
+		// public void onProviderDisabled(String arg0) {
+		//
+		// }
+		//
+		// @Override
+		// public void onLocationChanged(Location location) {
+		// setGeoLocation(location);
+		// }
+		//
+		// };
 
-				Location lastKnowLocation = locationManager
-						.getLastKnownLocation(LocationManager.GPS_PROVIDER);
-				if (lastKnowLocation != null) {
-					Log.v("TEST", "last lat: " + lastKnowLocation.getLatitude());
-					setGeoLocation(lastKnowLocation);
-				}
-			} catch (IllegalArgumentException e) {
-				Toast.makeText(
-						ctx,
-						"Your device does not support GPS Provider! Try NETWORK Provider.",
-						Toast.LENGTH_SHORT).show();
-			}
-		} else {
-			hust.hgbk.vtio.vinafood.constant.Location
-					.showSettingLocationDialog(ctx);
-			isWaitingLocation = true;
-		}
+		// if
+		// (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER))
+		// {
+		// try {
+		// locationManager.requestLocationUpdates(
+		// LocationManager.NETWORK_PROVIDER, 0, 0,
+		// locationListener);
+		// Location lastKnowLocation = locationManager
+		// .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+		// if (lastKnowLocation != null) {
+		// setGeoLocation(lastKnowLocation);
+		// }
+		// } catch (IllegalArgumentException e) {
+		// e.printStackTrace();
+		// }
+		// } else if (locationManager
+		// .isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+		// try {
+		// locationManager.requestLocationUpdates(
+		// LocationManager.GPS_PROVIDER, 0, 0, locationListener);
+		//
+		// Location lastKnowLocation = locationManager
+		// .getLastKnownLocation(LocationManager.GPS_PROVIDER);
+		// if (lastKnowLocation != null) {
+		// Log.v("TEST", "last lat: " + lastKnowLocation.getLatitude());
+		// setGeoLocation(lastKnowLocation);
+		// }
+		// } catch (IllegalArgumentException e) {
+		// Toast.makeText(
+		// ctx,
+		// "Your device does not support GPS Provider! Try NETWORK Provider.",
+		// Toast.LENGTH_SHORT).show();
+		// }
+		// } else {
+		// hust.hgbk.vtio.vinafood.constant.Location
+		// .showSettingLocationDialog(ctx);
+		// isWaitingLocation = true;
+		// }
 	}
 
 	@Override

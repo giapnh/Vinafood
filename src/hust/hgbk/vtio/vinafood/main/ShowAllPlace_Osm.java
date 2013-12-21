@@ -244,4 +244,10 @@ public class ShowAllPlace_Osm extends MapActivity {
 		}
 	}
 
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		// TODO Auto-generated method stub
+		super.onSaveInstanceState(outState);
+	}
+
 }

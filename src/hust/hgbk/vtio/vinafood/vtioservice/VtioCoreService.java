@@ -1,6 +1,7 @@
 package hust.hgbk.vtio.vinafood.vtioservice;
 
 import hust.hgbk.vtio.vinafood.config.ServerConfig;
+import hust.hgbk.vtio.vinafood.config.log;
 import hust.hgbk.vtio.vinafood.constant.LanguageCode;
 import hust.hgbk.vtio.vinafood.constant.MethodName;
 import hust.hgbk.vtio.vinafood.constant.NameSpace;
@@ -837,12 +838,12 @@ public class VtioCoreService {
 
 		if (placeInfo.size() > 0) {
 			ArrayList<String> resultString = placeInfo.get(0);
-			Log.v("TEST", "info size: " + resultString.size());
+			// Log.v("TEST", "info size: " + resultString.size());
 			String label = "";
 			try {
 				label = resultString.get(0).replace(
 						"@" + ServerConfig.LANGUAGE_CODE, "");
-				Log.v("TEST", "info size: " + label);
+				// Log.v("TEST", "info size: " + label);
 			} catch (Exception e) {
 			}
 
@@ -2370,12 +2371,11 @@ public class VtioCoreService {
 				androidHttpTransport.call("\"" + soapAction + "\"", envelope);
 			} catch (Exception e) {
 				isError = true;
-				e.printStackTrace();
+				log.e("Exception");
 				try {
 					Thread.sleep(50);
 				} catch (InterruptedException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					log.e("Interrupted Exception");
 				}
 			}
 		}

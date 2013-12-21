@@ -1,6 +1,7 @@
 package hust.hgbk.vtio.vinafood.customViewAdapter;
 
 import hust.hgbk.vtio.vinafood.config.ServerConfig;
+import hust.hgbk.vtio.vinafood.config.log;
 import hust.hgbk.vtio.vinafood.constant.OntologyCache;
 import hust.hgbk.vtio.vinafood.constant.SQLiteAdapter;
 import hust.hgbk.vtio.vinafood.customview.PlaceItemView;
@@ -44,10 +45,9 @@ public class ArrayPlaceSimpleAdapter extends ArrayAdapter<FullDataInstance> {
 	private float radius;
 	private boolean hasPreference;
 	private String keyWord;
-	private String locationKeyword;
+	private String locationKeyword = "";
 	private String nearbyKeyword;
-	private String cuisineStyle;
-	private String businessType;
+	private String cuisineStyle = "";
 	private int numStar;
 	private float numberRanking;
 	private boolean isWellKnown;
@@ -78,13 +78,12 @@ public class ArrayPlaceSimpleAdapter extends ArrayAdapter<FullDataInstance> {
 
 	public void loadPlaceDataInFirst(String classUri, double geoLat,
 			double geoLon, float radius, boolean hasPreference, String keyword,
-			String locationKeyword, String nearbyKeyword, String businessType,
-			String cuisineStyle, int numStar, float numRanking) {
+			String locationKeyword, String nearbyKeyword, String cuisineStyle,
+			int numStar, float numRanking) {
 		hasConstraint = true;
+		this.classUri = classUri;
 		this.locationKeyword = locationKeyword;
 		this.nearbyKeyword = nearbyKeyword;
-		this.businessType = businessType;
-		this.cuisineStyle = cuisineStyle;
 		this.numStar = numStar;
 		this.numberRanking = numRanking;
 		loadPlaceDataInFirst(classUri, geoLat, geoLon, radius, hasPreference,
@@ -243,6 +242,8 @@ public class ArrayPlaceSimpleAdapter extends ArrayAdapter<FullDataInstance> {
 				e.printStackTrace();
 			}
 		}
+
+		log.m("Load data with uri:" + classUri + "  ; radius = " + radius);
 
 		return soapServiceProxy.getiComCoreService()
 				.getDiningServiceDataWithDistance(classUri,//

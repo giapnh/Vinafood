@@ -35,13 +35,6 @@ public class PlaceDetails extends Activity {
 	Context context;
 	TextView waitTextView;
 	VtioCoreService services;
-	// String instanceURI = "";
-	// String instanceLabel = "";
-	// String classURI = "";
-	// InstanceData data = new InstanceData();
-
-	// ArrayList<PropertyWithValue> listPropertiesWithValue = new
-	// ArrayList<PropertyWithValue>();
 
 	FullDataInstance dataSimple;
 
@@ -50,17 +43,8 @@ public class PlaceDetails extends Activity {
 
 	Button btnBack, btnNext;
 	ViewFlipper viewFlipper;
-
-	// String[] listIgnoreProperty = {"hasGeoPoint","hasMedia","hasLocation"};
 	String[] listIgnoreProperty = { "hasLongtitude", "hasGeoPoint",
 			"hasLatitude", "hasMedia", "hasLocation" };
-	// String[] listIgnoreEnLabel = {"has longtitude",
-	// "has Geo Point (lat-lon)", "has latitude", "has location"};
-	// String[] listIgnoreVnLabel = {"có kinh độ", "có Geo Point", "có vĩ độ",
-	// "có địa chỉ tại"};
-	// String[] listIgnoreProperty =
-	// {"hasGeoPoint","hasLatitude","hasMedia","hasLocation"};
-
 	private final int SHOW_NO_DATA_DIALOG = 0;
 
 	private String latStr = "";
@@ -133,7 +117,6 @@ public class PlaceDetails extends Activity {
 		});
 
 		WebView webView = (WebView) findViewById(R.id.placeImageView);
-		System.out.println("Width = " + webView.getWidth());
 		final int width = (int) (getResources().getDisplayMetrics().widthPixels
 				/ getResources().getDisplayMetrics().density - 10);
 		// Set image for webview image
@@ -146,7 +129,6 @@ public class PlaceDetails extends Activity {
 				+ "px'    /></body></html>";
 		webView.getSettings().setJavaScriptEnabled(true);
 		webView.getSettings().setAllowFileAccess(true);
-		webView.getSettings().setPluginsEnabled(true);
 		webView.setScrollBarStyle(View.SCROLLBARS_OUTSIDE_OVERLAY);
 		webView.loadData(data, "text/html", "utf-8");
 		webView.setWebViewClient(new WebViewClient() {
@@ -233,15 +215,20 @@ public class PlaceDetails extends Activity {
 
 		Intent intent = new Intent(context,
 				XmlAdapter.getShowOnMapActivity(context));
-		intent.putExtra("URI", dataSimple.getUri());
-		intent.putExtra("label", dataSimple.getLabel());
-		intent.putExtra("lat", dataSimple.getLatitude());
-		intent.putExtra("long", dataSimple.getLongitude());
-		try {
-			intent.putExtra("iconurl", iconUrl);
-			intent.putExtra("iconId", iconId);
-		} catch (Exception e) {
-		}
+
+		Bundle bundle = new Bundle();
+		bundle.putSerializable("fullinstance", dataSimple);
+
+		// intent.putExtra("URI", dataSimple.getUri());
+		// intent.putExtra("label", dataSimple.getLabel());
+		// intent.putExtra("lat", dataSimple.getLatitude());
+		// intent.putExtra("long", dataSimple.getLongitude());
+		// try {
+		// intent.putExtra("iconurl", iconUrl);
+		// intent.putExtra("iconId", iconId);
+		// } catch (Exception e) {
+		// }
+		intent.putExtras(bundle);
 		this.context.startActivity(intent);
 	}
 

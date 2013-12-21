@@ -48,7 +48,7 @@ public class PlaceSearchResultActivity extends Activity {
 	String keyword;
 	Float radius = 0f;
 	String cuisineStype = "";
-	String busineseType = "";
+	String classUri = "";
 	String purpose = "";
 	boolean hasConstraint = false;
 
@@ -64,7 +64,7 @@ public class PlaceSearchResultActivity extends Activity {
 		keyword = extra.getString("keyword");
 		radius = extra.getFloat("radius", 0f);
 		cuisineStype = extra.getString("cuisineStyle");
-		busineseType = extra.getString("busineseType");
+		classUri = extra.getString("classUri");
 		purpose = extra.getString("purpose");
 		hasConstraint = extra.getBoolean("hasConstraint");
 
@@ -95,11 +95,11 @@ public class PlaceSearchResultActivity extends Activity {
 										.getInstance().getLongtitude(), radius,
 								false, keyword);
 					} else {
-						arrayPlaceSimpleAdapter.loadPlaceDataInFirst(CLASS_URI,
+						arrayPlaceSimpleAdapter.loadPlaceDataInFirst(classUri,
 								Location.getInstance().getLatitude(),//
 								Location.getInstance().getLongtitude(),//
 								radius, false, keyword, //
-								null, null, busineseType, cuisineStype, 0, 0);// FIXME
+								"", "", cuisineStype, 0, 0);// FIXME
 					}
 				} catch (InterruptedException e) {
 					e.printStackTrace();

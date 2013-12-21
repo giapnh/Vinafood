@@ -22,7 +22,8 @@ public class PlacesItemizedOverlay extends ItemizedOverlay<OverlayItem> {
 		mContext = context;
 	}
 
-	public PlacesItemizedOverlay(Drawable defaultMarker, Context context, boolean isTapable) {
+	public PlacesItemizedOverlay(Drawable defaultMarker, Context context,
+			boolean isTapable) {
 		super(boundCenterBottom(defaultMarker));
 		mContext = context;
 		this.isTapaple = isTapable;
@@ -57,11 +58,11 @@ public class PlacesItemizedOverlay extends ItemizedOverlay<OverlayItem> {
 		/*
 		 * AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
 		 * dialog.setTitle(item.getTitle());
-		 * dialog.setMessage(item.getSnippet());
-		 * dialog.show();
+		 * dialog.setMessage(item.getSnippet()); dialog.show();
 		 */
 		if (!isTapaple && placeURI.length() > 0) {
-			PlaceAnnotationDialog dialog = new PlaceAnnotationDialog(mContext, placeURI);
+			PlaceAnnotationDialog dialog = new PlaceAnnotationDialog(mContext,
+					placeURI);
 			dialog.show();
 		}
 

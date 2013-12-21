@@ -1,9 +1,12 @@
 package hust.hgbk.vtio.vinafood.main;
 
+import hust.hgbk.vtio.vinafood.config.ServerConfig;
 import hust.hgbk.vtio.vinafood.constant.NameSpace;
+import hust.hgbk.vtio.vinafood.constant.OntologyCache;
 import hust.hgbk.vtio.vinafood.constant.XmlAdapter;
 import hust.hgbk.vtio.vinafood.customDialog.MapsSettingDialog_Osm;
 import hust.hgbk.vtio.vinafood.customDialog.PlaceAnnotationDialog;
+import hust.hgbk.vtio.vinafood.vtioservice.FullDataInstance;
 import hust.hgbk.vtio.vinafood.vtioservice.VtioCoreService;
 
 import java.util.ArrayList;
@@ -19,6 +22,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -48,6 +52,9 @@ public class ShowPlaceOnOsmap extends MapActivity {
 
 	String iconUrl;
 	private int iconId = 0;
+	private boolean isStartFromCommentActivity = false;
+
+	private FullDataInstance fullDataInstance;
 
 	Context ctx;
 
@@ -64,12 +71,33 @@ public class ShowPlaceOnOsmap extends MapActivity {
 		Double geoLat = 0.0;
 		Double geoLong = 0.0;
 		extra = getIntent().getExtras();
-		geoLat = extra.getDouble("lat", -1.0);
-		geoLong = extra.getDouble("long", -1.0);
-		iconId = extra.getInt("iconId");
-		placeURI = extra.getString("URI");
-		placeLabel = extra.getString("label");
-		iconUrl = extra.getString("iconurl");
+		fullDataInstance = (FullDataInstance) extra
+				.getSerializable("fullinstance");
+
+		geoLat = fullDataInstance.getLatitude();// extra.getDouble("lat", -1.0);
+		geoLong = fullDataInstance.getLongitude();// extra.getDouble("long",
+													// -1.0);
+		placeURI = fullDataInstance.getUri();
+		placeLabel = fullDataInstance.getLabel();
+		isStartFromCommentActivity = extra.getBoolean("from_comment_activity");
+
+		try {
+			iconUrl = OntologyCache.uriOfIcon.get(
+					OntologyCache.hashMapTypeLabelToUri.get(fullDataInstance
+							.getType() + "@" + ServerConfig.LANGUAGE_CODE))
+					.getIconUrl();
+			iconId = OntologyCache.uriOfIcon.get(
+					OntologyCache.hashMapTypeLabelToUri.get(fullDataInstance
+							.getType() + "@" + ServerConfig.LANGUAGE_CODE))
+					.getIconId();
+		} catch (Exception e) {
+		}
+
+		/*
+		 * iconId = extra.getInt("iconId"); placeURI = extra.getString("URI");
+		 * placeLabel = extra.getString("label"); iconUrl =
+		 * extra.getString("iconurl");
+		 */
 
 		placePoint = getPlacePoint(placeURI, geoLat, geoLong);
 		hustPositionPoint = getPositionPoint();
@@ -479,4 +507,16 @@ public class ShowPlaceOnOsmap extends MapActivity {
 		// Log.v("KEN", "Stop result activity");
 
 	}
+
+	@Override
+	public boolean onKeyDown(int keyCode, KeyEvent event) {
+		return super.onKeyDown(keyCode, event);
+	}
+
+	@Override
+	protected void onSaveInstanceState(Bundle outState) {
+		// TODO Auto-generated method stub
+		super.onSaveInstanceState(outState);
+	}
+
 }

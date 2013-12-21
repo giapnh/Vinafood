@@ -43,10 +43,10 @@ public class PlaceItemizedOverlay_Osm extends ItemizedOverlay<OverlayItem> {
 		/*
 		 * AlertDialog.Builder dialog = new AlertDialog.Builder(mContext);
 		 * dialog.setTitle(item.getTitle());
-		 * dialog.setMessage(item.getSnippet());
-		 * dialog.show();
+		 * dialog.setMessage(item.getSnippet()); dialog.show();
 		 */
-		PlaceAnnotationDialog dialog = new PlaceAnnotationDialog(mContext, placeURI);
+		PlaceAnnotationDialog dialog = new PlaceAnnotationDialog(mContext,
+				placeURI);
 		dialog.show();
 
 		return true;

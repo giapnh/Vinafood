@@ -6,14 +6,18 @@ public class ServerConfig {
 	public static final String VTIO_REPOSITORY_KEY = "Db0hsr9lGsz6FaUGW7lPZcZ2VcFOMrzHZIJT2qi27p8=";
 	public static final String SERVER_DOMAIN = "icompanion.vn";
 	public static final String SERVICE_NAMESPACE = "http://service.sig.com/";
-
-	// private static String serverSpecificIp = "203.113.166.55";
-	private static String serverSpecificIp = "162.218.209.71";
+	public static final String USER_SERVICE_NAME_SPACE = "http://userservice.icom.sig/";
+	private static String serverSpecificIp = "14.160.65.178";
 	public static String SIG_APP_URI = "https://play.google.com/store/apps/developer?id=Semantic+Innovation+Group";
 
 	public static String getWSDLURL() {
 		return "http://" + serverSpecificIp
 				+ ":8080/SIG-CORE-SERVICE/CoreServicePort?WSDL";
+	}
+
+	public static String getUserServiceWSDLURL() {
+		return "http://" + serverSpecificIp
+				+ ":8080/IComUser/IcomUserServicePort?WSDL";
 	}
 
 	public static void setServerSpecificIp(String ip) {

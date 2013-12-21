@@ -106,7 +106,6 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
 			openDataBase();
 			executeSQL("CREATE  TABLE 'main'.'FavoritePlace' ('_id' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , 'uri' TEXT NOT NULL UNIQUE, 'label' TEXT NOT NULL , 'type' TEXT, 'address' TEXT, 'abstract' TEXT, 'img' TEXT, 'welknown' TEXT, 'phone' TEXT, 'rating' INTEGER, 'longitude' DOUBLE, 'latitude' DOUBLE)");
 		} catch (Exception e) {
-			Log.i("NOTIFY", "Create Failed!");
 		} finally {
 			close();
 		}
@@ -117,7 +116,6 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
 			openDataBase();
 			executeSQL("CREATE  TABLE 'main'.'RecentPlace' ('_id' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , 'uri' TEXT NOT NULL UNIQUE, 'label' TEXT NOT NULL , 'type' TEXT, 'address' TEXT, 'abstract' TEXT, 'img' TEXT, 'welknown' TEXT, 'phone' TEXT, 'rating' INTEGER, 'longitude' DOUBLE, 'latitude' DOUBLE)");
 		} catch (Exception e) {
-			Log.i("NOTIFY", "Create Failed!");
 		} finally {
 			close();
 		}
@@ -128,7 +126,6 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
 			openDataBase();
 			executeSQL("CREATE  TABLE 'main'.'Preference' ('_id' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL , 'uri' TEXT NOT NULL , 'label' TEXT NOT NULL )");
 		} catch (Exception e) {
-			Toast.makeText(ctx, "Create Failed!", Toast.LENGTH_SHORT).show();
 		} finally {
 			close();
 		}
@@ -162,7 +159,6 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
 					+ placeDataSimple.getLatitude() + "')");
 		} catch (Exception e) {
 			e.printStackTrace();
-			Toast.makeText(ctx, "Add Failed!", Toast.LENGTH_SHORT).show();
 		} finally {
 			close();
 		}
@@ -195,8 +191,6 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
 					+ "','"
 					+ placeDataSimple.getLatitude() + "')");
 		} catch (Exception e) {
-			// TODO: handle exception
-			Toast.makeText(ctx, "Add Failed!", Toast.LENGTH_SHORT).show();
 		} finally {
 			close();
 		}
@@ -210,8 +204,6 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
 					+ "','"
 					+ classDataSimple.getLabel().replaceAll("'", "''") + "')");
 		} catch (Exception e) {
-			// TODO: handle exception
-			Toast.makeText(ctx, "Add Failed!", Toast.LENGTH_SHORT).show();
 		} finally {
 			close();
 		}
@@ -244,8 +236,6 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
 					+ "','"
 					+ placeDataSimple.getLatitude() + "')");
 		} catch (Exception e) {
-			// TODO: handle exception
-			Toast.makeText(ctx, "Add Failed!", Toast.LENGTH_SHORT).show();
 		} finally {
 			close();
 		}
@@ -278,7 +268,6 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
 					+ "','"
 					+ placeDataSimple.getLatitude() + "')");
 		} catch (Exception e) {
-			Toast.makeText(ctx, "Add Failed!", Toast.LENGTH_SHORT).show();
 		} finally {
 			close();
 		}
@@ -290,7 +279,6 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
 			executeSQL("DELETE FROM 'main'.'FavoritePlace' WHERE uri='" + uri
 					+ "'");
 		} catch (Exception e) {
-			Toast.makeText(ctx, "Delete Failed!", Toast.LENGTH_SHORT).show();
 		} finally {
 			close();
 		}
@@ -302,8 +290,6 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
 			executeSQL("DELETE FROM 'main'.'Preference' WHERE uri='" + uri
 					+ "'");
 		} catch (Exception e) {
-			// TODO: handle exception
-			Toast.makeText(ctx, "Delete Failed!", Toast.LENGTH_SHORT).show();
 		} finally {
 			close();
 		}
@@ -315,7 +301,6 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
 			executeSQL("DELETE FROM 'main'.'RecentPlace' WHERE uri='" + uri
 					+ "'");
 		} catch (Exception e) {
-			Toast.makeText(ctx, "Delete Failed!", Toast.LENGTH_SHORT).show();
 		} finally {
 			close();
 		}

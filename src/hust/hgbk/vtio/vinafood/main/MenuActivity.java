@@ -5,7 +5,10 @@ import hust.hgbk.vtio.vinafood.constant.NameSpace;
 import hust.hgbk.vtio.vinafood.customview.SubClassHorizontalView;
 import hust.hgbk.vtio.vinafood.vtioservice.VtioCoreService;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.AlertDialog.Builder;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -144,7 +147,29 @@ public class MenuActivity extends Activity {
 				about.startAnimation(AnimationUtils.loadAnimation(ctx,
 						R.anim.slide_out_right));
 			} else {
-				finish();
+				final AlertDialog.Builder builder = new Builder(
+						MenuActivity.this);
+				builder.setMessage(getString(R.string.txt_exit));
+				builder.setPositiveButton("Có",
+						new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								finish();
+							}
+						});
+
+				builder.setNegativeButton("Không",
+						new DialogInterface.OnClickListener() {
+
+							@Override
+							public void onClick(DialogInterface dialog,
+									int which) {
+								builder.create().dismiss();
+							}
+						});
+				builder.create().show();
 			}
 			isShowAbout = false;
 		}

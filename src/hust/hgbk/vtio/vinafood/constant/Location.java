@@ -21,7 +21,8 @@ public class Location {
 		return currentLocation;
 	}
 
-	synchronized public void setGeo(Float lat, Float lon) throws InterruptedException {
+	synchronized public void setGeo(Float lat, Float lon)
+			throws InterruptedException {
 		if (isAccessing) {
 			wait();
 		}
@@ -51,7 +52,7 @@ public class Location {
 			if (currentLocation.geoLat == 0f || currentLocation.geoLon == 0f) {
 				return false;
 			} else if (currentLocation.getLatitude() == GEO_LAT_DEFAULT
-			        && currentLocation.getLongtitude() == GEO_LON_DEFAULT) {
+					&& currentLocation.getLongtitude() == GEO_LON_DEFAULT) {
 				return false;
 			} else
 				return true;
@@ -69,7 +70,8 @@ public class Location {
 				case DialogInterface.BUTTON_POSITIVE:
 					// Yes button clicked
 					// pauseSound();
-					ctx.startActivity(new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+					ctx.startActivity(new Intent(
+							Settings.ACTION_LOCATION_SOURCE_SETTINGS));
 					break;
 
 				case DialogInterface.BUTTON_NEGATIVE:
@@ -87,9 +89,11 @@ public class Location {
 
 		AlertDialog.Builder builder = new AlertDialog.Builder(ctx);
 		builder.setMessage(ctx.getResources().getString(R.string.enable_gps))
-		        .setPositiveButton(ctx.getResources().getString(R.string.apply),
-		                dialogClickListener)
-		        .setNegativeButton(ctx.getResources().getString(R.string.select_on_map),
-		                dialogClickListener).show();
+				.setPositiveButton(
+						ctx.getResources().getString(R.string.apply),
+						dialogClickListener)
+				.setNegativeButton(
+						ctx.getResources().getString(R.string.select_on_map),
+						dialogClickListener).show();
 	}
 }
