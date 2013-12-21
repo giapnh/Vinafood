@@ -174,68 +174,6 @@ public class PlaceItemView extends RelativeLayout {
 			}
 		}
 		imageWebView.setBackgroundColor(Color.TRANSPARENT);
-		// imageWebView.setOnTouchListener(new OnTouchListener() {
-		//
-		// @Override
-		// public boolean onTouch(View v, MotionEvent event) {
-		// if (event.getAction() == MotionEvent.ACTION_UP) {
-		// imageWebView.setClickable(false);
-		// new AsyncTask<Void, Void, ArrayList<String>>() {
-		//
-		// @Override
-		// protected ArrayList<String> doInBackground(
-		// Void... params) {
-		// String query = "select ?url where {"
-		// + "<"
-		// + fullDataInstance.getUri()
-		// + "> vtio:hasMedia ?imageUri. ?imageUri rdf:type vtio:Image."
-		// + "?imageUri vtio:hasURL ?url." + "}";
-		// ArrayList<ArrayList<String>> results = new VtioCoreService()
-		// .executeQuery(query, true);
-		// ArrayList<String> listUrl = new ArrayList<String>();
-		// for (int i = 0; i < results.size(); i++) {
-		// String url = results
-		// .get(i)
-		// .get(0)
-		// .replace(
-		// "^^" + NameSpace.xsd + "string",
-		// "");
-		// url = url.trim();
-		// url = url.replace(" ", "%20");
-		// listUrl.add(url);
-		// }
-		// return listUrl;
-		// }
-		//
-		// @Override
-		// protected void onPostExecute(ArrayList<String> result) {
-		// if (result.size() > 0) {
-		// Display display = ((Activity) context)
-		// .getWindowManager().getDefaultDisplay();
-		// Dialog dialog = new Dialog(getContext(),
-		// R.style.MyDialogTheme);
-		// dialog.setContentView(new ShowImageOfPlaceView(
-		// getContext(), result, dialog));
-		// dialog.getWindow().setLayout(
-		// display.getWidth() - 20,
-		// LayoutParams.WRAP_CONTENT);
-		// dialog.show();
-		// } else {
-		// Toast.makeText(getContext(),
-		// "This place has no image!",
-		// Toast.LENGTH_SHORT).show();
-		// }
-		//
-		// imageWebView.setClickable(true);
-		// }
-		//
-		// }.execute();
-		//
-		// }
-		// return false;
-		// }
-		// });
-		final int iconId = iconId1;
 
 		final int rate = fullDataInstance.getRatingNum();
 		ratingView.removeAllViews();

@@ -100,13 +100,6 @@ public abstract class ArrayPlaceResultAdapter extends
 				for (int i = 0; i < fullDataInstances.length; i++) {
 					listPlaceDataSimple.add(fullDataInstances[i]);
 				}
-				// if (IUserService.isLog && countLoopQuery == 0) {
-				// try {
-				// callServiceLog(fullDataInstances, LIMIT, offset);
-				// } catch (Exception e) {
-				// e.printStackTrace();
-				// }
-				// }
 				if (fullDataInstances.length > 0) {
 					offset += LIMIT;
 				}

@@ -38,7 +38,7 @@ public class FavoritePlaceActivity extends Activity {
 		setContentView(R.layout.result_place_search_layout);
 		listResultView = (ListView) findViewById(R.id.listResultView);
 		noFavorPlaceTextView = (TextView) this
-				.findViewById(R.id.no_search_result_textview);
+				.findViewById(R.id.no_search_result);
 		loadAllInstanceTask = new LoadAllInstanceTask();
 		loadAllInstanceTask.execute();
 		message = getResources().getString(R.string.please_wait);

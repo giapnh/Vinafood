@@ -1,8 +1,6 @@
 package hust.hgbk.vtio.vinafood.main;
 
-import hust.hgbk.vtio.vinafood.config.ServerConfig;
 import hust.hgbk.vtio.vinafood.config.log;
-import hust.hgbk.vtio.vinafood.constant.OntologyCache;
 import hust.hgbk.vtio.vinafood.constant.SQLiteAdapter;
 import hust.hgbk.vtio.vinafood.constant.XmlAdapter;
 import hust.hgbk.vtio.vinafood.vtioservice.FullDataInstance;
@@ -60,8 +58,6 @@ public class PlaceDetails extends Activity {
 		setContentView(R.layout.place_details_layout);
 		this.context = PlaceDetails.this;
 		Bundle extra = getIntent().getExtras();
-		// instanceURI = extra.getString("instanceURI");
-		// instanceLabel = extra.getString("instanceLabel");
 
 		dataSimple = new FullDataInstance();
 		dataSimple.setUri(extra.getString("uri"));
@@ -117,28 +113,39 @@ public class PlaceDetails extends Activity {
 		});
 
 		WebView webView = (WebView) findViewById(R.id.placeImageView);
-		final int width = (int) (getResources().getDisplayMetrics().widthPixels
-				/ getResources().getDisplayMetrics().density - 10);
-		// Set image for webview image
-		String data = "";
-		data = "<html><head></head><body><img  src=\""
-				+ dataSimple.getImageURL()
-				+ "\" style=' background-color:transparent;' width='" + width
-				+ "px;'height = '"
-				+ getResources().getDimension(R.dimen.layy300)
-				+ "px'    /></body></html>";
-		webView.getSettings().setJavaScriptEnabled(true);
-		webView.getSettings().setAllowFileAccess(true);
-		webView.setScrollBarStyle(View.SCROLLBARS_OUTSIDE_OVERLAY);
-		webView.loadData(data, "text/html", "utf-8");
-		webView.setWebViewClient(new WebViewClient() {
-			@Override
-			public void onReceivedError(WebView view, int errorCode,
-					String description, String failingUrl) {
-				log.e("Webview error");
-				super.onReceivedError(view, errorCode, description, failingUrl);
-			}
-		});
+		ImageView imageView = (ImageView) findViewById(R.id.imgNoImage);
+
+		if (dataSimple.getImageURL().equals("")
+				|| dataSimple.getImageURL().contains("anyType")) {
+			imageView.setVisibility(View.VISIBLE);
+			webView.setVisibility(View.GONE);
+		} else {
+			imageView.setVisibility(View.GONE);
+			webView.setVisibility(View.VISIBLE);
+			final int width = (int) (getResources().getDisplayMetrics().widthPixels
+					/ getResources().getDisplayMetrics().density - 10);
+			// Set image for webview image
+			String data = "";
+			data = "<html><head></head><body><img  src=\""
+					+ dataSimple.getImageURL()
+					+ "\" style=' background-color:transparent;' width='"
+					+ width + "px;'height = '"
+					+ getResources().getDimension(R.dimen.layy300)
+					+ "px'    /></body></html>";
+			webView.getSettings().setJavaScriptEnabled(true);
+			webView.getSettings().setAllowFileAccess(true);
+			webView.setScrollBarStyle(View.SCROLLBARS_OUTSIDE_OVERLAY);
+			webView.loadData(data, "text/html", "utf-8");
+			webView.setWebViewClient(new WebViewClient() {
+				@Override
+				public void onReceivedError(WebView view, int errorCode,
+						String description, String failingUrl) {
+					log.e("Webview error");
+					super.onReceivedError(view, errorCode, description,
+							failingUrl);
+				}
+			});
+		}
 
 		textViewTitle = (TextView) findViewById(R.id.placeTypesTextView);
 		textViewTitle.setText(dataSimple.getLabel());
@@ -199,35 +206,10 @@ public class PlaceDetails extends Activity {
 	}
 
 	public void onViewMap(View v) {
-		String iconUrl = "";
-		int iconId = 0;
-		try {
-			iconUrl = OntologyCache.uriOfIcon.get(
-					OntologyCache.hashMapTypeLabelToUri.get(dataSimple
-							.getType() + "@" + ServerConfig.LANGUAGE_CODE))
-					.getIconUrl();
-			iconId = OntologyCache.uriOfIcon.get(
-					OntologyCache.hashMapTypeLabelToUri.get(dataSimple
-							.getType() + "@" + ServerConfig.LANGUAGE_CODE))
-					.getIconId();
-		} catch (Exception e) {
-		}
-
 		Intent intent = new Intent(context,
 				XmlAdapter.getShowOnMapActivity(context));
-
 		Bundle bundle = new Bundle();
 		bundle.putSerializable("fullinstance", dataSimple);
-
-		// intent.putExtra("URI", dataSimple.getUri());
-		// intent.putExtra("label", dataSimple.getLabel());
-		// intent.putExtra("lat", dataSimple.getLatitude());
-		// intent.putExtra("long", dataSimple.getLongitude());
-		// try {
-		// intent.putExtra("iconurl", iconUrl);
-		// intent.putExtra("iconId", iconId);
-		// } catch (Exception e) {
-		// }
 		intent.putExtras(bundle);
 		this.context.startActivity(intent);
 	}
@@ -260,6 +242,7 @@ public class PlaceDetails extends Activity {
 		Intent intent = new Intent(PlaceDetails.this,
 				DinningServiceSearch.class);
 		startActivity(intent);
+		finish();
 	}
 
 	public void onBack(View v) {

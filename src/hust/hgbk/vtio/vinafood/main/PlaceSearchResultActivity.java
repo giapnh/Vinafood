@@ -5,7 +5,6 @@ import hust.hgbk.vtio.vinafood.constant.Location;
 import hust.hgbk.vtio.vinafood.constant.NameSpace;
 import hust.hgbk.vtio.vinafood.constant.XmlAdapter;
 import hust.hgbk.vtio.vinafood.customViewAdapter.ArrayPlaceSimpleAdapter;
-import hust.hgbk.vtio.vinafood.customViewAdapter.NewArrayPlaceSimpleAdapter;
 import hust.hgbk.vtio.vinafood.vtioservice.FullDataInstance;
 import hust.hgbk.vtio.vinafood.vtioservice.ICoreService;
 import hust.hgbk.vtio.vinafood.vtioservice.VtioCoreService;
@@ -25,6 +24,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class PlaceSearchResultActivity extends Activity {
 
@@ -37,7 +37,6 @@ public class PlaceSearchResultActivity extends Activity {
 	ArrayList<FullDataInstance> listPlaceDataSimple;
 	boolean isReasoning = true;
 
-	NewArrayPlaceSimpleAdapter newArrayPlaceSimpleAdapter;
 	ArrayPlaceSimpleAdapter arrayPlaceSimpleAdapter;
 	LoadAllInstanceTask loadAllInstanceTask;
 
@@ -52,6 +51,8 @@ public class PlaceSearchResultActivity extends Activity {
 	String purpose = "";
 	boolean hasConstraint = false;
 
+	TextView noResult;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -59,6 +60,7 @@ public class PlaceSearchResultActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		XmlAdapter.synConfig(this);
 		setContentView(R.layout.result_place_search_layout);
+		noResult = (TextView) findViewById(R.id.no_search_result);
 		// Get extras data
 		Bundle extra = this.getIntent().getExtras();
 		keyword = extra.getString("keyword");
@@ -121,13 +123,13 @@ public class PlaceSearchResultActivity extends Activity {
 
 		@Override
 		protected void onPostExecute(Void result) {
-			if (newArrayPlaceSimpleAdapter != null) {
-				listResultView.setAdapter(newArrayPlaceSimpleAdapter);
+			progressLayout.dismiss();
+			if (arrayPlaceSimpleAdapter.listPlaceDataSimple.size() == 0) {
+				noResult.setVisibility(View.VISIBLE);
 			} else {
 				listResultView.setAdapter(arrayPlaceSimpleAdapter);
+				listResultView.setVisibility(View.VISIBLE);
 			}
-			progressLayout.dismiss();
-			listResultView.setVisibility(View.VISIBLE);
 		}
 	}
 
@@ -174,9 +176,6 @@ public class PlaceSearchResultActivity extends Activity {
 				int currentPosition = 0;
 				if (arrayPlaceSimpleAdapter != null) {
 					currentPosition = arrayPlaceSimpleAdapter
-							.getCurrentPosition();
-				} else if (newArrayPlaceSimpleAdapter != null) {
-					currentPosition = newArrayPlaceSimpleAdapter
 							.getCurrentPosition();
 				}
 				int begin = (currentPosition - 3) > 0 ? (currentPosition - 3)

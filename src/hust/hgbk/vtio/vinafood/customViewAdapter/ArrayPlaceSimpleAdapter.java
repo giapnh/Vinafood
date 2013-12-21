@@ -28,7 +28,7 @@ public class ArrayPlaceSimpleAdapter extends ArrayAdapter<FullDataInstance> {
 	private int offset = 0;
 	int offsetOnList;
 	Context context;
-	ArrayList<FullDataInstance> listPlaceDataSimple;
+	public ArrayList<FullDataInstance> listPlaceDataSimple;
 	int countLoopQuery = 0;
 	private LoadInstanceTask loadInstanceTask;
 	private int currentPosition = 0;

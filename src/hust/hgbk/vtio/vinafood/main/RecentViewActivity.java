@@ -50,7 +50,7 @@ public class RecentViewActivity extends Activity {
 		// titleSearchTextView = (TextView)
 		// findViewById(R.id.serchTitleTextView);
 		listResultView = (ListView) findViewById(R.id.listResultView);
-		noFavorPlaceTextView = (TextView) findViewById(R.id.no_search_result_textview);
+		noFavorPlaceTextView = (TextView) findViewById(R.id.no_search_result);
 
 		loadAllInstanceTask = new LoadAllInstanceTask();
 		loadAllInstanceTask.execute();

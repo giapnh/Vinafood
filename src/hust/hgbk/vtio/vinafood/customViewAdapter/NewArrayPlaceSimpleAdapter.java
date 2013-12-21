@@ -1,7 +1,6 @@
 package hust.hgbk.vtio.vinafood.customViewAdapter;
 
 import hust.hgbk.vtio.vinafood.config.ServerConfig;
-import hust.hgbk.vtio.vinafood.constant.OntologyCache;
 import hust.hgbk.vtio.vinafood.constant.SQLiteAdapter;
 import hust.hgbk.vtio.vinafood.customview.PlaceItemView;
 import hust.hgbk.vtio.vinafood.main.PlaceDetails;
@@ -18,13 +17,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.ImageView.ScaleType;
 import android.widget.ProgressBar;
 
 public class NewArrayPlaceSimpleAdapter extends ArrayAdapter<FullDataInstance> {
@@ -102,6 +98,30 @@ public class NewArrayPlaceSimpleAdapter extends ArrayAdapter<FullDataInstance> {
 
 		final FullDataInstance placeItem = listPlaceDataSimple.get(position);
 		view.setData(placeItem);
+		view.setClickable(true);
+		view.findViewById(R.id.for_click_view).setOnClickListener(
+				new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Intent intent = new Intent(context, PlaceDetails.class);
+						Bundle bundle = new Bundle();
+						bundle.putString("abstractInfo",
+								placeItem.getAbstractInfo());
+						bundle.putString("address", placeItem.getAddress());
+						bundle.putString("imageURL", placeItem.getImageURL());
+						bundle.putString("label", placeItem.getLabel());
+						bundle.putDouble("latitude", placeItem.getLatitude());
+						bundle.putDouble("longitude", placeItem.getLongitude());
+						bundle.putString("location", placeItem.getLocation());
+						bundle.putString("phone", placeItem.getPhone());
+						bundle.putInt("ratingNum", placeItem.getRatingNum());
+						bundle.putString("type", placeItem.getType());
+						bundle.putString("uri", placeItem.getUri());
+						bundle.putString("wellKnown", placeItem.getWellKnown());
+						intent.putExtras(bundle);
+						context.startActivity(intent);
+					}
+				});
 		return view;
 	}
 
@@ -110,7 +130,6 @@ public class NewArrayPlaceSimpleAdapter extends ArrayAdapter<FullDataInstance> {
 		ProgressBar progressBar;
 
 		public LoadInstanceTask(String query, ProgressBar progressBar) {
-			// this.offset = offset;
 			this.progressBar = progressBar;
 		}
 
@@ -121,7 +140,6 @@ public class NewArrayPlaceSimpleAdapter extends ArrayAdapter<FullDataInstance> {
 		}
 
 		protected void onCancelled() {
-			Log.v("KEN", "Load result cancel");
 		}
 
 		@Override
@@ -156,10 +174,6 @@ public class NewArrayPlaceSimpleAdapter extends ArrayAdapter<FullDataInstance> {
 			offsetOnList = offsetOnList + LIMIT;
 
 		}
-		Log.v("TIME", "loaded uri: " + (System.currentTimeMillis() - a));
-
-		Log.v("TIME", "size: " + listPlaceDataSimple.size() + "query: " + query);
-
 	}
 
 	public int getCurrentPosition() {
@@ -169,13 +183,4 @@ public class NewArrayPlaceSimpleAdapter extends ArrayAdapter<FullDataInstance> {
 	public void setCurrentPosition(int currentPosition) {
 		this.currentPosition = currentPosition;
 	}
-	// public interface OnLastPositionListener {
-	// public void onLastPosition(int position);
-	// }
-	//
-	// public void setOnLastPositionListener(
-	// OnLastPositionListener onLastPositionListener) {
-	// this.onLastPositionListener = onLastPositionListener;
-	// }
-
 }
