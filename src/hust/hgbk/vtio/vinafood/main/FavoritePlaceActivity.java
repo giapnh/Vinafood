@@ -42,6 +42,8 @@ public class FavoritePlaceActivity extends Activity {
 		loadAllInstanceTask = new LoadAllInstanceTask();
 		loadAllInstanceTask.execute();
 		message = getResources().getString(R.string.please_wait);
+		TextView subMenuTitle = (TextView) findViewById(R.id.txt_sub_menu);
+		subMenuTitle.setText(getString(R.string.txt_favorite));
 	}
 
 	public class LoadAllInstanceTask extends AsyncTask<Void, Void, Void> {
@@ -51,7 +53,7 @@ public class FavoritePlaceActivity extends Activity {
 		@Override
 		protected Void doInBackground(Void... arg0) {
 			FullDataInstance[] dataInstances = SQLiteAdapter.getInstance(ctx)
-					.getAllFavoritePlace(8, 0);
+					.getAllFavoritePlace(20, 0);
 			for (int i = 0; i < dataInstances.length; i++) {
 				listFullDataInstance.add(dataInstances[i]);
 			}

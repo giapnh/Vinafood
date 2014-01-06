@@ -75,6 +75,9 @@ public class DiscoveryActivity extends Activity {
 		// List type of food
 		category = (ListView) this.findViewById(R.id.category);
 		category.setAdapter(new DiscoveryAdapter());
+
+		TextView subMenuTitle = (TextView) findViewById(R.id.txt_sub_menu);
+		subMenuTitle.setText(getString(R.string.txt_discovery));
 	}
 
 	public void onStop() {

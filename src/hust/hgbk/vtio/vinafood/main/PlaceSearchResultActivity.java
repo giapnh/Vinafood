@@ -76,6 +76,8 @@ public class PlaceSearchResultActivity extends Activity {
 		listResultView = (ListView) findViewById(R.id.listResultView);
 		loadAllInstanceTask = new LoadAllInstanceTask();
 		loadAllInstanceTask.execute();
+		TextView subMenuTitle = (TextView) findViewById(R.id.txt_sub_menu);
+		subMenuTitle.setText("Kết quả");
 	}
 
 	class LoadAllInstanceTask extends AsyncTask<Void, Void, Void> {

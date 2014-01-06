@@ -11,7 +11,6 @@ import java.util.List;
 import ken.soapservicelib.proxy.SoapServiceProxy;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -53,28 +52,28 @@ public abstract class ArrayPlaceResultAdapter extends
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
 		currentPosition = position;
-		PlaceItemView view;
-		if (convertView == null) {
+		PlaceItemView view = (PlaceItemView) convertView;
+		if (view == null) {
 			view = new PlaceItemView(context);
-		} else {
-			view = (PlaceItemView) convertView;
-		}
-		view.getProgressBar().setVisibility(View.GONE);
-		if (position == getCount() - 1) {
-			if (!isStop && !isLoading) {
-				if (loadInstanceTask != null) {
-					loadInstanceTask.cancel(true);
+			view.getProgressBar().setVisibility(View.GONE);
+			if (position == getCount() - 1) {
+				if (!isStop && !isLoading) {
+					if (loadInstanceTask != null) {
+						loadInstanceTask.cancel(true);
+					}
+					loadInstanceTask = new LoadInstanceTask(
+							view.getProgressBar());
+					loadInstanceTask.execute();
 				}
-				loadInstanceTask = new LoadInstanceTask(view.getProgressBar());
-				loadInstanceTask.execute();
+				if (isLoading) {
+					view.getProgressBar().setVisibility(View.VISIBLE);
+				}
 			}
-			if (isLoading) {
-				view.getProgressBar().setVisibility(View.VISIBLE);
-			}
+
+			FullDataInstance placeItem = listPlaceDataSimple.get(position);
+			view.setData(placeItem);
 		}
 
-		final FullDataInstance placeItem = listPlaceDataSimple.get(position);
-		view.setData(placeItem);
 		return view;
 	}
 

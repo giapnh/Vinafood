@@ -1,7 +1,6 @@
 package hust.hgbk.vtio.vinafood.customview;
 
 import hust.hgbk.vtio.vinafood.config.ServerConfig;
-import hust.hgbk.vtio.vinafood.config.log;
 import hust.hgbk.vtio.vinafood.constant.OntologyCache;
 import hust.hgbk.vtio.vinafood.main.R;
 import hust.hgbk.vtio.vinafood.vtioservice.FullDataInstance;
@@ -10,15 +9,15 @@ import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.squareup.picasso.Picasso;
+
 public class PlaceItemView extends RelativeLayout {
-	WebView imageWebView;
 	ImageView imageView;
 	TextView labelTextView;
 	// TextView distanceTextView;
@@ -39,7 +38,6 @@ public class PlaceItemView extends RelativeLayout {
 				.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 		li.inflate(R.layout.place_item_layout, this, true);
 
-		imageWebView = (WebView) findViewById(R.id.imagePlaceWebview);
 		imageView = (ImageView) findViewById(R.id.imagePlaceview);
 		labelTextView = (TextView) findViewById(R.id.labelTextView);
 		addressTextView = (TextView) findViewById(R.id.addressTextView);
@@ -47,14 +45,6 @@ public class PlaceItemView extends RelativeLayout {
 		ratingView = (LinearLayout) findViewById(R.id.ratingLinearLayout);
 		typeTextView = (TextView) findViewById(R.id.typeTextView);
 		progressBar = (ProgressBar) findViewById(R.id.loadingProgress);
-	}
-
-	public WebView getImageWebView() {
-		return imageWebView;
-	}
-
-	public void setImageWebView(WebView imageWebView) {
-		this.imageWebView = imageWebView;
 	}
 
 	public TextView getLabelTextView() {
@@ -137,43 +127,15 @@ public class PlaceItemView extends RelativeLayout {
 		if (fullDataInstance.getImageURL().equals("")
 				|| fullDataInstance.getImageURL().contains("anyType")) {
 			try {
-				imageWebView.setVisibility(View.GONE);
 				imageView.setVisibility(View.VISIBLE);
 				imageView.setImageResource(iconId1);
 			} catch (Exception e) {
 			}
 		} else {
-			imageView.setVisibility(View.GONE);
-			imageWebView.setVisibility(View.VISIBLE);
-			String data = "<div style='border: solid #bb3333  1px; position: absolute;   "
-					+ "top: 0px; left: 0px; width:"
-					+ getResources().getDimension(R.dimen.layx130)
-					+ "px; height:"
-					+ getResources().getDimension(R.dimen.layx130)
-					+ "px; overflow:hidden;  '><img src=\""
-					+ fullDataInstance.getImageURL()
-					+ "\" style=' background-color:transparent;' width='"
-					+ getResources().getDimension(R.dimen.layx130)
-					+ "px' height='"
-					+ getResources().getDimension(R.dimen.layx130)
-					+ "px'/></div>";
-			try {
-				imageWebView.loadData(data, "text/html", "utf-8");
-				imageWebView.setScrollContainer(false);
-				imageWebView.setWebViewClient(new WebViewClient() {
-					@Override
-					public void onReceivedError(WebView view, int errorCode,
-							String description, String failingUrl) {
-						log.e("Webview: On receive error");
-						super.onReceivedError(view, errorCode, description,
-								failingUrl);
-					}
-				});
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
+			imageView.setVisibility(View.VISIBLE);
+			Picasso.with(context).load(fullDataInstance.getImageURL())
+					.resize(130, 130).centerCrop().into(imageView);
 		}
-		imageWebView.setBackgroundColor(Color.TRANSPARENT);
 
 		final int rate = fullDataInstance.getRatingNum();
 		ratingView.removeAllViews();

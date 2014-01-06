@@ -100,6 +100,8 @@ public class RecentViewActivity extends Activity {
 				}
 			}
 		});
+		TextView subMenuTitle = (TextView) findViewById(R.id.txt_sub_menu);
+		subMenuTitle.setText(getString(R.string.txt_recent_view));
 	}
 
 	public class LoadAllInstanceTask extends AsyncTask<Void, Void, Void> {
