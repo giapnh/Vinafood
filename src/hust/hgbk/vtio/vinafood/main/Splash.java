@@ -198,13 +198,7 @@ public class Splash extends Activity implements OnClickListener {
 		@Override
 		protected Void doInBackground(Void... arg0) {
 			long a = System.currentTimeMillis();
-			// listHostContentStrings = new OnlineContentReader()
-			// .getStringArrayFromURL(
-			// "https://sites.google.com/site/diemdenviet/newhost.txt",
-			// 3);
-			// truy van lay uri, label
 			isLoadedIcon = doLoadIcon();
-			// isLoadSuccess = true;
 			long b = System.currentTimeMillis();
 			while (b - a < 5500
 					|| (!isResume && (b - a < 30000))
@@ -213,7 +207,6 @@ public class Splash extends Activity implements OnClickListener {
 				try {
 					Thread.sleep(1000);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 				b = System.currentTimeMillis();
@@ -433,13 +426,13 @@ public class Splash extends Activity implements OnClickListener {
 
 	private void detectLocation() {
 		txtLoading.setText("Đang cập nhật vị trí...");
-
 		LocationService locationService = new LocationService(ctx);
 		locationService.updateLocation(ctx, LocationService.EXPIRATION_TIME,
 				new CustomLocationListener() {
 
 					@Override
 					public void onProviderDisabled() {
+						System.out.println("disable");
 					}
 
 					@Override
@@ -467,71 +460,6 @@ public class Splash extends Activity implements OnClickListener {
 					public void onGetLastLocation(Location location) {
 					}
 				});
-
-		// locationManager = (LocationManager) ctx
-		// .getSystemService(Context.LOCATION_SERVICE);
-		// locationListener = new LocationListener() {
-		// int count = 0;
-		//
-		// @Override
-		// public void onStatusChanged(String arg0, int arg1, Bundle arg2) {
-		//
-		// }
-		//
-		// @Override
-		// public void onProviderEnabled(String arg0) {
-		// }
-		//
-		// @Override
-		// public void onProviderDisabled(String arg0) {
-		//
-		// }
-		//
-		// @Override
-		// public void onLocationChanged(Location location) {
-		// setGeoLocation(location);
-		// }
-		//
-		// };
-
-		// if
-		// (locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER))
-		// {
-		// try {
-		// locationManager.requestLocationUpdates(
-		// LocationManager.NETWORK_PROVIDER, 0, 0,
-		// locationListener);
-		// Location lastKnowLocation = locationManager
-		// .getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-		// if (lastKnowLocation != null) {
-		// setGeoLocation(lastKnowLocation);
-		// }
-		// } catch (IllegalArgumentException e) {
-		// e.printStackTrace();
-		// }
-		// } else if (locationManager
-		// .isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-		// try {
-		// locationManager.requestLocationUpdates(
-		// LocationManager.GPS_PROVIDER, 0, 0, locationListener);
-		//
-		// Location lastKnowLocation = locationManager
-		// .getLastKnownLocation(LocationManager.GPS_PROVIDER);
-		// if (lastKnowLocation != null) {
-		// Log.v("TEST", "last lat: " + lastKnowLocation.getLatitude());
-		// setGeoLocation(lastKnowLocation);
-		// }
-		// } catch (IllegalArgumentException e) {
-		// Toast.makeText(
-		// ctx,
-		// "Your device does not support GPS Provider! Try NETWORK Provider.",
-		// Toast.LENGTH_SHORT).show();
-		// }
-		// } else {
-		// hust.hgbk.vtio.vinafood.constant.Location
-		// .showSettingLocationDialog(ctx);
-		// isWaitingLocation = true;
-		// }
 	}
 
 	@Override
@@ -543,7 +471,6 @@ public class Splash extends Activity implements OnClickListener {
 	private void setGeoLocation(Location location) {
 		String lat = String.valueOf(location.getLatitude());
 		String lon = String.valueOf(location.getLongitude());
-		Log.v("LOCATION", lat + "-" + lon);
 		try {
 			lat = lat.substring(0, 10);
 		} catch (Exception e) {

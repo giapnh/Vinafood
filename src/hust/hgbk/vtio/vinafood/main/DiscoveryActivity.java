@@ -27,7 +27,8 @@ public class DiscoveryActivity extends Activity {
 	// ===========================================================
 	public static final String[] typeVal = new String[] { "Bún ngan",
 			"Bánh đúc", "Bún riêu", "Bánh cuốn", "Bún đậu", "Bún cá",
-			"Mỳ vằn thắn" };
+			"Mỳ vằn thắn", "Bún bò Huế", "Bún bò Nam Bộ", "Bánh gối",
+			"Phở cuốn" , "Bún chả"};
 
 	// ===========================================================
 	// Fields

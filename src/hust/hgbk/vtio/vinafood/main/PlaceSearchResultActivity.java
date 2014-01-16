@@ -206,6 +206,12 @@ public class PlaceSearchResultActivity extends Activity {
 				startActivity(intent);
 			}
 			break;
+		case R.id.btnSearch:
+			Intent intent = new Intent(this, DinningServiceSearch.class);
+			startActivity(intent);
+			overridePendingTransition(R.anim.slide_in_right,
+					R.anim.slide_out_left);
+			break;
 		// case R.id.list_grid:
 		// if (isGrid) {
 		// isGrid = false;
@@ -219,4 +225,5 @@ public class PlaceSearchResultActivity extends Activity {
 		// break;
 		}
 	}
+
 }

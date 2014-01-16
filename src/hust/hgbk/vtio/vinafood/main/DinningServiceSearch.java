@@ -4,7 +4,6 @@ import hust.hgbk.vtio.vinafood.config.ServerConfig;
 import hust.hgbk.vtio.vinafood.config.log;
 import hust.hgbk.vtio.vinafood.constant.NameSpace;
 import hust.hgbk.vtio.vinafood.constant.XmlAdapter;
-import hust.hgbk.vtio.vinafood.customview.SubClassHorizontalView;
 import hust.hgbk.vtio.vinafood.maps.CustomLocationListener;
 import hust.hgbk.vtio.vinafood.maps.LocationService;
 import hust.hgbk.vtio.vinafood.ontology.simple.ClassDataSimple;
@@ -91,7 +90,6 @@ public class DinningServiceSearch extends Activity {
 		edtSearch = (EditText) findViewById(R.id.edtSearch);
 		btnSearch = (ImageButton) findViewById(R.id.btnSearch);
 		clearButton = (ImageView) findViewById(R.id.btnClearText);
-		SubClassHorizontalView.currentClassURI = CLASS_URI;
 
 		edtSearch.postDelayed(new Runnable() {
 			@Override
@@ -358,7 +356,6 @@ public class DinningServiceSearch extends Activity {
 	class GetAllSubClassTask extends AsyncTask<Void, Void, Void> {
 		@Override
 		protected void onPreExecute() {
-			SubClassHorizontalView.currentClassURI = CLASS_URI;
 		}
 
 		@Override

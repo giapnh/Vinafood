@@ -4,6 +4,9 @@
  */
 package hust.hgbk.vtio.vinafood.file;
 
+import hust.hgbk.vtio.vinafood.config.log;
+
+import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,6 +14,8 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.URL;
+import java.net.URLConnection;
 
 import android.content.Context;
 
@@ -107,6 +112,32 @@ public class FileManager {
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
+		}
+	}
+
+	public byte[] download(URL url) throws IOException {
+		log.m("Start download!");
+		URLConnection uc = url.openConnection();
+		int len = uc.getContentLength();
+		InputStream is = new BufferedInputStream(uc.getInputStream());
+		try {
+			byte[] data = new byte[len];
+			int offset = 0;
+			while (offset < len) {
+				int read = is.read(data, offset, data.length - offset);
+				if (read < 0) {
+					break;
+				}
+				offset += read;
+			}
+			if (offset < len) {
+				throw new IOException(String.format(
+						"Read %d bytes; expected %d", offset, len));
+			}
+			return data;
+		} finally {
+			is.close();
+			System.out.println("Downloaded");
 		}
 	}
 
