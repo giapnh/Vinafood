@@ -2,8 +2,8 @@ package hust.hgbk.vtio.vinafood.main;
 
 import hust.hgbk.vtio.vinafood.config.ServerConfig;
 import hust.hgbk.vtio.vinafood.constant.OntologyCache;
-import hust.hgbk.vtio.vinafood.constant.SQLiteAdapter;
 import hust.hgbk.vtio.vinafood.constant.XmlAdapter;
+import hust.hgbk.vtio.vinafood.database.SQLiteAdapter;
 import hust.hgbk.vtio.vinafood.maps.CustomLocationListener;
 import hust.hgbk.vtio.vinafood.maps.LocationService;
 import hust.hgbk.vtio.vinafood.media.OnlineContentReader;
@@ -171,6 +171,7 @@ public class Splash extends Activity implements OnClickListener {
 		}
 
 		SQLiteAdapter sqLiteAdapter = SQLiteAdapter.getInstance(ctx);
+		sqLiteAdapter.createDiscoveryTable();
 		try {
 			OntologyCache.preferUser = sqLiteAdapter.getAllPreferenceClass();
 		} catch (Exception e) {

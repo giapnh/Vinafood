@@ -1,8 +1,8 @@
 package hust.hgbk.vtio.vinafood.customViewAdapter;
 
 import hust.hgbk.vtio.vinafood.config.ServerConfig;
-import hust.hgbk.vtio.vinafood.constant.SQLiteAdapter;
 import hust.hgbk.vtio.vinafood.customview.PlaceItemView;
+import hust.hgbk.vtio.vinafood.database.SQLiteAdapter;
 import hust.hgbk.vtio.vinafood.main.PlaceDetails;
 import hust.hgbk.vtio.vinafood.main.R;
 import hust.hgbk.vtio.vinafood.vtioservice.FullDataInstance;

@@ -1,8 +1,8 @@
 package hust.hgbk.vtio.vinafood.main;
 
 import hust.hgbk.vtio.vinafood.config.log;
-import hust.hgbk.vtio.vinafood.constant.SQLiteAdapter;
 import hust.hgbk.vtio.vinafood.constant.XmlAdapter;
+import hust.hgbk.vtio.vinafood.database.SQLiteAdapter;
 import hust.hgbk.vtio.vinafood.vtioservice.FullDataInstance;
 import hust.hgbk.vtio.vinafood.vtioservice.VtioCoreService;
 import android.app.Activity;

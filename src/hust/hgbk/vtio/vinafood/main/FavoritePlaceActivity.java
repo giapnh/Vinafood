@@ -1,7 +1,7 @@
 package hust.hgbk.vtio.vinafood.main;
 
-import hust.hgbk.vtio.vinafood.constant.SQLiteAdapter;
 import hust.hgbk.vtio.vinafood.customViewAdapter.NewArrayPlaceSimpleAdapter;
+import hust.hgbk.vtio.vinafood.database.SQLiteAdapter;
 import hust.hgbk.vtio.vinafood.vtioservice.FullDataInstance;
 
 import java.util.ArrayList;

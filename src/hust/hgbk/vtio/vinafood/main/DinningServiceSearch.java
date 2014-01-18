@@ -7,8 +7,6 @@ import hust.hgbk.vtio.vinafood.constant.XmlAdapter;
 import hust.hgbk.vtio.vinafood.maps.CustomLocationListener;
 import hust.hgbk.vtio.vinafood.maps.LocationService;
 import hust.hgbk.vtio.vinafood.ontology.simple.ClassDataSimple;
-import hust.hgbk.vtio.vinafood.query.Constraint;
-import hust.hgbk.vtio.vinafood.query.Variable;
 import hust.hgbk.vtio.vinafood.vtioservice.VtioCoreService;
 
 import java.util.ArrayList;
@@ -55,8 +53,6 @@ public class DinningServiceSearch extends Activity {
 	// Input manager: show keyboard
 	InputMethodManager imm;
 
-	public static ArrayList<Variable> arrayVariable;
-	public static ArrayList<Constraint> arrayConstraint;
 	static String currentLanguage = "";
 
 	public static final String CLASS_URI = NameSpace.vtio + "Dining-Service";
@@ -71,8 +67,6 @@ public class DinningServiceSearch extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.giapnh_new_dinning_service);
-		arrayConstraint = new ArrayList<Constraint>();
-		arrayVariable = new ArrayList<Variable>();
 		XmlAdapter.synConfig(this);
 		ctx = this;
 		init();

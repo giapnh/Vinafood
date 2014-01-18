@@ -1,6 +1,10 @@
-package hust.hgbk.vtio.vinafood.constant;
+package hust.hgbk.vtio.vinafood.database;
 
 import hust.hgbk.vtio.vinafood.config.ServerConfig;
+import hust.hgbk.vtio.vinafood.config.log;
+import hust.hgbk.vtio.vinafood.entities.Topic;
+import hust.hgbk.vtio.vinafood.file.FileManager;
+import hust.hgbk.vtio.vinafood.main.R;
 import hust.hgbk.vtio.vinafood.ontology.simple.ClassDataSimple;
 import hust.hgbk.vtio.vinafood.ontology.simple.PlaceDataSimple;
 import hust.hgbk.vtio.vinafood.vtioservice.FullDataInstance;
@@ -9,6 +13,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
 import android.app.Activity;
@@ -19,7 +24,6 @@ import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Environment;
 import android.util.Log;
-import android.widget.Toast;
 
 public class SQLiteAdapter extends SQLiteOpenHelper {
 	private static SQLiteAdapter sqLiteAdapter;
@@ -71,33 +75,37 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
 	public boolean checkAndCreateDatabase() {
 		boolean dbExist = checkDataBase();
 		if (dbExist) {
-
 			Log.v("DATABASE", "Database exits");
 			return true;
 		} else {
-			Log.v("DATABASE", "Database chua ton tai");
-
+			Log.v("DATABASE", "Not exits");
 			try {
-				// ctx.getAssets().open(databaseName);
 				try {
 					this.getReadableDatabase();
-
 					createFavoriteTable();
 					createRecentViewTable();
 					createPreferenceTable();
-
 					Log.v("DATABASE", "Copy " + databaseName);
 					return true;
 				} catch (Exception e) {
-
-					Log.v("DATABASE", "Khong ton tai " + databaseName);
+					Log.v("DATABASE", "Not exits " + databaseName);
 					return false;
 				}
 			} catch (Exception ex) {
 				ex.printStackTrace();
 				return false;
 			}
+		}
+	}
 
+	public void createDiscoveryTable() {
+		try {
+			openDataBase();
+			executeSQL("CREATE  TABLE 'main'.'Discovery' ('_id' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ,'type' INTEGER NOT NULL, 'title' TEXT NOT NULL UNIQUE, 'description' TEXT, 'content' TEXT)");
+			importDiscoveryDbFromFile();
+		} catch (Exception e) {
+		} finally {
+			close();
 		}
 	}
 
@@ -162,6 +170,30 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
 		} finally {
 			close();
 		}
+	}
+
+	public void importDiscoveryDbFromFile() {
+		log.m("Start import");
+		byte[] data = FileManager.loadFromRaw(R.raw.dining, ctx);
+		ByteBuffer buffer = ByteBuffer.wrap(data);
+		Topic topic = new Topic();
+		while (buffer.hasRemaining()) {
+			topic.type = buffer.getInt();
+			int tLen = buffer.getInt();
+			byte[] ttData = new byte[tLen];
+			buffer.get(ttData);
+			topic.title = new String(ttData);
+			int desLen = buffer.getInt();
+			byte[] desData = new byte[desLen];
+			buffer.get(desData);
+			topic.description = new String(desData);
+			int contentLen = buffer.getInt();
+			byte[] ctData = new byte[contentLen];
+			buffer.get(ctData);
+			topic.content = new String(ctData);
+			addTopic(topic);
+		}
+		log.m("Finish import");
 	}
 
 	public void addPlaceToFavoriteTable(FullDataInstance placeDataSimple) {
@@ -273,6 +305,22 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
 		}
 	}
 
+	public void addTopic(Topic topic) {
+		try {
+			openDataBase();
+			executeSQL("INSERT INTO 'main'.'Discovery' ('type','title','description','content') VALUES('"
+					+ topic.type
+					+ "','"
+					+ topic.title
+					+ "','"
+					+ topic.description + "','" + topic.content + "')");
+			log.m("Add: " + topic.title);
+		} catch (Exception e) {
+		} finally {
+			close();
+		}
+	}
+
 	public void deletePlaceFromFavoriteTable(String uri) {
 		try {
 			openDataBase();
@@ -353,6 +401,37 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
 			close();
 		}
 		return false;
+	}
+
+	public Topic[] getTopics(int limit, int offset) {
+		ArrayList<Topic> returnList = new ArrayList<Topic>();
+		try {
+			openDataBase();
+			Cursor cursor = rawQuery("SELECT type,title,description,content FROM 'main'.'Discovery' LIMIT "
+					+ limit + "OFFSET " + offset);
+			((Activity) ctx).startManagingCursor(cursor);
+			if (cursor.moveToFirst()) {
+				do {
+					Cursor cur = cursor;
+					try {
+						Topic p = new Topic();
+						p.type = cur.getInt(0);
+						p.title = cur.getString(1);
+						p.description = cur.getString(2);
+						p.content = cur.getString(3);
+						returnList.add(p);
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
+
+				} while (cursor.moveToNext());
+			}
+		} catch (Exception e) {
+		} finally {
+			close();
+		}
+		Topic[] topics = new Topic[returnList.size()];
+		return returnList.toArray(topics);
 	}
 
 	public FullDataInstance[] getAllFavoritePlace(int limit, int offset) {
