@@ -4,8 +4,6 @@ import hust.hgbk.vtio.vinafood.config.ServerConfig;
 import hust.hgbk.vtio.vinafood.constant.OntologyCache;
 import hust.hgbk.vtio.vinafood.constant.XmlAdapter;
 import hust.hgbk.vtio.vinafood.customDialog.MapsSettingDialog;
-import hust.hgbk.vtio.vinafood.maps.CustomLocationListener;
-import hust.hgbk.vtio.vinafood.maps.LocationService;
 import hust.hgbk.vtio.vinafood.maps.PlacesItemizedOverlay;
 
 import java.util.List;
@@ -23,7 +21,6 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.widget.TextView;
 
-import com.google.android.gms.common.ConnectionResult;
 import com.google.android.maps.GeoPoint;
 import com.google.android.maps.MapActivity;
 import com.google.android.maps.MapController;

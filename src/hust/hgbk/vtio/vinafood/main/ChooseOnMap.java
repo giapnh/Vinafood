@@ -43,13 +43,7 @@ public class ChooseOnMap extends MapActivity {
 		mapView = (MapView) findViewById(R.id.place_map_view);
 		doneButton = (Button) findViewById(R.id.done_button);
 		cancelButton = (Button) findViewById(R.id.cancel_button);
-		// Che do street view
-		// mapView.setStreetView(true);
-		// mapView.setSatellite(true);
 		mapView.setTraffic(true);
-
-		// Set thong tin cho mapView
-		// Cai dat nut zoom tren man hinh
 		mapView.setBuiltInZoomControls(true);
 		mapView.displayZoomControls(true);
 

@@ -36,7 +36,7 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
 		return sqLiteAdapter;
 	}
 
-	public String databaseName = "VtioSQLite.sqlite";
+	public String databaseName = "Vinafood.sqlite";
 	private static final String DATABASE_PATH = "/data/data/hust.hgbk.vtio.vinafood.main/databases/";
 
 	private SQLiteDatabase myDB;
