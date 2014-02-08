@@ -9,7 +9,8 @@ public class Topic {
 	// ===========================================================
 	// Fields
 	// ===========================================================
-	public int type = 0;
+//	public int type = 0;
+	public String imgLink = "";
 	public String title = "";
 	public String description = "";
 	public String content = "";
@@ -20,9 +21,9 @@ public class Topic {
 	public Topic() {
 	}
 
-	public Topic(int type, String title, String description, String content) {
-		super();
-		this.type = type;
+	public Topic(String imgLink, String title, String description,
+			String content) {
+		this.imgLink = imgLink;
 		this.title = title;
 		this.description = description;
 		this.content = content;

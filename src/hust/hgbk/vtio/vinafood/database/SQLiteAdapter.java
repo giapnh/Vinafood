@@ -37,7 +37,7 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
 	}
 
 	public String databaseName = "Vinafood.sqlite";
-	private static final String DATABASE_PATH = "/data/data/hust.hgbk.vtio.vinafood.main/databases/";
+	private static String DATABASE_PATH = "/data/hust.hgbk.vtio.vinafood.main/databases/";
 
 	private SQLiteDatabase myDB;
 	private final Context ctx;
@@ -47,6 +47,7 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
 	protected SQLiteAdapter(Context context) {
 		super(context, "VtioSQLite.sqlite", null, 1);
 		this.ctx = context;
+		DATABASE_PATH = ctx.getFilesDir().getPath() + DATABASE_PATH;
 	}
 
 	@Override
@@ -101,7 +102,7 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
 	public void createDiscoveryTable() {
 		try {
 			openDataBase();
-			executeSQL("CREATE  TABLE 'main'.'Discovery' ('_id' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ,'type' INTEGER NOT NULL, 'title' TEXT NOT NULL UNIQUE, 'description' TEXT, 'content' TEXT)");
+			executeSQL("CREATE  TABLE 'main'.'Discovery' ('_id' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ,'imglink' TEXT NOT NULL, 'title' TEXT NOT NULL UNIQUE, 'description' TEXT, 'content' TEXT)");
 			importDiscoveryDbFromFile();
 		} catch (Exception e) {
 		} finally {
@@ -178,7 +179,10 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
 		ByteBuffer buffer = ByteBuffer.wrap(data);
 		Topic topic = new Topic();
 		while (buffer.hasRemaining()) {
-			topic.type = buffer.getInt();
+			int imgLen = buffer.getInt();
+			byte[] imgLinkData = new byte[imgLen];
+			buffer.get(imgLinkData);
+			topic.imgLink = new String(imgLinkData);
 			int tLen = buffer.getInt();
 			byte[] ttData = new byte[tLen];
 			buffer.get(ttData);
@@ -308,8 +312,8 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
 	public void addTopic(Topic topic) {
 		try {
 			openDataBase();
-			executeSQL("INSERT INTO 'main'.'Discovery' ('type','title','description','content') VALUES('"
-					+ topic.type
+			executeSQL("INSERT INTO 'main'.'Discovery' ('imglink','title','description','content') VALUES('"
+					+ topic.imgLink
 					+ "','"
 					+ topic.title
 					+ "','"
@@ -407,7 +411,7 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
 		ArrayList<Topic> returnList = new ArrayList<Topic>();
 		try {
 			openDataBase();
-			Cursor cursor = rawQuery("SELECT type,title,description,content FROM 'main'.'Discovery' LIMIT "
+			Cursor cursor = rawQuery("SELECT imglink,title,description,content FROM 'main'.'Discovery' LIMIT "
 					+ limit + "OFFSET " + offset);
 			((Activity) ctx).startManagingCursor(cursor);
 			if (cursor.moveToFirst()) {
@@ -415,7 +419,7 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
 					Cursor cur = cursor;
 					try {
 						Topic p = new Topic();
-						p.type = cur.getInt(0);
+						p.imgLink = cur.getString(0);
 						p.title = cur.getString(1);
 						p.description = cur.getString(2);
 						p.content = cur.getString(3);

@@ -171,7 +171,7 @@ public class Splash extends Activity implements OnClickListener {
 		}
 
 		SQLiteAdapter sqLiteAdapter = SQLiteAdapter.getInstance(ctx);
-		sqLiteAdapter.createDiscoveryTable();
+//		sqLiteAdapter.createDiscoveryTable();
 		try {
 			OntologyCache.preferUser = sqLiteAdapter.getAllPreferenceClass();
 		} catch (Exception e) {

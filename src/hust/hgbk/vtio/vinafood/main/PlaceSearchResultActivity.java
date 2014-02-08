@@ -142,6 +142,7 @@ public class PlaceSearchResultActivity extends Activity {
 
 	public boolean onKeyDown(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_BACK) {
+			finish();
 			super.onKeyDown(keyCode, event);
 		}
 
@@ -161,10 +162,6 @@ public class PlaceSearchResultActivity extends Activity {
 									int which) {
 							}
 						}).show();
-	}
-
-	public void onBack(View v) {
-		finish();
 	}
 
 	public void onClick(View v) {
