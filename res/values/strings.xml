@@ -12,6 +12,7 @@
         <item name="md8">Hát hò</item>
     </string-array>
     <string-array name="cuisine_style_list">
+        <item name="all">Bất kỳ</item>
         <item name="st1">Miền Bắc</item>
         <item name="st2">Miền Trung</item>
         <item name="st3">Miền Nam</item>
@@ -77,9 +78,8 @@
     <string name="by_interest">theo sở thích của mình</string>
     <string name="any_key">Tất cả</string>
     <string name="hasCuisineStyle">Có phong cách</string>
-
-    <item name="app_notification_id" type="id">VTIO Suggestion!</item>
-
+    <string name="txt_all">Bất kỳ</string>
+    <string name="txt_loading">Đang tải dữ liệu...</string>
     <string name="type">Loại</string>
     <string name="address">Địa chỉ</string>
     <string name="semantic_search">Tìm kiếm ngữ nghĩa</string>
@@ -98,9 +98,7 @@
     <string name="show_all_on_map"> Show all places on this map.</string>
     <string name="favorite_intro">Hiển thị các địa điểm bạn đã đánh dấu.</string>
     <string name="filter_result">Lọc kết quả...</string>
-    <string name="tourist_help">Ví dụ:\nHoàn Kiếm, Chùa, Tràng Tiền, Hồ, Văn miếu...Bạn có thể dùng tiếng Việt không dấu hoặc không nhập từ khóa và nhấn ngay nút Search.\nBạn cũng có thể tìm kiếm theo các thuộc tính bên dưới</string>
     <string name="dining_help">Example:\nPizza, Chả cá, Nhà hàng, nha hang, Hoàn Kiếm, Huynh Thuc Khang, am thuc chau Au ... Bạn có thể dùng tiếng Việt không dấu hoặc không nhập từ khóa và nhấn ngay nút Search.\nBạn cũng có thể tìm kiếm theo các thuộc tính bên dưới</string>
-    <string name="health_help">Example:\nViet Duc, Dinh Cong, Giai Phong, Viet Phap... Bạn có thể dùng tiếng Việt không dấu hoặc không nhập từ khóa và nhấn ngay nút Search.\nBạn cũng có thể tìm kiếm theo các thuộc tính bên dưới</string>
     <string name="accomodation_help">Example:\nKhách sạn, Hanoi, Hoan Kiem, Daewoo ... Bạn có thể dùng tiếng Việt không dấu hoặc không nhập từ khóa và nhấn ngay nút Search.\nBạn cũng có thể tìm kiếm theo các thuộc tính bên dưới</string>
     <string name="entertainment_service_help">Example:\nHoan Kiem, ...Bạn có thể dùng tiếng Việt không dấu hoặc không nhập từ khóa và nhấn ngay nút Search.\nBạn cũng có thể tìm kiếm theo các thuộc tính bên dưới </string>
     <string name="vehicle_service_help">Example:\nGiai Phong, Salon, Garage ... Bạn có thể dùng tiếng Việt không dấu hoặc không nhập từ khóa và nhấn ngay nút Search.\nBạn cũng có thể tìm kiếm theo các thuộc tính bên dưới</string>
@@ -154,16 +152,9 @@
     <string name="help">Giúp đỡ</string>
     <string name="to_common">Thông thường</string>
     <string name="optional">Tùy chọn</string>
-    <string name="input_data">Nhập dữ liệu...</string>
     <string name="false1">Sai</string>
     <string name="true1">Đúng</string>
-    <string name="constraint">Ràng buộc</string>
-    <string name="type_instance">Nhập đối tượng...</string>
-    <string name="type_key_word">Nhập từ khóa...</string>
-    <string name="select_instance_of">-- Chọn đối tượng của -</string>
     <string name="None">Bất kỳ</string>
-    <string name="is_welknown">nổi tiếng</string>
-    <string name="SEARCH_RESULT">Kết quả :</string>
     <string name="view_map">Xem bản đồ</string>
     <string name="place">Địa điểm</string>
     <string name="please_wait">Đang lấy kết quả. Vui lòng đợi một chút!</string>
@@ -197,19 +188,10 @@
     <string name="verb">Thuộc tính</string>
     <string name="object">Đối tượng</string>
     <string name="clear">Xóa</string>
-    <string name="please_choose_hint">Chọn theo gợi ý ...</string>
     <string name="data_not_update">Chưa có dữ liệu chi tiết cho địa điểm này. Ở phiên bản sau, chúng tôi sẽ cung cấp thêm chức năng góp ý về địa điểm.</string>
-    <string name="input_subject">Mời nhập vào chủ thể trước...</string>
     <string name="incorrect_subject">Chủ thể không đúng, mời nhập lại!</string>
     <string name="incorrect_object">Đối tượng không đúng, mời nhập lại!</string>
     <string name="fact_about">Chi tiết về</string>
-    <string name="should_input_predicate">Nhập thuộc tính ...</string>
-    <string name="input_object">Mời nhập vào đối tượng!</string>
-    <string name="what_concept_object_that">Tìm xxx mà</string>
-    <string name="find">Tìm</string>
-    <string name="in">ở</string>
-    <string name="inputing_object">Nhập đối tượng...</string>
-    <string name="type_to_object">Nhập \'xxx\' vào đối tượng...</string>
     <string name="no_result">Không có kết quả cho trường hợp này hoặc kết nối mạng bị ngắt. Hãy thử lại với trường hợp khác!</string>
     <string name="tap_on_map_icon">Bấm vào biểu tượng để xem các địa điểm trên bản đồ.</string>
     <string name="result_for">Kết quả cho</string>
@@ -226,7 +208,7 @@
     <string name="not_catch_location_yet">Vị trí của bạn chưa được cập nhật! Chương trình đang sử dụng vị trí mặc định là tại hồ Hoàn Kiếm!</string>
     <string name="select_on_map">Chọn thủ công</string>
     <string name="change_city">Bấm menu để thay đổi thành phố.</string>
-    <string name="no_search_result"> Không tìm thấy địa điểm phù hợp. Hiện tại hệ thống chỉ hỗ trợ Hà Nội, TP Hồ Chí Minh,  Đà Nẵng, Hải Phòng, Khánh Hòa, Lâm Đồng, và Bà Rịa-Vũng Tàu. Muốn có kết quả hãy kiểm tra kết nối internet hoặc thay đổi tham số tìm kiếm. </string>
+    <string name="no_search_result"> Không tìm thấy địa điểm phù hợp.Muốn có kết quả hãy kiểm tra kết nối internet hoặc thay đổi tham số tìm kiếm. </string>
     <string name="no_favorite_place"> Bạn chưa đánh dấu địa điểm nào. </string>
     <string name="choose_place">Chọn trên bản đồ</string>
     <string name="list_grid">Danh sách/Lưới</string>
@@ -303,5 +285,6 @@
     <string name="txt_landmark">Khu vực</string>
     <string name="txt_kind">Kind</string>
     <string name="txt_distance">Khoảng cách</string>
+    <string name="txt_exit">Bạn có chắc chắn muốn thoát?</string>
 
 </resources>

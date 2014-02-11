@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/layy200"
+    android:layout_height="wrap_content"
     android:layout_marginBottom="3dp"
     android:background="#66000000"
     android:orientation="vertical" >
@@ -9,17 +9,19 @@
     <RelativeLayout
         android:id="@+id/image_layout"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent"
+        android:layout_height="@dimen/layy200"
         android:layout_marginBottom="2dp"
         android:background="#7fff" >
 
-        <WebView
+        <!--
+             <WebView
             android:id="@+id/imagePlaceWebview"
             android:layout_width="@dimen/layx200"
             android:layout_height="match_parent"
             android:background="#00ff00ff"
             android:scrollbars="none"
             android:visibility="gone" />
+        -->
 
         <ImageView
             android:id="@+id/imagePlaceview"
@@ -35,13 +37,14 @@
             style="?android:attr/progressBarStyleSmall"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:visibility="gone" />
     </RelativeLayout>
 
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="fill_parent"
-        android:layout_height="match_parent"
+        android:layout_height="@dimen/layy200"
         android:layout_alignParentTop="true"
         android:layout_marginLeft="@dimen/layx4"
         android:layout_toRightOf="@+id/image_layout"
@@ -53,12 +56,11 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/layx2"
-            android:background="#220000ff"
+            android:background="#22ff0000"
             android:ellipsize="marquee"
             android:gravity="center_vertical"
             android:marqueeRepeatLimit="marquee_forever"
             android:singleLine="false"
-            android:text="Cafe morning Hoan Kiem lakeCafe morning Hoan Kiem lake"
             android:textColor="#ee0000ff"
             android:textSize="@dimen/text_22"
             android:textStyle="bold" />
@@ -67,10 +69,8 @@
             android:id="@+id/addressTextView"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/labelTextView"
             android:layout_marginLeft="@dimen/layx2"
             android:singleLine="false"
-            android:text="Address content"
             android:textColor="@color/Black"
             android:textSize="@dimen/text_18"
             android:textStyle="italic|bold" />
@@ -79,10 +79,8 @@
             android:id="@+id/abstractInfor"
             android:layout_width="fill_parent"
             android:layout_height="0dp"
-            android:layout_below="@+id/addressTextView"
             android:layout_weight="1"
             android:singleLine="false"
-            android:text="abstract infor content"
             android:textColor="@color/Black"
             android:textSize="@dimen/text_17"
             android:textStyle="normal" />
@@ -94,7 +92,6 @@
         android:layout_height="wrap_content"
         android:background="#99ff0000"
         android:padding="2dp"
-        android:text="Bar"
         android:textColor="@color/WHITE"
         android:textSize="@dimen/text_18"
         android:textStyle="bold" />
@@ -109,9 +106,25 @@
     </LinearLayout>
 
     <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linearLayout2"
+        android:background="#44ff0000" >
+
+        <ProgressBar
+            android:id="@+id/loadingProgress"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:visibility="gone" />
+    </RelativeLayout>
+
+    <RelativeLayout
         android:id="@+id/for_click_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="@dimen/layy200"
+        android:focusable="true" >
     </RelativeLayout>
 
 </RelativeLayout>

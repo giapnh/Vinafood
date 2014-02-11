@@ -20,6 +20,24 @@
             layout="@layout/icon_inside_layout" />
 
         <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/icon_inside"
+            android:src="@drawable/amsc_arrow_next" />
+
+        <TextView
+            android:id="@+id/txt_sub_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/imageView2"
+            android:textColor="#88009900"
+            android:textSize="@dimen/text_24"
+            android:textStyle="bold|italic" />
+
+        <ImageView
             android:id="@+id/list_grid"
             android:layout_width="@dimen/layx60"
             android:layout_height="@dimen/layy50"
@@ -36,7 +54,20 @@
             android:layout_alignParentRight="true"
             android:layout_marginLeft="@dimen/layx5"
             android:background="@drawable/ic_map"
-            android:onClick="onClick" />
+            android:onClick="onClick"
+            android:visibility="invisible" />
+
+        <ImageButton
+            android:id="@+id/btnSearch"
+            android:layout_width="@dimen/layx70"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/giapnh_button_search_topbar_selector"
+            android:onClick="onClick"
+            android:src="@drawable/icon_search" />
     </RelativeLayout>
 
     <ProgressBar
@@ -61,7 +92,7 @@
     </ListView>
 
     <TextView
-        android:id="@+id/no_search_result_textview"
+        android:id="@+id/no_search_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
@@ -70,7 +101,7 @@
         android:textColor="@color/BLACK"
         android:textSize="20sp"
         android:typeface="serif"
-        android:visibility="invisible" />
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/message"

@@ -16,16 +16,24 @@
             layout="@layout/icon_inside_layout"
             android:onClick="onBack" />
 
-        <TextView
-            android:id="@+id/placeTitleTextView"
-            style="@style/TitleText"
-            android:layout_width="fill_parent"
-            android:layout_height="@dimen/layx70"
-            android:layout_marginLeft="@dimen/layx15"
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/icon_inside"
-            android:gravity="center_vertical"
+            android:src="@drawable/amsc_arrow_next" />
+
+        <TextView
+            android:id="@+id/txt_sub_menu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/imageView2"
             android:text="Chi tiết địa điểm"
-            android:textStyle="bold" />
+            android:textColor="#88009900"
+            android:textSize="@dimen/text_24"
+            android:textStyle="bold|italic" />
 
         <ImageButton
             android:id="@+id/btnSearch"
@@ -167,10 +175,22 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
-            <hust.hgbk.vtio.vinafood.customview.ExpandableWebView
-                android:id="@+id/placeImageView"
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/layy350" />
+                android:layout_height="@dimen/layy350" >
+
+                <ImageView
+                    android:id="@+id/imgNoImage"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/layy350"
+                    android:src="@drawable/no_image_yet" />
+
+                <WebView
+                    android:id="@+id/placeImageView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/layy350"
+                    android:visibility="gone" />
+            </RelativeLayout>
 
             <View
                 android:id="@+id/View01"

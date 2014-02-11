@@ -40,25 +40,6 @@
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/layx10"
                 android:background="@drawable/logo_small" />
-
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/imageView1"
-                android:src="@drawable/amsc_arrow_next" />
-
-            <TextView
-                android:id="@+id/txt_sub_menu"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@+id/imageView2"
-                android:text="Menu"
-                android:textColor="#88009900"
-                android:textSize="@dimen/text_24"
-                android:textStyle="bold|italic" />
         </RelativeLayout>
     </RelativeLayout>
 
@@ -396,7 +377,8 @@
             android:layout_alignParentLeft="true"
             android:background="#44ff0000"
             android:gravity="center"
-            android:textColor="@color/WHITE" />
+            android:textColor="@color/WHITE"
+            android:visibility="gone" />
     </RelativeLayout>
 
     <RelativeLayout
