@@ -97,7 +97,13 @@ public class MenuActivity extends Activity {
 	}
 
 	public void onDiscovery(View v) {
-		Intent intent = new Intent(MenuActivity.this, DiscoveryActivity.class);
+		// Intent intent = new Intent(MenuActivity.this,
+		// DiscoveryActivity.class);
+		// startActivity(intent);
+		// overridePendingTransition(R.anim.slide_in_right,
+		// R.anim.slide_out_left);
+		Intent intent = new Intent(MenuActivity.this,
+				DiscoveryMainActivity.class);
 		startActivity(intent);
 		overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
 	}

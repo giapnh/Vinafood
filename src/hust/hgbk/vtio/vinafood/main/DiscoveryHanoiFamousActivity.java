@@ -20,7 +20,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class DiscoveryActivity extends Activity {
+public class DiscoveryHanoiFamousActivity extends Activity {
 
 	// ===========================================================
 	// Constants
@@ -28,7 +28,7 @@ public class DiscoveryActivity extends Activity {
 	public static final String[] typeVal = new String[] { "Bún ngan",
 			"Bánh đúc", "Bún riêu", "Bánh cuốn", "Bún đậu", "Bún cá",
 			"Mỳ vằn thắn", "Bún bò Huế", "Bún bò Nam Bộ", "Bánh gối",
-			"Phở cuốn" , "Bún chả"};
+			"Phở cuốn", "Bún chả" };
 
 	// ===========================================================
 	// Fields
@@ -65,12 +65,12 @@ public class DiscoveryActivity extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		this.ctx = DiscoveryActivity.this;
+		this.ctx = DiscoveryHanoiFamousActivity.this;
 
 		importData(FileManager.loadFromRaw(R.raw.data, this));
 		parserKeys();
 
-		setContentView(R.layout.discovery_category);
+		setContentView(R.layout.discovery_hanoi_famous_category);
 		((TextView) findViewById(R.id.txt_sub_menu)).setText(getResources()
 				.getString(R.string.txt_discovery));
 		// List type of food
@@ -174,7 +174,8 @@ public class DiscoveryActivity extends Activity {
 					public void onClick(View v) {
 						Bundle bundle = new Bundle();
 						bundle.putInt("type", keys.get(position));
-						Intent intent = new Intent(DiscoveryActivity.this,
+						Intent intent = new Intent(
+								DiscoveryHanoiFamousActivity.this,
 								DiscoveryShowItemOfType.class);
 						intent.putExtras(bundle);
 						startActivity(intent);

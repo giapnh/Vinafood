@@ -46,7 +46,8 @@ public class ChooseOnMap extends MapActivity {
 		mapView.setTraffic(true);
 		mapView.setBuiltInZoomControls(true);
 		mapView.displayZoomControls(true);
-
+		
+		
 		mapController = mapView.getController();
 		mapController.setZoom(10);
 		int currentGeoLat = (int) (1E6 * hust.hgbk.vtio.vinafood.constant.Location.GEO_LAT_DEFAULT);

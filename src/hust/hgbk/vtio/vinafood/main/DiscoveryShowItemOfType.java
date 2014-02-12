@@ -1,7 +1,7 @@
 package hust.hgbk.vtio.vinafood.main;
 
 import hust.hgbk.vtio.vinafood.config.log;
-import hust.hgbk.vtio.vinafood.main.DiscoveryActivity.FoodLocation;
+import hust.hgbk.vtio.vinafood.main.DiscoveryHanoiFamousActivity.FoodLocation;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -56,7 +56,7 @@ public class DiscoveryShowItemOfType extends Activity {
 		this.ctx = DiscoveryShowItemOfType.this;
 		// Load data
 		typeID = getIntent().getExtras().getInt("type");
-		hashtable = DiscoveryActivity.hashtable.get(Integer.valueOf(typeID));
+		hashtable = DiscoveryHanoiFamousActivity.hashtable.get(Integer.valueOf(typeID));
 		Iterator<String> iterator = hashtable.keySet().iterator();
 		while (iterator.hasNext()) {
 			keys.add(iterator.next());
