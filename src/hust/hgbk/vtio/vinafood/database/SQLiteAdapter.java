@@ -36,8 +36,8 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
 		return sqLiteAdapter;
 	}
 
-	public String databaseName = "Vinafood.sqlite";
-	private static String DATABASE_PATH = "/data/hust.hgbk.vtio.vinafood.main/databases/";
+	public static String databaseName = "amthucviet.sqlite";
+	private static String DATABASE_PATH = "/data/data/hust.hgbk.vtio.vinafood.main/databases/";
 
 	private SQLiteDatabase myDB;
 	private final Context ctx;
@@ -45,9 +45,9 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
 	// private HashSet<String> favoriteUriSet;
 
 	protected SQLiteAdapter(Context context) {
-		super(context, "VtioSQLite.sqlite", null, 1);
+		super(context, databaseName, null, 1);
 		this.ctx = context;
-		DATABASE_PATH = ctx.getFilesDir().getPath() + DATABASE_PATH;
+		// DATABASE_PATH = ctx.getFilesDir().getPath() + DATABASE_PATH;
 	}
 
 	@Override
@@ -407,12 +407,27 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
 		return false;
 	}
 
+	public int topicCount() {
+		try {
+			openDataBase();
+			Cursor cursor = rawQuery("SELECT COUNT(DISTINCT _id) FROM 'main'.'Discovery'");
+			((Activity) ctx).startManagingCursor(cursor);
+			if (cursor.moveToFirst()) {
+				Cursor cur = cursor;
+				int numberTopic = cur.getInt(0);
+				return numberTopic;
+			}
+		} catch (Exception e) {
+		}
+		return 0;
+	}
+
 	public Topic[] getTopics(int limit, int offset) {
 		ArrayList<Topic> returnList = new ArrayList<Topic>();
 		try {
 			openDataBase();
 			Cursor cursor = rawQuery("SELECT imglink,title,description,content FROM 'main'.'Discovery' LIMIT "
-					+ limit + "OFFSET " + offset);
+					+ limit + " OFFSET " + offset);
 			((Activity) ctx).startManagingCursor(cursor);
 			if (cursor.moveToFirst()) {
 				do {
@@ -425,7 +440,6 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
 						p.content = cur.getString(3);
 						returnList.add(p);
 					} catch (Exception e) {
-						// TODO: handle exception
 					}
 
 				} while (cursor.moveToNext());

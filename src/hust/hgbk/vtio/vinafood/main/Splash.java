@@ -169,13 +169,23 @@ public class Splash extends Activity implements OnClickListener {
 		if (isNewNetWork) {
 			OntologyCache.clearCache();
 		}
+		new LoadDatabase().start();
+	}
 
-		SQLiteAdapter sqLiteAdapter = SQLiteAdapter.getInstance(ctx);
-		sqLiteAdapter.createDiscoveryTable();
-		try {
-			OntologyCache.preferUser = sqLiteAdapter.getAllPreferenceClass();
-		} catch (Exception e) {
+	class LoadDatabase extends Thread {
+		public LoadDatabase() {
 		}
+
+		public void run() {
+			SQLiteAdapter sqLiteAdapter = SQLiteAdapter.getInstance(ctx);
+			sqLiteAdapter.createDiscoveryTable();
+			try {
+				OntologyCache.preferUser = sqLiteAdapter
+						.getAllPreferenceClass();
+			} catch (Exception e) {
+			}
+			isLoadSuccess = true;
+		};
 	}
 
 	private void setLanguage(String lang) {
@@ -236,6 +246,7 @@ public class Splash extends Activity implements OnClickListener {
 				Toast.makeText(ctx, "Can't detech your location by Provider!",
 						Toast.LENGTH_SHORT).show();
 			}
+			// Wait for loading data
 			startActivity(new Intent(ctx, MainClass));
 			overridePendingTransition(R.anim.slide_in_right,
 					R.anim.slide_out_left);

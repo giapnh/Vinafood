@@ -1,15 +1,21 @@
 package hust.hgbk.vtio.vinafood.entities;
 
-public class Topic {
+import java.io.Serializable;
+
+public class Topic implements Serializable {
 
 	// ===========================================================
 	// Constants
 	// ===========================================================
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	// ===========================================================
 	// Fields
 	// ===========================================================
-//	public int type = 0;
+	// public int type = 0;
 	public String imgLink = "";
 	public String title = "";
 	public String description = "";

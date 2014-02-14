@@ -1,11 +1,15 @@
 package hust.hgbk.vtio.vinafood.main;
 
+import hust.hgbk.vtio.vinafood.entities.Topic;
 import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
+import android.webkit.WebView;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-public class DiscoveryMainActivity extends Activity {
+import com.squareup.picasso.Picasso;
+
+public class DiscoveryCuisineWithHelthViewTopicActivity extends Activity {
 
 	// ===========================================================
 	// Constants
@@ -29,29 +33,22 @@ public class DiscoveryMainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.discovery_main_layout);
+		Topic topic = (Topic) getIntent().getSerializableExtra("topic");
+		setContentView(R.layout.discovery_amthuc_suckhoe_view_topic);
+		ImageView imgIcon = (ImageView) this.findViewById(R.id.img_icon);
+		Picasso.with(this).load(topic.imgLink).centerCrop().resize(130, 130)
+				.into(imgIcon);
+		TextView title = (TextView) this.findViewById(R.id.title);
+		TextView description = (TextView) this.findViewById(R.id.description);
+		WebView webView = (WebView) this.findViewById(R.id.webview);
+		title.setText(topic.title);
+		description.setText(topic.description);
+		webView.loadData(topic.content, "text/html", "utf-8");
 	}
-
 	// ===========================================================
 	// Methods
 	// ===========================================================
-	public void onMonngon(View v) {
-		Intent intent = new Intent(DiscoveryMainActivity.this,
-				DiscoveryHanoiFamousActivity.class);
-		startActivity(intent);
-		overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-	}
 
-	public void onCuisineWithHelth(View v) {
-		Intent intent = new Intent(DiscoveryMainActivity.this,
-				DiscoveryCuisineWithHelthActivity.class);
-		startActivity(intent);
-		overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left);
-	}
-
-	public void onCookbook(View v) {
-		// TODO
-	}
 	// ===========================================================
 	// Inner and Anonymous Classes
 	// ===========================================================

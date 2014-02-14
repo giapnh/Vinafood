@@ -223,4 +223,8 @@ public class PlaceSearchResultActivity extends Activity {
 		}
 	}
 
+	public void onBack(View v) {
+		this.finish();
+	}
+
 }
