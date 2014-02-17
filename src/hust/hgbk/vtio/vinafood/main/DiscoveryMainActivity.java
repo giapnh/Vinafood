@@ -7,6 +7,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.KeyEvent;
 import android.view.View;
 
@@ -21,6 +22,31 @@ public class DiscoveryMainActivity extends Activity {
 	// ===========================================================
 	public Context ctx;
 	Dialog progressLayout;
+	Handler handler = new Handler() {
+		public void handleMessage(android.os.Message msg) {
+			switch (msg.what) {
+			case 0:
+				progressLayout.hide();
+				Intent intent = new Intent(DiscoveryMainActivity.this,
+						DiscoveryCuisineWithHelthActivity.class);
+				startActivity(intent);
+				overridePendingTransition(R.anim.slide_in_right,
+						R.anim.slide_out_left);
+				break;
+			case 1:
+				progressLayout.hide();
+				Intent intent2 = new Intent(DiscoveryMainActivity.this,
+						DiscoveryCookbookActivity.class);
+				startActivity(intent2);
+				overridePendingTransition(R.anim.slide_in_right,
+						R.anim.slide_out_left);
+				break;
+			default:
+				break;
+			}
+
+		};
+	};
 
 	// ===========================================================
 	// Constructors
@@ -73,12 +99,7 @@ public class DiscoveryMainActivity extends Activity {
 						.getAllPreferenceClass();
 			} catch (Exception e) {
 			}
-			progressLayout.hide();
-			Intent intent = new Intent(DiscoveryMainActivity.this,
-					DiscoveryCuisineWithHelthActivity.class);
-			startActivity(intent);
-			overridePendingTransition(R.anim.slide_in_right,
-					R.anim.slide_out_left);
+			handler.sendEmptyMessage(0);
 		}
 	}
 
@@ -91,13 +112,7 @@ public class DiscoveryMainActivity extends Activity {
 						.getAllPreferenceClass();
 			} catch (Exception e) {
 			}
-			progressLayout.hide();
-			Intent intent = new Intent(DiscoveryMainActivity.this,
-					DiscoveryCookbookActivity.class);
-			startActivity(intent);
-			overridePendingTransition(R.anim.slide_in_right,
-					R.anim.slide_out_left);
-
+			handler.sendEmptyMessage(1);
 		}
 	}
 
@@ -111,15 +126,6 @@ public class DiscoveryMainActivity extends Activity {
 		overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_right);
 	}
 
-	@Override
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		if (keyCode == KeyEvent.KEYCODE_BACK) {
-			if (progressLayout.isShowing()) {
-				return false;
-			}
-		}
-		return super.onKeyDown(keyCode, event);
-	}
 	// ===========================================================
 	// Inner and Anonymous Classes
 	// ===========================================================
