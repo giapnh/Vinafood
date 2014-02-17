@@ -1,7 +1,7 @@
 package hust.hgbk.vtio.vinafood.main;
 
 import hust.hgbk.vtio.vinafood.database.SQLiteAdapter;
-import hust.hgbk.vtio.vinafood.entities.Topic;
+import hust.hgbk.vtio.vinafood.entities.Cookbook;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
-public class DiscoveryCuisineWithHelthActivity extends Activity {
+public class DiscoveryCookbookActivity extends Activity {
 
 	// ===========================================================
 	// Constants
@@ -45,7 +45,7 @@ public class DiscoveryCuisineWithHelthActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		this.ctx = DiscoveryCuisineWithHelthActivity.this;
+		this.ctx = DiscoveryCookbookActivity.this;
 		setContentView(R.layout.discovery_amthuc_suckhoe_main);
 		listView = (ListView) this.findViewById(R.id.category);
 		indexPage = (TextView) this.findViewById(R.id.index_page);
@@ -89,7 +89,7 @@ public class DiscoveryCuisineWithHelthActivity extends Activity {
 		public int CURR_PAGE = 1;
 		public int LIMIT = 10;
 		public int OFFSET = 0;
-		Topic[] topics;
+		Cookbook[] topics;
 
 		public DiscoveryHelthAdapter() {
 			TOTAL = SQLiteAdapter.getInstance(ctx).topicCount();
@@ -104,7 +104,8 @@ public class DiscoveryCuisineWithHelthActivity extends Activity {
 		}
 
 		public void load(int limit, int offset) {
-			topics = SQLiteAdapter.getInstance(ctx).getTopics(limit, offset);
+			topics = SQLiteAdapter.getInstance(ctx).getCookbookTopics(limit,
+					offset);
 			OFFSET = offset;
 		}
 
@@ -155,8 +156,7 @@ public class DiscoveryCuisineWithHelthActivity extends Activity {
 
 				@Override
 				public void onClick(View v) {
-					Intent intent = new Intent(
-							DiscoveryCuisineWithHelthActivity.this,
+					Intent intent = new Intent(DiscoveryCookbookActivity.this,
 							DiscoveryCuisineWithHelthViewTopicActivity.class);
 					intent.putExtra("topic", topics[paramInt]);
 					startActivity(intent);

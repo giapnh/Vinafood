@@ -2,6 +2,7 @@ package hust.hgbk.vtio.vinafood.database;
 
 import hust.hgbk.vtio.vinafood.config.ServerConfig;
 import hust.hgbk.vtio.vinafood.config.log;
+import hust.hgbk.vtio.vinafood.entities.Cookbook;
 import hust.hgbk.vtio.vinafood.entities.Topic;
 import hust.hgbk.vtio.vinafood.file.FileManager;
 import hust.hgbk.vtio.vinafood.main.R;
@@ -27,7 +28,7 @@ import android.util.Log;
 
 public class SQLiteAdapter extends SQLiteOpenHelper {
 	private static SQLiteAdapter sqLiteAdapter;
-
+	
 	public static SQLiteAdapter getInstance(Context context) {
 		if (sqLiteAdapter == null) {
 			sqLiteAdapter = new SQLiteAdapter(context);
@@ -104,6 +105,17 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
 			openDataBase();
 			executeSQL("CREATE  TABLE 'main'.'Discovery' ('_id' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ,'imglink' TEXT NOT NULL, 'title' TEXT NOT NULL UNIQUE, 'description' TEXT, 'content' TEXT)");
 			importDiscoveryDbFromFile();
+		} catch (Exception e) {
+		} finally {
+			close();
+		}
+	}
+
+	public void createCookbookTable() {
+		try {
+			openDataBase();
+			executeSQL("CREATE  TABLE 'main'.'Cookbook' ('_id' INTEGER PRIMARY KEY  AUTOINCREMENT  NOT NULL ,'imglink' TEXT NOT NULL, 'title' TEXT NOT NULL UNIQUE, 'description' TEXT, 'content' TEXT)");
+			importDiscoveryCookbookDbFromFile();
 		} catch (Exception e) {
 		} finally {
 			close();
@@ -195,7 +207,34 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
 			byte[] ctData = new byte[contentLen];
 			buffer.get(ctData);
 			topic.content = new String(ctData);
-			addTopic(topic);
+			addCuisineHelthTopic(topic);
+		}
+		log.m("Finish import");
+	}
+
+	public void importDiscoveryCookbookDbFromFile() {
+		log.m("Start import");
+		byte[] data = FileManager.loadFromRaw(R.raw.vaobep, ctx);
+		ByteBuffer buffer = ByteBuffer.wrap(data);
+		Cookbook topic = new Cookbook();
+		while (buffer.hasRemaining()) {
+			int imgLen = buffer.getInt();
+			byte[] imgLinkData = new byte[imgLen];
+			buffer.get(imgLinkData);
+			topic.imgLink = new String(imgLinkData);
+			int tLen = buffer.getInt();
+			byte[] ttData = new byte[tLen];
+			buffer.get(ttData);
+			topic.title = new String(ttData);
+			int desLen = buffer.getInt();
+			byte[] desData = new byte[desLen];
+			buffer.get(desData);
+			topic.description = new String(desData);
+			int contentLen = buffer.getInt();
+			byte[] ctData = new byte[contentLen];
+			buffer.get(ctData);
+			topic.content = new String(ctData);
+			addCookbookTopic(topic);
 		}
 		log.m("Finish import");
 	}
@@ -309,10 +348,26 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
 		}
 	}
 
-	public void addTopic(Topic topic) {
+	public void addCuisineHelthTopic(Topic topic) {
 		try {
 			openDataBase();
 			executeSQL("INSERT INTO 'main'.'Discovery' ('imglink','title','description','content') VALUES('"
+					+ topic.imgLink
+					+ "','"
+					+ topic.title
+					+ "','"
+					+ topic.description + "','" + topic.content + "')");
+			log.m("Add: " + topic.title);
+		} catch (Exception e) {
+		} finally {
+			close();
+		}
+	}
+
+	public void addCookbookTopic(Cookbook topic) {
+		try {
+			openDataBase();
+			executeSQL("INSERT INTO 'main'.'Cookbook' ('imglink','title','description','content') VALUES('"
 					+ topic.imgLink
 					+ "','"
 					+ topic.title
@@ -422,6 +477,21 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
 		return 0;
 	}
 
+	public int cookbookCount() {
+		try {
+			openDataBase();
+			Cursor cursor = rawQuery("SELECT COUNT(DISTINCT _id) FROM 'main'.'Cookbook'");
+			((Activity) ctx).startManagingCursor(cursor);
+			if (cursor.moveToFirst()) {
+				Cursor cur = cursor;
+				int numberTopic = cur.getInt(0);
+				return numberTopic;
+			}
+		} catch (Exception e) {
+		}
+		return 0;
+	}
+
 	public Topic[] getTopics(int limit, int offset) {
 		ArrayList<Topic> returnList = new ArrayList<Topic>();
 		try {
@@ -449,6 +519,36 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
 			close();
 		}
 		Topic[] topics = new Topic[returnList.size()];
+		return returnList.toArray(topics);
+	}
+
+	public Cookbook[] getCookbookTopics(int limit, int offset) {
+		ArrayList<Cookbook> returnList = new ArrayList<Cookbook>();
+		try {
+			openDataBase();
+			Cursor cursor = rawQuery("SELECT imglink,title,description,content FROM 'main'.'Discovery' LIMIT "
+					+ limit + " OFFSET " + offset);
+			((Activity) ctx).startManagingCursor(cursor);
+			if (cursor.moveToFirst()) {
+				do {
+					Cursor cur = cursor;
+					try {
+						Cookbook p = new Cookbook();
+						p.imgLink = cur.getString(0);
+						p.title = cur.getString(1);
+						p.description = cur.getString(2);
+						p.content = cur.getString(3);
+						returnList.add(p);
+					} catch (Exception e) {
+					}
+
+				} while (cursor.moveToNext());
+			}
+		} catch (Exception e) {
+		} finally {
+			close();
+		}
+		Cookbook[] topics = new Cookbook[returnList.size()];
 		return returnList.toArray(topics);
 	}
 

@@ -169,23 +169,6 @@ public class Splash extends Activity implements OnClickListener {
 		if (isNewNetWork) {
 			OntologyCache.clearCache();
 		}
-		new LoadDatabase().start();
-	}
-
-	class LoadDatabase extends Thread {
-		public LoadDatabase() {
-		}
-
-		public void run() {
-			SQLiteAdapter sqLiteAdapter = SQLiteAdapter.getInstance(ctx);
-			sqLiteAdapter.createDiscoveryTable();
-			try {
-				OntologyCache.preferUser = sqLiteAdapter
-						.getAllPreferenceClass();
-			} catch (Exception e) {
-			}
-			isLoadSuccess = true;
-		};
 	}
 
 	private void setLanguage(String lang) {
