@@ -92,7 +92,7 @@ public class DiscoveryCookbookActivity extends Activity {
 		Cookbook[] topics;
 
 		public DiscoveryHelthAdapter() {
-			TOTAL = SQLiteAdapter.getInstance(ctx).topicCount();
+			TOTAL = SQLiteAdapter.getInstance(ctx).cookbookCount();
 			NUM_PAGE = (int) Math.ceil(TOTAL / LIMIT);
 			indexPage.setText(CURR_PAGE + "/" + NUM_PAGE);
 		}

@@ -28,7 +28,7 @@ import android.util.Log;
 
 public class SQLiteAdapter extends SQLiteOpenHelper {
 	private static SQLiteAdapter sqLiteAdapter;
-	
+
 	public static SQLiteAdapter getInstance(Context context) {
 		if (sqLiteAdapter == null) {
 			sqLiteAdapter = new SQLiteAdapter(context);
@@ -526,7 +526,7 @@ public class SQLiteAdapter extends SQLiteOpenHelper {
 		ArrayList<Cookbook> returnList = new ArrayList<Cookbook>();
 		try {
 			openDataBase();
-			Cursor cursor = rawQuery("SELECT imglink,title,description,content FROM 'main'.'Discovery' LIMIT "
+			Cursor cursor = rawQuery("SELECT imglink,title,description,content FROM 'main'.'Cookbook' LIMIT "
 					+ limit + " OFFSET " + offset);
 			((Activity) ctx).startManagingCursor(cursor);
 			if (cursor.moveToFirst()) {
